@@ -11,14 +11,22 @@ Bash Alias
 # ----------------------
 # Git Aliases
 # ----------------------
-alias ga='git add'
-alias gaa='git add .'
-alias gaaa='git add --all'
-alias gau='git add --update'
-alias gb='git branch'
-alias gbd='git branch --delete '
-alias gc='git commit'
-alias gcm='git commit --message'
+alias ga='git add' 
+
+alias gaa='git add .' 
+
+alias gaaa='git add --all' 
+
+alias gau='git add --update' 
+
+alias gb='git branch' 
+
+alias gbd='git branch --delete ' 
+
+alias gc='git commit' 
+
+alias gcm='git commit --message' 
+
 alias gcf='git commit --fixup'
 alias gco='git checkout'
 alias gcob='git checkout -b'
@@ -44,6 +52,8 @@ alias gstd='git stash drop'
 alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gsts='git stash save'
+
+
 # ----------------------
 # Git Functions
 # ----------------------

@@ -2873,4 +2873,245 @@ To start a process with pre-defined nice value -  nice -n 10 sleep 3600 &
 
  
 
-To verify results -  top  
+To verify results -  top   
+
+# ---------------------------------
+# What to do if a process is locked 
+# --------------------------------- 
+
+STEP 1:  
+
+ 
+
+ps aux | grep -i apt  
+
+ 
+
+sudo kill –9   
+
+ 
+
+sudo killall apt apt-get 
+
+ 
+
+STEP2:  
+
+ 
+
+lsof /var/lib/dpkg/lock  
+
+ 
+
+lsof /var/lib/apt/lists/lock  
+
+ 
+
+lsof /var/cache/apt/archives/lock  
+
+ 
+
+sudo kill -9 PID  
+
+ 
+
+sudo rm /var/lib/apt/lists/lock  
+
+ 
+
+sudo rm /var/cache/apt/archives/lock   
+
+ 
+
+sudo rm /var/lib/dpkg/lock    
+
+ 
+
+sudo dpkg --configure -a 
+
+ STEP3:  
+
+ 
+
+Troubleshoot: dpkg: error: dpkg frontend is locked by another process 
+
+If you see the error “dpkg frontend is locked by another process” while running the above described method, you’ll have to do an 
+
+additional step. 
+
+ 
+
+First, find out the id of the process that is holding the lock file. 
+
+ 
+
+lsof /var/lib/dpkg/lock-frontend 
+
+ 
+
+The above command will give you the PID of the processes using the lock files. Use this PID to kill the process. 
+
+sudo kill -9 PID 
+
+ 
+
+Now you can remove the lock and reconfigure dpkg: 
+
+sudo rm /var/lib/dpkg/lock-frontend sudo dpkg --configure -a  
+
+# ---------------------------------
+# SSH 
+# ---------------------------------  
+
+Configuration for remote server being accessed
+
+eze@ubuntu:~$ sudo apt install openssh-server
+eze@ubuntu:~$ sudo systemctl status ssh
+eze@ubuntu:~$ sudo ufw allow ssh
+root@ubuntu:~# ufw status 
+
+Key Generation: 
+
+eze@ubuntu:~$ sudo apt install openssh-server 
+
+eze@ubuntu:~$ sudo apt-get update / yum update (redhat)
+
+eze@ubuntu:~$ sudo apt-get upgrade /yum update (redhat) 
+
+systemctl start sshd   
+
+systemctl status sshd
+
+eze@ubuntu:~$ sudo systemctl status ssh 
+
+eze@ubuntu:~$ sudo ufw allow ssh 
+
+eze@ubuntu:~$ sudo ufw enable 
+
+eze@ubuntu:~$ ssh-keygen -t rsa 
+
+eze@ubuntu:~$ cd .ssh 
+
+eze@ubuntu:~/.ssh$ ssh-keygen 
+
+eze@ubuntu:~/.ssh$ ls
+key1 key1.pub
+eze@ubuntu:~/.ssh$ ls –ltr
+total 8
+-rw-r--r-- 1 eze eze 392 Dec 19 16:11 key1.pub
+-rw------- 1 eze eze 1679 Dec 19 16:11 key1 
+
+eze@ubuntu:~/.ssh$ ssh-copy-id -i ~/.ssh/key1.pub 192.168.142.136 
+
+eze@ubuntu:~/.ssh$ ssh 192.168.142.136 
+
+**** chmod 600 or 700 for ssh key to work **** 
+
+*** Copy SSH credentials cat id_rsa.pub | pbcopy ***
+
+
+SSH File Config
+
+19 February 2021
+09:57
+
+Used for multiple users trying to access a box 
+ 
+	1. Create new user using adduser command on the box you want them to have access
+                                                     
+                                                      
+ 
+2)  
+ 
+use this command to copy the public key to the server you're trying to access:  
+                                                      (username@ip_addr)
+ ssh-copy-id -i ~/.ssh/obi_rsa.pub ezeaka01@10.61.240.244 
+ 
+3) nano config in /.ssh directory
+ 
+Edit config file like below: 
+ 
+Config file: 
+ 
+ 
+Host *
+   IdentityFile ~/.ssh/obi_rsa
+   User ezeaka01 
+ 
+ 
+Example: 
+ 
+ssh ezeaka01@10.61.240.244
+ 
+ 
+ 
+***********************  How to create ssh config   *****************************************************************************   
+  554  ssh 10.61.240.244 -v
+  555  ssh ezeaka01@10.61.240.244
+  556  ll
+  557  ssh-copy-id -i ~/.ssh/obi_rsa.pub ezeaka01@10.61.240.244 
+  558  nano config 
+  
+  Config file: 
+ 
+ 
+Host *
+   IdentityFile ~/.ssh/obi_rsa
+   User ezeaka01
+  
+  559  ssh 10.61.240.244
+  560  history
+ 
+ 
+***********************  How to create ssh config  *****************************************************************************  
+
+
+File Transfer
+
+/usr/bin/scp ./cope_collector.pl.bk2 ouhukapp06:/usr/local/cwx 
+
+/usr/bin/scp <app node name>:<filepath> <db node>:<filepath> 
+
+# ---------------------------------
+# Troubleshooting 
+# ---------------------------------   
+
+Debugging: 
+
+bash -v hello1.sh  
+
+Can't ssh to an app Server:  
+
+
+ 
+
+Ping IP from localhost  
+
+Attempt to ssh from localhost  
+
+  
+
+Ping IP from another node in the same/another domain  
+
+Attempt to ssh from that node to node in question  
+
+  
+
+If the previous 2 fail attempt to log into the server directly e.g. via ILO if it's a physical server like HP-UX series , or directly from Vsphere if a virtual server. If that issue fails, then it's need to be escalated to the infrastructure team/on site team of engineers to diagnose the issue further.  
+
+ 
+
+Tip for diagnosing the issue:  
+
+ 
+
+Notify all the engineers and teams who have been working on the server and check if any of the changes they made could have caused the server's sshd capabilities to stop functioning. E.g. If a certain config file was edited, then revert the changes made to it and test and so forth  
+
+ 
+Slowness on Server: 
+
+Check CPU, RAM, & Swap usage using top command  
+
+ 
+
+Based on the results the best option is to identify and kill PIDS that is causing the issue and if that is not resolution reboot the node and free up swap space as it doesn't get released after RAM usage goes down 

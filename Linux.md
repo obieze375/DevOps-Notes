@@ -5,10 +5,7 @@ permalink: /Linux/
 
 --- 
 
-Bash Alias
------------
 
-# ----------------------
 # Git Aliases
 # ----------------------
 alias ga='git add' 
@@ -146,9 +143,8 @@ $ flush_redis
 
 
 
-##############################################################################
 # DEBUGGING SHELL PROGRAMS
-##############################################################################
+------------------------------------------------------------------------------
 
 
 	• bash -n scriptname  # don't run commands; check for syntax errors only 
@@ -214,7 +210,7 @@ $ flush_redis
 	
     file1 -ot file2           # file1 is older than file2 
 
-# ----------------------
+
 # For Loops 
 # ----------------------   
 
@@ -233,7 +229,7 @@ do
   statements...
 done
 
-# ----------------------
+
 # Functions 
 # ----------------------  
 
@@ -312,7 +308,7 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php>
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php>  
 
 
-# ----------------------
+
 # If Statement
 # ----------------------
 
@@ -397,7 +393,7 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php>
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php>  
 
 
-# ----------------------
+
 # INPUT/OUTPUT REDIRECTORS
 # ----------------------
 
@@ -443,7 +439,7 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php>
 	
 	• n<&-       # closes the input from file descripor n 
 
-# ----------------------
+
 # Operators
 # ----------------------
 
@@ -469,7 +465,7 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php>
 -o                     # or operator inside a test conditional expression 
 
 
-# ----------------------
+
 # Process Handling
 # ---------------------- 
 
@@ -506,7 +502,7 @@ disown <PID|JID>    # removes the process from the list of jobs
 wait                # waits until all background jobs have finished
 
 
-# ----------------------
+
 # Strings
 # ---------------------- 
 
@@ -527,7 +523,6 @@ wait                # waits until all background jobs have finished
 	
     -z str1                    # str1 is null (has length 0) 
 
-# ----------------------
 # Switchcase
 # ---------------------- 
 
@@ -581,7 +576,7 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php>
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php>   
 
 
-# ----------------------
+
 # Until
 # ---------------------- 
 
@@ -602,7 +597,7 @@ done
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-loops.php#while>   
 
 
-# ----------------------
+
 # Variables
 # ---------------------- 
 
@@ -666,7 +661,7 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-loops.php#while>
 	• $(UNIX command)              # command substitution: runs the command and returns standard output 
 
 
-# ----------------------
+
 # While
 # ---------------------- 
 
@@ -680,6 +675,7 @@ done
 #!/bin/bash 
 
 # Basic while loop 
+# ---------------------- 
 
 counter=1 
 
@@ -695,7 +691,7 @@ done
 
 echo All done 
 
-# ----------------------
+
 # Whoami
 # ---------------------- 
 
@@ -708,7 +704,7 @@ then
    exit 1
 fi
 
-# ----------------------
+
 # CLI
 # ---------------------- 
 

@@ -746,13 +746,13 @@ echo All done
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-loops.php#while>   
 
-
+~~~~
 if [[ `whoami` != root && `whoami` != mqm ]]
 then
    print "Script must be run as root or mqm user."
    exit 1
 fi
-
+~~~~
 
 # CLI
 
@@ -760,15 +760,17 @@ fi
 
 
 #clear – Clear the terminal window 
-
+~~~~
 • clear
+~~~~
 
-reset – Resets the terminal 
-
+#reset – Resets the terminal 
+~~~~
 • reset
+~~~~ 
 
 #history – Lists all recent commands 
-
+~~~~
 • history
 
 history | grep - Search for a specific command from the history 
@@ -779,13 +781,14 @@ with a space before them after you will have set
 HISTCONTROL=ignorespace 
 
 • ! e.g. !357 -> re-runs command if entered into terminal
+~~~~ 
 
 #xkill – Close a frozen window/application 
 
 • xkill
 
 #Tab Completion 
-
+~~~~
 • Use TAB key for completion of characters on CLI 
 
 • ctrl + u = Clear everything before the cursor 
@@ -803,10 +806,12 @@ HISTCONTROL=ignorespace
 • ctrl + k = Clear everything after the cursor 
 
 • ctrl + _ = Undo
+~~~~ 
 
 #Alter Screen Resolution 
-
-• xrandr --output --mode 1920x1200
+~~~~
+• xrandr --output --mode 1920x1200 
+~~~~
 
 Ctrl + r - Reverse search
 
@@ -814,7 +819,7 @@ Type Ctrl+r to open the reverse search tool.
 Search for any command from the history and press Ctrl+r again for
 the previous one that contain the string you’re looking for. 
 
-General commands 
+#General commands 
 
 • ./ - Runs file as executable 
 
@@ -839,29 +844,31 @@ General commands continued…
 
 To install : yum install tmux
 
-start new: 
-
+#start new: 
+       ~~~~
 	• tmux 
-	
-start new with session name: 
-
-	• tmux new -s myname 
+       ~~~~
+#start new with session name: 
+       ~~~~
+	• tmux new -s myname   
+       ~~~~
 	
 attach: 
 
-tmux a  #  (or at, or attach) 
+#tmux a  #  (or at, or attach) 
 
 attach to named:  
 
 	• tmux a -t myname
 
-list sessions: 
-
+#list sessions: 
+       ~~~~
 	• tmux ls
-
-kill session: 
-
-	• tmux kill-session -t myname
+       ~~~~
+#kill session: 
+       ~~~~
+	• tmux kill-session -t myname 
+       ~~~~
 
 Kill all the tmux sessions: 
 
@@ -874,18 +881,21 @@ From <https://gist.github.com/MohamedAlaa/2961058>
 
 
 
-4 pane window: 
-
+#4 pane window: 
+~~~~
 tmux new-window \; split-window -p 66 \; split-window -d \; split-window -h 
+~~~~ 
 
-The flow is:
+The flow is: 
+~~~~
 	1. tmux new-window: create a window (ok, you wanted a new-session, that does create a window upon startup) 
 	
 	2. split-window -p 66: allocate bottom two thirds of the vertical space to a secondary pane and focus it 
 	
 	3. split-window -d: split bottom pane in half, vertically, without focusing the new pane (i.e. focus stays on second – now center – pane) 
 	
-	4. split-window -h: split center pane in half, horizontally
+	4. split-window -h: split center pane in half, horizontally 
+~~~~
 
 From <https://superuser.com/questions/1155771/tmux-split-into-4-panes> 
 
@@ -924,10 +934,13 @@ f  find window
 
 From <https://gist.github.com/MohamedAlaa/2961058> 
 
-Sync Panes
-You can do this by switching to the appropriate window, typing your Tmux prefix (commonly Ctrl-B or Ctrl-A) and then a colon to bring up a Tmux command line, and typing:
+#Sync Panes 
+	
+You can do this by switching to the appropriate window, typing your Tmux prefix (commonly Ctrl-B or Ctrl-A) and then a colon to bring up a Tmux command line, and typing:  
+	
+~~~~	
 :setw synchronize-panes 
-
+~~~~
 You can optionally add on or off to specify which state you want; otherwise the option is simply toggled. This option is specific to one window, so it won’t change the way your other sessions or windows operate. When you’re done, toggle it off again by repeating the command. 
 
 From <https://gist.github.com/MohamedAlaa/2961058> 

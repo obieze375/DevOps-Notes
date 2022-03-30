@@ -242,8 +242,8 @@ done
 
 # Functions 
 
-# The function refers to passed arguments by position (as if they were positional parameters), that is, $1, $2, and so forth.
-# $@ is equal to "$1" "$2"... "$N", where N is the number of positional parameters. $# holds the number of positional parameters.
+The function refers to passed arguments by position (as if they were positional parameters), that is, $1, $2, and so forth.
+$@ is equal to "$1" "$2"... "$N", where N is the number of positional parameters. $# holds the number of positional parameters.
 
 
 function functname() {
@@ -3015,9 +3015,12 @@ sudo rm /var/lib/dpkg/lock-frontend sudo dpkg --configure -a
 
 Configuration for remote server being accessed
 
-eze@ubuntu:~$ sudo apt install openssh-server
-eze@ubuntu:~$ sudo systemctl status ssh
-eze@ubuntu:~$ sudo ufw allow ssh
+eze@ubuntu:~$ sudo apt install openssh-server 
+	
+eze@ubuntu:~$ sudo systemctl status ssh 
+	
+eze@ubuntu:~$ sudo ufw allow ssh 
+	
 root@ubuntu:~# ufw status 
 
 Key Generation: 
@@ -3044,9 +3047,12 @@ eze@ubuntu:~$ cd .ssh
 
 eze@ubuntu:~/.ssh$ ssh-keygen 
 
-eze@ubuntu:~/.ssh$ ls
-key1 key1.pub
-eze@ubuntu:~/.ssh$ ls –ltr
+eze@ubuntu:~/.ssh$ ls 
+	
+key1 key1.pub 
+	
+eze@ubuntu:~/.ssh$ ls –ltr 
+	
 total 8
 -rw-r--r-- 1 eze eze 392 Dec 19 16:11 key1.pub
 -rw------- 1 eze eze 1679 Dec 19 16:11 key1 
@@ -3062,10 +3068,8 @@ eze@ubuntu:~/.ssh$ ssh 192.168.142.136
 
 SSH File Config
 
-19 February 2021
-09:57
 
-Used for multiple users trying to access a box 
+#Used for multiple users trying to access a box 
  
 	1. Create new user using adduser command on the box you want them to have access
                                                      
@@ -3074,8 +3078,8 @@ Used for multiple users trying to access a box
 2)  
  
 use this command to copy the public key to the server you're trying to access:  
-                                                      (username@ip_addr)
- ssh-copy-id -i ~/.ssh/obi_rsa.pub ezeaka01@10.61.240.244 
+                                                          
+ ssh-copy-id -i ~/.ssh/obi_rsa.pub ezeaka01@10.61.240.244 (username@ip_addr)
  
 3) nano config in /.ssh directory
  
@@ -3096,27 +3100,34 @@ ssh ezeaka01@10.61.240.244
  
  
 ***********************  How to create ssh config   *****************************************************************************   
-  554  ssh 10.61.240.244 -v
-  555  ssh ezeaka01@10.61.240.244
-  556  ll
-  557  ssh-copy-id -i ~/.ssh/obi_rsa.pub ezeaka01@10.61.240.244 
-  558  nano config 
+  ssh 10.61.240.244 -v 
+	
+  ssh ezeaka01@10.61.240.244 
+	
+  ll 
+	
+  ssh-copy-id -i ~/.ssh/obi_rsa.pub ezeaka01@10.61.240.244  
+	
+  nano config 
   
   Config file: 
  
  
-Host *
-   IdentityFile ~/.ssh/obi_rsa
+Host * 
+	
+   IdentityFile ~/.ssh/obi_rsa 
+	
    User ezeaka01
   
-  559  ssh 10.61.240.244
-  560  history
+  ssh 10.61.240.244 
+	
+  history
  
  
 ***********************  How to create ssh config  *****************************************************************************  
 
 
-File Transfer
+#File Transfer
 
 /usr/bin/scp ./cope_collector.pl.bk2 ouhukapp06:/usr/local/cwx 
 
@@ -3126,16 +3137,16 @@ File Transfer
 # Troubleshooting 
  
 
-Debugging: 
+#Debugging: 
 
 bash -v hello1.sh  
 
-Can't ssh to an app Server:  
+#Can't ssh to an app Server:  
 
 
  
 
-Ping IP from localhost  
+#Ping IP from localhost  
 
 Attempt to ssh from localhost  
 
@@ -3151,14 +3162,14 @@ If the previous 2 fail attempt to log into the server directly e.g. via ILO if i
 
  
 
-Tip for diagnosing the issue:  
+#Tip for diagnosing the issue:  
 
  
 
 Notify all the engineers and teams who have been working on the server and check if any of the changes they made could have caused the server's sshd capabilities to stop functioning. E.g. If a certain config file was edited, then revert the changes made to it and test and so forth  
 
  
-Slowness on Server: 
+#Slowness on Server: 
 
 Check CPU, RAM, & Swap usage using top command  
 

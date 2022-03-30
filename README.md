@@ -542,7 +542,7 @@ wait                # waits until all background jobs have finished
         * -z str1                    # str1 is null (has length 0) 
 
 # Switchcase
- 
+~~~~
 
     case expression in
   pattern1 )
@@ -550,9 +550,13 @@ wait                # waits until all background jobs have finished
   pattern2 )
     statements ;;
 esac
+~~~~ 
 
-#!/bin/bash
+
 # case example
+~~~~
+#!/bin/bash
+
 case $1 in
 start)
 echo starting
@@ -567,6 +571,7 @@ echo restarting
 echo don\'t know
 ;;
 esac
+~~~~ 
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php> 
 
@@ -598,12 +603,16 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php>
 # Until
 # ---------------------- 
 
+~~~~
 until condition; do
   statements
 done
+~~~~ 
 
-#!/bin/bash
 # Basic until loop
+
+~~~~
+#!/bin/bash
 counter=1
 until [ $counter -gt 10 ]
 do
@@ -611,6 +620,7 @@ echo $counter
 ((counter++))
 done
 echo All done
+~~~~ 
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-loops.php#while>   
 
@@ -683,12 +693,13 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-loops.php#while>
 # While
  
 
-
+~~~~
 while condition; do 
 
   statements 
 
 done  
+~~~~
 
 #!/bin/bash 
 
@@ -909,7 +920,7 @@ From <https://gist.github.com/MohamedAlaa/2961058>
 
 # Crontab
 
-
+~~~~
 [Crontab schedule]
 +---------------- minute (0 - 59)
 |  +------------- hour (0 - 23)
@@ -919,7 +930,7 @@ From <https://gist.github.com/MohamedAlaa/2961058>
 |  |  |  |  |
 *  *  *  *  * command to be executed <script>
 -- -- -- -- - --------------------------------- 
-
+~~~~
 crontab  -e  
 
 crontab -l | grep <script_name> 
@@ -941,10 +952,13 @@ RAM
 
 
 RAM & CPU
+
+~~~~
 top 
 
 top –c - Filtering 
-
+~~~~ 
+	
 OS: 
 
 hostnamectl
@@ -2417,7 +2431,7 @@ Testing Connectivity with Ping
 
  
 
- Network Troubleshooting:
+Network Troubleshooting:
 
 Format: 
 
@@ -2580,7 +2594,7 @@ eth0 1500 3975 0 0 0 2627 0 0 0 BMRU
 lo 65536 8 0 0 0 8 0 0 0 LRU 
 
  
-
+~~~~
 [jason@linuxsvr ~]$ netstat -rn  
 
  
@@ -2592,9 +2606,9 @@ Destination Gateway Genmask Flags MSS Window irtt Iface
 0.0.0.0 10.0.2.2 0.0.0.0 UG 0 0 0 eth0 
 
 10.0.2.0 0.0.0.0 255.255.255.0 U 0 0 0 eth0 
-
+~~~~
  
-
+~~~~
 [jason@linuxsvr ~]$ sudo netstat -ntlp  
 
  
@@ -2608,13 +2622,13 @@ name
 tcp 0 0 0.0.0.0:22 0.0.0.0:* LISTEN 943/sshd 
 
 tcp 0 0 127.0.0.1:25 0.0.0.0:* LISTEN 1313/master 
-
+~~~~
  
 
 #Telnet  
 
  
-
+~~~~
 telnet HOST_OR_IP PORT_NUMBER 
 
 $ telnet google.com 80 
@@ -2634,7 +2648,7 @@ HTTP/1.0 200 OK
 telnet> quit 
 
 closed. 
-
+~~~~
 
 
 [root@server1 ~]# nmcli con show  
@@ -2860,7 +2874,7 @@ tcpdump
 $ sudo tcpdump  
 
  
-
+~~~~
 tcpdump: verbose output suppressed, use -v or -vv for full protocol decode 
 
 listening on eth0, link-type EN10MB (Ethernet), capture size 65535 bytes 
@@ -2874,13 +2888,13 @@ listening on eth0, link-type EN10MB (Ethernet), capture size 65535 bytes
 19:25:49.639750 IP 10.0.2.2.64440 > linuxsvr.ssh: Flags [.], ack 84, win 65535, length 0 
 
 19:25:49.639763 IP 10.0.2.2.64440 > linuxsvr.ssh: Flags [.], ack 120, win 65535, length 0  
-
+~~~~
  
 
 $ sudo tcpdump –Anvvv  
 
  
-
+~~~~
 tcpdump: listening on eth0, link-type EN10MB (Ethernet), capture size 65535 bytes 
 
 19:44:27.067530 IP (tos 0x10, ttl 64, id 5120, offset 0, flags [DF], proto TCP (6), length 64) 
@@ -2892,14 +2906,14 @@ tcpdump: listening on eth0, link-type EN10MB (Ethernet), capture size 65535 byte
 E..@..@.@.(............P..>.:........4..... 
 
 ..0K..-9GET /about 
-
+~~~~
  
 
  
 
  
 
-tcpdump -w /temp/traffic.pcap -i eno1 -v host 7.191.5.161  
+tcpdump -w /temp/traffic.pcap -i eno1 -v host 9.9.9.9  
 
  
 
@@ -3213,7 +3227,7 @@ Host *
 
 #File Transfer
 
-/usr/bin/scp ./cope_collector.pl.bk2 ouhukapp06:/usr/local/cwx 
+
 
 /usr/bin/scp <app node name>:<filepath> <db node>:<filepath> 
 

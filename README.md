@@ -248,9 +248,7 @@ function functname() {
 ~~~~ 
 
 Example: 
-
-
-
+~~~~
 !/bin/bash 
 
 Basic function

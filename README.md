@@ -222,30 +222,33 @@ done
 ~~~~
 
 
-
+~~~~
 for name [in list]
 do
   statements that can use $name
 done
+~~~~
 
-
+~~~~
 for (( initialisation ; ending condition ; update ))
 do
   statements...
 done
-
+~~~~
 
 # Functions 
 
 The function refers to passed arguments by position (as if they were positional parameters), that is, $1, $2, and so forth.
 $@ is equal to "$1" "$2"... "$N", where N is the number of positional parameters. $# holds the number of positional parameters.
 
-
+~~~~
 function functname() {
   shell commands
 }
+~~~~ 
 
 Example: 
+
 
 
 !/bin/bash 
@@ -256,6 +259,8 @@ print_something () {
    }
   print_something
   print_something
+
+~~~~
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php> 
 
@@ -268,7 +273,7 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php>
 	• declare -f          # displays all defined functions in your login session
 
 
-
+~~~~
 #!/bin/bash
 # Passing arguments to a function
 print_something () {
@@ -276,10 +281,10 @@ echo Hello $1
 }
 print_something Mars
 print_something Jupiter
-
+~~~~
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php> 
 
-
+~~~~
 #!/bin/bash
 # Setting a return status for a function
 print_something () {
@@ -289,9 +294,12 @@ return 5
 print_something Mars
 print_something Jupiter
 echo The previous function has a return value of $?
+~~~~
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php> 
 
+
+~~~~
 #!/bin/bash
 # Experimenting with variable scope
 var_change () {
@@ -309,6 +317,7 @@ echo Before function call: var1 is $var1 : var2 is $var2
 var_change 
 
 echo After function call: var1 is $var1 : var2 is $var2
+~~~~
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php>  
 
@@ -316,8 +325,7 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php>
 
 # If Statement
 
-
-
+~~~~
 if condition
 then
   statements
@@ -325,8 +333,9 @@ then
   then statements...]
 [else
   statements]
-fi
-
+fi 
+~~~~
+~~~~
 #!/bin/bash
 # else example
 if [ $# -eq 1 ]
@@ -335,34 +344,37 @@ nl $1
 else
 nl /dev/stdin
 fi
-
+~~~~
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php> 
 
-#!/bin/bash
 # or example
+~~~~
+#!/bin/bash
 if [ $USER == 'bob' ] || [ $USER == 'andy' ]
 then
 ls -alh
 else
 ls
 fi
-
+~~~~
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php> 
 
-
-#!/bin/bash
 # Basic if statement
+~~~~
+#!/bin/bash
 if [ $1 -gt 100 ]
 then
 echo Hey that\'s a large number.
 pwd
 fi
 date
+~~~~ 
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php> 
 
-#!/bin/bash
 # elif statements
+~~~~
+#!/bin/bash
 if [ $1 -ge 18 ]
 then
 echo You may go to the party.
@@ -372,11 +384,12 @@ echo You may go to the party but be back before midnight.
 else
 echo You may not go to the party.
 fi
-
+~~~~
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php> 
 
-#!/bin/bash
 # Nested if statements
+~~~~
+#!/bin/bash
 if [ $1 -gt 100 ]
 then
 echo Hey that\'s a large number.
@@ -385,15 +398,17 @@ then
 echo And is also an even number.
 fi
 fi
-
+~~~~
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php> 
 
-#!/bin/bash
 # and example
+~~~~
+#!/bin/bash
 if [ -r $1 ] && [ -s $1 ]
 then
 echo This file is useful.
 fi
+~~~~ 
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php>  
 
@@ -526,7 +541,7 @@ wait                # waits until all background jobs have finished
 	
 	• -n str1                    # str1 is not null (has length greater than 0) 
 	
-    -z str1                    # str1 is null (has length 0) 
+        * -z str1                    # str1 is null (has length 0) 
 
 # Switchcase
  

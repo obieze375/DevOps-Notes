@@ -279,35 +279,35 @@ print_something Jupiter
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php> 
 
 
-1. #!/bin/bash
-2. # Setting a return status for a function
-3. print_something () {
-4. echo Hello $1
-5. return 5
-6. }
-7. print_something Mars
-8. print_something Jupiter
-9. echo The previous function has a return value of $?
+#!/bin/bash
+# Setting a return status for a function
+print_something () {
+echo Hello $1
+return 5
+}
+print_something Mars
+print_something Jupiter
+echo The previous function has a return value of $?
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php> 
 
-1. #!/bin/bash
-2. # Experimenting with variable scope
-3. var_change () {
-4. local var1='local 1'
-5. echo Inside function: var1 is $var1 : var2 is $var2
-6. var1='changed again'
-7. var2='2 changed again'
-8. } 
+#!/bin/bash
+# Experimenting with variable scope
+var_change () {
+local var1='local 1'
+echo Inside function: var1 is $var1 : var2 is $var2
+var1='changed again'
+var2='2 changed again'
+} 
 
-9. var1='global 1'
-10. var2='global 2' 
+var1='global 1'
+var2='global 2' 
 
-11. echo Before function call: var1 is $var1 : var2 is $var2 
+echo Before function call: var1 is $var1 : var2 is $var2 
 
-12. var_change 
+var_change 
 
-13. echo After function call: var1 is $var1 : var2 is $var2
+echo After function call: var1 is $var1 : var2 is $var2
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php>  
 
@@ -339,12 +339,12 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php>
 
 #!/bin/bash
 # or example
-3. if [ $USER == 'bob' ] || [ $USER == 'andy' ]
-4. then
-5. ls -alh
-6. else
-7. ls
-8. fi
+if [ $USER == 'bob' ] || [ $USER == 'andy' ]
+then
+ls -alh
+else
+ls
+fi
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php> 
 
@@ -588,9 +588,9 @@ until condition; do
   statements
 done
 
-1. #!/bin/bash
-2. # Basic until loop
-3. counter=1
+#!/bin/bash
+# Basic until loop
+counter=1
 4. until [ $counter -gt 10 ]
 5. do
 6. echo $counter
@@ -831,9 +831,12 @@ From <https://gist.github.com/MohamedAlaa/2961058>
 tmux new-window \; split-window -p 66 \; split-window -d \; split-window -h 
 
 The flow is:
-	1. tmux new-window: create a window (ok, you wanted a new-session, that does create a window upon startup)
-	2. split-window -p 66: allocate bottom two thirds of the vertical space to a secondary pane and focus it
-	3. split-window -d: split bottom pane in half, vertically, without focusing the new pane (i.e. focus stays on second – now center – pane)
+	1. tmux new-window: create a window (ok, you wanted a new-session, that does create a window upon startup) 
+	
+	2. split-window -p 66: allocate bottom two thirds of the vertical space to a secondary pane and focus it 
+	
+	3. split-window -d: split bottom pane in half, vertically, without focusing the new pane (i.e. focus stays on second – now center – pane) 
+	
 	4. split-window -h: split center pane in half, horizontally
 
 From <https://superuser.com/questions/1155771/tmux-split-into-4-panes> 
@@ -1439,7 +1442,7 @@ The issue was the client didn't have access to the BE of the Prod domain so they
 
  
 
-Create BE and check if they can login  
+#Create BE and check if they can login  
 
 If they can't, try and login into their account from another Linux box  e.g. ssh <theiruserid>@<targetserver>   
 
@@ -1447,7 +1450,7 @@ If you can login, then check their if their user permissions are correct via lsl
 
 Check if the client can telnet to port 22 on the server (This rules out any network issues on their side)  
 
-Create new user with Useradd  
+#Create new user with Useradd  
 
  
 
@@ -1469,7 +1472,7 @@ The path to the user's shell.
 
  
 
-Useradd  
+#Useradd  
 
  
 
@@ -1487,7 +1490,7 @@ useradd –c "Grant Stewart" –m –s /bin/bash grant
 
  
 
-SECONDARY USER ACCOUNT Creation:  
+#SECONDARY USER ACCOUNT Creation:  
 
  
 
@@ -1515,7 +1518,7 @@ usermod -a -G <group_name> kabbott - add to group
 
  
 
-Create a password using passwd  
+#Create a password using passwd  
 
  
 
@@ -1733,7 +1736,7 @@ hostnamectl set-hostname 'host_name'
 
 hostnamectl set-hostname 'node01'  
 
-Checking Open: 
+#Checking Open: 
 
 hecking Open files  
 
@@ -1771,7 +1774,7 @@ hecking Open files
 
  
 
-List User Specific Open Files  
+#List User Specific Open Files  
 
  
 
@@ -1813,7 +1816,7 @@ Find Processes running on Specific Port
 
  
 
-List Only IPv4 & IPv6 Open Files  
+#List Only IPv4 & IPv6 Open Files  
 
  
 
@@ -1955,7 +1958,7 @@ List Only IPv4 & IPv6 Open Files
 
  
 
-Search by PID  
+#Search by PID  
 
  
 
@@ -1977,7 +1980,7 @@ Search by PID
 
  
 
-Kill all Activity of Particular User  
+#Kill all Activity of Particular User  
 
  
 
@@ -1992,7 +1995,7 @@ Bring Interface up / down
 
  
 
-Bring Interface up  
+#Bring Interface up  
 
  
 
@@ -2000,7 +2003,7 @@ ifup eth0
 
  
 
-Bring Interface down  
+#Bring Interface down  
 
  
 
@@ -2012,7 +2015,7 @@ Network Interface
 
  
 
-Check network interfaces: 
+#Check network interfaces: 
 
  
 
@@ -2082,7 +2085,7 @@ tcp6 0 0 ip6-localhost:ipp [::]:* LISTEN
 
  
 
-List only TCP or UDP connections 
+#List only TCP or UDP connections 
 
 • $ 
 
@@ -2110,7 +2113,7 @@ ESTABLISHED
 
  
 
-List udp connections only  
+#List udp connections only  
 
  
 
@@ -2136,7 +2139,7 @@ udp 0 0 *:ntp :
 
  
 
-Disable reverse dns lookup for faster output  
+#Disable reverse dns lookup for faster output  
 
  
 
@@ -2160,7 +2163,7 @@ tcp6 0 0 ::1:631 :::* LISTEN
 
  
 
-List out only listening connections  
+#List out only listening connections  
 
  
 
@@ -2188,7 +2191,7 @@ netstat -tulpn
 
  
 
-Get process name/pid and user id  
+#Get process name/pid and user id  
 
  
 
@@ -2238,7 +2241,7 @@ User Inode PID/Program name
 
  
 
-Print statistics 
+#Print statistics 
 
  
 
@@ -2282,7 +2285,7 @@ Iface
 
  
 
-Print network interfaces 
+#Print network interfaces 
 
  
 
@@ -2312,7 +2315,7 @@ RX bytes:29637117 (29.6 MB) TX bytes:4590583 (4.5 MB)
 
  
 
-Display multicast group information 
+#Display multicast group information 
 
  
 
@@ -2350,7 +2353,7 @@ tcp 0 0 10.61.223.188:22 10.14.40.60:54034 ESTABLISHED -
 
  
 
-Netstat with grep  
+#Netstat with grep  
 
  
 
@@ -2444,7 +2447,7 @@ rtt min/avg/max/mdev = 0.103/0.192/0.272/0.070 ms
 
  
 
-Traceroute  
+#Traceroute  
 
  
 
@@ -2486,7 +2489,7 @@ $ tracepath -n google.com
 
  
 
-Netstat  
+#Netstat  
 
  
 
@@ -2554,7 +2557,7 @@ tcp 0 0 127.0.0.1:25 0.0.0.0:* LISTEN 1313/master
 
  
 
-Telnet  
+#Telnet  
 
  
 

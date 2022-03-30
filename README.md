@@ -3013,44 +3013,44 @@ tcpdump -w /<dir>/traffic.pcap -i <interface> -v host <ip_addr_interface_is_send
  
 
 Update & Upgrade OS packages 
-
+~~~~
 	• sudo apt-get update
 
 	• sudo apt-get upgrade
-
+~~~~
 Install package
-
+~~~~
 	• sudo apt-get install 
-
+~~~~
 Uninstall packages 
-
+~~~~
 	• sudo apt-get remove --purge
 
 	• sudo apt-get remove
-
+~~~~
 # CENTOS/REDHAT COMMANDS 
-
+~~~~
 Install package 
 
 	• yum install httpd
-
+~~~~
 Uninstall package 
-
+~~~~
 	• yum remove package_name
-
+~~~~
 Update/Upgrade packages 
-
+~~~~
 	• yum update
 
 	• yum upgrade
 
 	• yum update -y 
-
-  Get Details  
-
+~~~~
+Get Details  
+~~~~
 	• rpm -qi <package_name> 
 	• yum info <package_name>  
-
+~~~~
 
 
 # Process Management
@@ -3112,10 +3112,10 @@ To verify results -  top
 # What to do if a process is locked 
 
 
-STEP 1:  
+#STEP 1:  
 
  
-
+~~~~
 ps aux | grep -i apt  
 
  
@@ -3126,12 +3126,12 @@ sudo kill –9
 
 sudo killall apt apt-get 
 
+~~~~
+
+#STEP2:  
+
  
-
-STEP2:  
-
- 
-
+~~~~
 lsof /var/lib/dpkg/lock  
 
  
@@ -3161,19 +3161,18 @@ sudo rm /var/lib/dpkg/lock
  
 
 sudo dpkg --configure -a 
-
- STEP3:  
+~~~~ 
+	
+#STEP3:  
 
  
 
 Troubleshoot: dpkg: error: dpkg frontend is locked by another process 
 
-If you see the error “dpkg frontend is locked by another process” while running the above described method, you’ll have to do an 
-
-additional step. 
+If you see the error “dpkg frontend is locked by another process” while running the above described method, you’ll have to do an additional step. 
 
  
-
+~~~~
 First, find out the id of the process that is holding the lock file. 
 
  
@@ -3191,7 +3190,7 @@ sudo kill -9 PID
 Now you can remove the lock and reconfigure dpkg: 
 
 sudo rm /var/lib/dpkg/lock-frontend sudo dpkg --configure -a  
-
+~~~~
 
 # SSH 
  

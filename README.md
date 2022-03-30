@@ -575,8 +575,9 @@ esac
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php> 
 
+~~~~
 #!/bin/bash
-# Print a message about disk useage.
+ 
 space_free=$( df -h | awk '{ print $5 }' | sort -n | tail -n 1 | sed 's/%//' )
 case $space_free in
 [1-5]*)
@@ -586,15 +587,16 @@ echo Plenty of disk space available
 echo There could be a problem in the near future
 ;;
 8*)
-12. echo Maybe we should look at clearing out old files
-13. ;;
-14. 9*)
-15. echo We could have a serious problem on our hands soon
-16. ;;
-17. *)
-18. echo Something is not quite right here
-19. ;;
-20. esac
+echo Maybe we should look at clearing out old files
+;;
+9*)
+echo We could have a serious problem on our hands soon
+;;
+*)
+echo Something is not quite right here
+;;
+esac
+~~~~ 
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php>   
 
@@ -843,8 +845,9 @@ kill session:
 
 Kill all the tmux sessions: 
 
+~~~~
 tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xargs kill 
-
+~~~~
 In tmux, hit the prefix ctrl+b (my modified prefix is ctrl+a) and then:
 
 From <https://gist.github.com/MohamedAlaa/2961058> 
@@ -961,8 +964,9 @@ top –c - Filtering
 	
 OS: 
 
+~~~~	
 hostnamectl
-
+~~~~
 
 SAR: 
 
@@ -2518,11 +2522,11 @@ rtt min/avg/max/mdev = 0.103/0.192/0.272/0.070 ms
 #Traceroute  
 
  
-
+~~~~
 traceroute -n google.com 
-
+~~~~
  
-
+~~~~
 traceroute to google.com (216.58.2.7), 30 hops 
 
 max, 60 byte packets 
@@ -2552,7 +2556,7 @@ $ tracepath -n google.com
 1: 10.0.2.2 0.649ms 
 
 2: 192.168.1.1 2.147ms asymm 64 
-
+~~~~
 ... 
 
  
@@ -2564,7 +2568,7 @@ $ tracepath -n google.com
 The netstat Command 
 
  
-
+~~~~
 -n Display numerical addresses and ports. 
 
 -i Displays a list of network interfaces. 
@@ -2578,7 +2582,7 @@ The netstat Command
 -t Limit the output to TCP (netstat -ntlp) 
 
 -u Limit the output to UDP (netstat -nulp) 
-
+~~~~
  
 
 [jason@linuxsvr ~]$ netstat -i 

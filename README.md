@@ -213,7 +213,7 @@ $ flush_redis
 
 
 # For Loops 
-~
+~~~~~~
 for x in {1..10}
 do
   statements

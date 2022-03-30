@@ -2334,9 +2334,9 @@ ffctcp6 0 0 ::1:631 :::* LISTEN
 ~~~~
  
 
-netstat -tulpn  
+#netstat -tulpn  
 
- 
+~~~~ 
 
 • netstat -tulpn is merge between tcp and udp 
 
@@ -2348,7 +2348,7 @@ netstat -tulpn
 
 sudo netstat -nlpt 
 
- 
+
 
 • Active Internet connections (only servers) 
 
@@ -2369,9 +2369,10 @@ PID/Program name
 e option along with the p option to get the 
 
 username too. 
-
-• $ sudo netstat -ltpe 
-
+~~~~ 
+	
+#sudo netstat -ltpe 
+~~~~
 • Active Internet connections (only servers) 
 
 • Proto Recv-Q Send-Q Local Address Foreign Address State 
@@ -2389,16 +2390,16 @@ User Inode PID/Program name
 • tcp6 0 0 ip6-localhost:ipp [::]:* LISTEN root 9754 
 
 661/cupsd 
-
+~~~~
  
 
 #Print statistics 
 
  
-
+~~~~
 • $ netstat -s 
 
- 
+
 
 Ip: 
 
@@ -2414,11 +2415,11 @@ Ip:
 
 60 outgoing packets dropped 
 
- 
+~~~~ 
 
-Display kernel routing information 
+#Display kernel routing information 
 
- 
+~~~~
 
 • $ netstat -rn  
 
@@ -2434,12 +2435,12 @@ Iface
 
 • 192.168.1.0 0.0.0.0 255.255.255.0 U 0 0 0 eth0 
 
- 
+~~~~ 
 
 #Print network interfaces 
 
  
-
+~~~~
 • $ netstat -ie  
 
  
@@ -2463,13 +2464,13 @@ collisions:0 txqueuelen:1000
 RX bytes:29637117 (29.6 MB) TX bytes:4590583 (4.5 MB) 
 
  Interrupt:18 Memory:da000000-da020000  
-
+~~~~
  
 
 #Display multicast group information 
 
  
-
+~~~~
 netstat -g  
 
  
@@ -2502,15 +2503,16 @@ tcp 0 0 10.61.223.188:43191 10.61.239.93:1984 TIME_WAIT -
 
 tcp 0 0 10.61.223.188:22 10.14.40.60:54034 ESTABLISHED -       
 
- 
+~~~~
 
 #Netstat with grep  
 
  
-
+~~~~
 netstat -nap |grep :3506  
+~~~~
 
-Testing Connectivity with Ping  
+#Testing Connectivity with Ping  
 
  
 
@@ -2602,9 +2604,9 @@ rtt min/avg/max/mdev = 0.103/0.192/0.272/0.070 ms
  
 ~~~~
 traceroute -n google.com 
-~~~~
+
  
-~~~~
+
 traceroute to google.com (216.58.2.7), 30 hops 
 
 max, 60 byte packets 
@@ -2622,7 +2624,7 @@ Diagnosing Network Connections 413
 4 216.58.216.78 20.549 ms 12.250.16.30 22.904 
 
 ms 216.58.216.78 20.724 ms 
-
+~~~~
 
 ~~~~
 $ tracepath -n google.com 
@@ -2822,6 +2824,7 @@ To display Manual page for nmcli - man nmcli
 
 To display Manual page for nmcli-examples - man nmcli-examples   
 
+~~~~
 
 #Configure Static Route: 
 

@@ -1167,30 +1167,45 @@ grep -v pattern file.txt
 
 Vi Command Mode and Navigation
 
-k Up one line.
-j Down one line.
-h Left one character.
-l Right one character.
-w Right one word.
-b Left one word.
-^ Go to the beginning of the line.
-$ Go to the end of the line.
+k  - Up one line.  
+		
+j -  Down one line.    
+		
+h  - Left one character.      
+		
+l  - Right one character.   
+		
+w  - Right one word. 
+		
+b  - Left one word. 
+		
+^  - Go to the beginning of the line. 
+		
+$  - Go to the end of the line.
 V
 
 Vi Insert Mode 
 
-i Insert at the cursor position.
-I Insert at the beginning of the line.
-a Append after the cursor position.
+i Insert at the cursor position. 
+		
+I Insert at the beginning of the line.  
+		
+a Append after the cursor position.  
+		
 A Append at the end of the line.
 
 Vi Line Mode 
 
-:w Writes (saves) the file.
-:w! Forces the file to be saved.
-:q Quit.
-:q! Quit without saving changes.
-:wq! Write and quit.
+:w Writes (saves) the file.    
+		
+:w! Forces the file to be saved.  
+		
+:q Quit.   
+		
+:q! Quit without saving changes.  
+		
+:wq! Write and quit.  
+		
 :x Same as :wq. 
 
 Vi Line Mode 
@@ -1252,17 +1267,24 @@ C Same as c$.
 
 Vi - Copying and Pasting 
 
-yy Yank (copy) the current line.
-y Yank the .
-p Paste the most recent deleted or yanked text. 
+yy Yank (copy) the current line.  
+		
+y Yank the .   
+		
+p Paste the most recent deleted or yanked text.   
+		
 4yy - Pastes 4 lines down page 
 
 Vi - Undo / Redo 
 
-u Undo
-Ctrl-R Redo
-Vi - Searching
-/ Start a forward search.
+u Undo 
+		
+Ctrl-R Redo  
+		
+Vi - Searching  
+		
+/ Start a forward search.  
+		
 ? Start a reverse search.
 
 Demo - vi

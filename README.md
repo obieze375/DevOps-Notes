@@ -219,7 +219,9 @@ do
   statements
 done 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
 for name [in list]
 do
   statements that can use $name
@@ -231,7 +233,7 @@ for (( initialisation ; ending condition ; update ))
 do
   statements...
 done
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 # Functions 
 

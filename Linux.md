@@ -7,7 +7,7 @@ permalink: /Linux/
 
 
 # Git Aliases
-# ----------------------
+
 alias ga='git add' 
 
 alias gaa='git add .' 
@@ -75,17 +75,19 @@ alias gstp='git stash pop'
 alias gsts='git stash save'
 
 
-# ----------------------
+
 # Git Functions
-# ----------------------
+
+
 # Git log find by commit message
 function glf() { git log --all --grep="$1"; }
 
 From <https://jonsuh.com/blog/git-command-line-shortcuts/>  
 
-# ----------------------
+
 # How to create aliases
-# ----------------------
+
+
 # Git log find by commit me
 
 1. Edit ~/.bash_aliases or ~/.bashrc file using: vi ~/.bash_aliases
@@ -104,17 +106,22 @@ Let us create four aliases as follows:
 $ vi ~/.bash_aliases
 OR
 $ joe ~/.bashrc
-Append text:
-# update our debian/ubuntu box
+Append text: 
+
+# update our debian/ubuntu box 
+
 alias update='sudo -- sh -c "apt update && apt upgrade"'
  
-# make grep output colorful 
+# make grep output colorful  
+
 alias grep='grep --color=auto'
  
-# set eth0 as an interface for eth0  
+# set eth0 as an interface for eth0   
+
 alias vnstat='vnstat -i eth0'
  
-# flush redis cache for wp
+# flush redis cache for wp 
+
 alias flush_redis='redis-cli -h 127.0.0.1 FLUSHDB'
 Save and close the file.
 How to load aliases
@@ -212,7 +219,7 @@ $ flush_redis
 
 
 # For Loops 
-# ----------------------   
+  
 
 for x in {1..10}
 do
@@ -231,7 +238,6 @@ done
 
 
 # Functions 
-# ----------------------  
 
 # The function refers to passed arguments by position (as if they were positional parameters), that is, $1, $2, and so forth.
 # $@ is equal to "$1" "$2"... "$N", where N is the number of positional parameters. $# holds the number of positional parameters.
@@ -244,13 +250,14 @@ function functname() {
 Example: 
 
 
-1. #!/bin/bash
-2. # Basic function
-3. print_something () {
-4. echo Hello I am a function
-5. }
-6. print_something
-7. print_something
+!/bin/bash 
+
+Basic function
+print_something () {
+  echo Hello I am a function
+   }
+  print_something
+  print_something
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php> 
 
@@ -310,7 +317,7 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php>
 
 
 # If Statement
-# ----------------------
+
 
 
 if condition
@@ -322,19 +329,19 @@ then
   statements]
 fi
 
-1. #!/bin/bash
-2. # else example
-3. if [ $# -eq 1 ]
-4. then
-5. nl $1
-6. else
-7. nl /dev/stdin
-8. fi
+#!/bin/bash
+# else example
+if [ $# -eq 1 ]
+then
+nl $1
+else
+nl /dev/stdin
+fi
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php> 
 
-1. #!/bin/bash
-2. # or example
+#!/bin/bash
+# or example
 3. if [ $USER == 'bob' ] || [ $USER == 'andy' ]
 4. then
 5. ls -alh
@@ -395,7 +402,7 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php>
 
 
 # INPUT/OUTPUT REDIRECTORS
-# ----------------------
+
 
 
 
@@ -441,7 +448,7 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php>
 
 
 # Operators
-# ----------------------
+
 
 
 
@@ -467,7 +474,7 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php>
 
 
 # Process Handling
-# ---------------------- 
+
 
 # To suspend a job, type CTRL+Z while it is running. You can also suspend a job with CTRL+Y.
 # This is slightly different from CTRL+Z in that the process is only stopped when it attempts to read input from terminal.
@@ -504,7 +511,7 @@ wait                # waits until all background jobs have finished
 
 
 # Strings
-# ---------------------- 
+
 
 
 	• str1 == str2               # str1 matches str2 
@@ -524,7 +531,7 @@ wait                # waits until all background jobs have finished
     -z str1                    # str1 is null (has length 0) 
 
 # Switchcase
-# ---------------------- 
+ 
 
     case expression in
   pattern1 )
@@ -599,7 +606,7 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-loops.php#while>
 
 
 # Variables
-# ---------------------- 
+
 
 
 	• varname=value                # defines a variable 
@@ -663,7 +670,7 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-loops.php#while>
 
 
 # While
-# ---------------------- 
+ 
 
 
 while condition; do 
@@ -675,7 +682,7 @@ done
 #!/bin/bash 
 
 # Basic while loop 
-# ---------------------- 
+
 
 counter=1 
 
@@ -693,7 +700,7 @@ echo All done
 
 
 # Whoami
-# ---------------------- 
+ 
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-loops.php#while>   
 
@@ -706,7 +713,7 @@ fi
 
 
 # CLI
-# ---------------------- 
+
 
 
 
@@ -772,29 +779,39 @@ General commands continued…
 • -- help – use to get information on command e.g. ls --help 
 
 
-# ----------------------
+
 # tmux
-# ---------------------- 
+ 
 
 
 To install : yum install tmux
 
-start new:
-	• tmux
-start new with session name:
-	• tmux new -s myname
-attach:
-tmux a  #  (or at, or attach)
-attach to named:
+start new: 
+
+	• tmux 
+	
+start new with session name: 
+
+	• tmux new -s myname 
+	
+attach: 
+
+tmux a  #  (or at, or attach) 
+
+attach to named:  
+
 	• tmux a -t myname
 
-list sessions:
+list sessions: 
+
 	• tmux ls
 
-kill session:
+kill session: 
+
 	• tmux kill-session -t myname
 
-Kill all the tmux sessions:
+Kill all the tmux sessions: 
+
 tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xargs kill 
 
 In tmux, hit the prefix ctrl+b (my modified prefix is ctrl+a) and then:
@@ -884,16 +901,16 @@ crontab  -e
 
 crontab -l | grep <script_name> 
 
-# ----------------------
+
 # Check Version
-# ---------------------- 
+
 
 cat /etc/oracle-release 
 
 
-# ----------------------
+
 # Diagnostics
-# ----------------------  
+ 
 
 RAM 
 
@@ -990,9 +1007,9 @@ ALL – This displays all of the above information. The output will be very long
  w 
 
 
-# ----------------------
+
 # Files & Directories
-# ---------------------- 
+
 
 pwd command 
 
@@ -1231,9 +1248,9 @@ press shift key + ‘:’ and press the up arrow key
 
 set nu
 
-# ----------------------
+
 # Groups & Users
-# ---------------------- 
+
 
 
 groupadd group_name  
@@ -2849,9 +2866,9 @@ Update/Upgrade packages
 	• yum info <package_name>  
 
 
-# ----------------------
+
 # Process Management
-# ----------------------
+
 
 
 
@@ -2905,9 +2922,9 @@ To start a process with pre-defined nice value -  nice -n 10 sleep 3600 &
 
 To verify results -  top   
 
-# ---------------------------------
+
 # What to do if a process is locked 
-# --------------------------------- 
+
 
 STEP 1:  
 
@@ -2989,9 +3006,9 @@ Now you can remove the lock and reconfigure dpkg:
 
 sudo rm /var/lib/dpkg/lock-frontend sudo dpkg --configure -a  
 
-# ---------------------------------
+
 # SSH 
-# ---------------------------------  
+ 
 
 Configuration for remote server being accessed
 
@@ -3102,9 +3119,9 @@ File Transfer
 
 /usr/bin/scp <app node name>:<filepath> <db node>:<filepath> 
 
-# ---------------------------------
+
 # Troubleshooting 
-# ---------------------------------   
+ 
 
 Debugging: 
 

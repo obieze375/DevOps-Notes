@@ -2946,11 +2946,11 @@ listening on eth0, link-type EN10MB (Ethernet), capture size 65535 bytes
 19:25:49.639763 IP 10.0.2.2.64440 > linuxsvr.ssh: Flags [.], ack 120, win 65535, length 0  
 ~~~~
  
-
+~~~~
 $ sudo tcpdump –Anvvv  
 
  
-~~~~
+
 tcpdump: listening on eth0, link-type EN10MB (Ethernet), capture size 65535 bytes 
 
 19:44:27.067530 IP (tos 0x10, ttl 64, id 5120, offset 0, flags [DF], proto TCP (6), length 64) 
@@ -2968,17 +2968,17 @@ E..@..@.@.(............P..>.:........4.....
  
 
  
-
+~~~~
 tcpdump -w /temp/traffic.pcap -i eno1 -v host 9.9.9.9  
-
+~~~~
  
 
  
 
  
-
+~~~~
 tcpdump -w /<dir>/traffic.pcap -i <interface> -v host <ip_addr_interface_is_sending_traffic_to> 
-
+~~~~
 
 # Package Management
  
@@ -3029,7 +3029,7 @@ Update/Upgrade packages
 
 
 
-    Run CPU intensive process on System with nice value of -5 to give more CPU attention than default.  
+Run CPU intensive process on System with nice value of -5 to give more CPU attention than default.  
  
 
 • Adjust the niceness value to 5 so that CPU pays less attention to this process  
@@ -3049,7 +3049,7 @@ Never run process with nice value of -20 ,CPU will give highest priority and no 
 Command Action/Description  
 
  
-
+~~~~
 To start process with nice value -5 - nice -n -5 dd if=/dev/zero of=/dev/null   
 
  
@@ -3064,9 +3064,9 @@ To verify changes                   - top
 Run below command in back ground with nice value of 10. 
 
  
-
+~~~~
 sleep 3600 
-
+~~~~
  
 
 Command Action/Description  
@@ -3166,7 +3166,7 @@ sudo rm /var/lib/dpkg/lock-frontend sudo dpkg --configure -a
 
 # SSH 
  
-
+~~~~
 Configuration for remote server being accessed
 
 eze@ubuntu:~$ sudo apt install openssh-server 
@@ -3176,9 +3176,10 @@ eze@ubuntu:~$ sudo systemctl status ssh
 eze@ubuntu:~$ sudo ufw allow ssh 
 	
 root@ubuntu:~# ufw status 
-
+~~~~ 
+	
 Key Generation: 
-
+~~~~
 eze@ubuntu:~$ sudo apt install openssh-server 
 
 eze@ubuntu:~$ sudo apt-get update / yum update (redhat)
@@ -3214,7 +3215,8 @@ total 8
 eze@ubuntu:~/.ssh$ ssh-copy-id -i ~/.ssh/key1.pub 192.168.142.136 
 
 eze@ubuntu:~/.ssh$ ssh 192.168.142.136 
-
+~~~~ 
+	
 **** chmod 600 or 700 for ssh key to work **** 
 
 *** Copy SSH credentials cat id_rsa.pub | pbcopy ***
@@ -3252,7 +3254,7 @@ Example:
 ssh ezeaka01@10.61.240.244
  
  
- 
+ ~~~~
 ***********************  How to create ssh config   *****************************************************************************   
   ssh 10.61.240.244 -v 
 	
@@ -3279,7 +3281,7 @@ Host *
  
  
 ***********************  How to create ssh config  *****************************************************************************  
-
+~~~~
 
 #File Transfer
 
@@ -3299,7 +3301,7 @@ bash -v hello1.sh
 
 #Ping IP from localhost  
 
-	~~~~
+~~~~
 Attempt to ssh from localhost  
 
   

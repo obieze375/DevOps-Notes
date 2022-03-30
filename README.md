@@ -721,10 +721,10 @@ while condition; do
 done  
 ~~~~
 
+# Basic while loop
+
+~~~~ 
 #!/bin/bash 
-
-# Basic while loop 
-
 
 counter=1 
 
@@ -739,7 +739,7 @@ echo $counter
 done 
 
 echo All done 
-
+~~~~
 
 # Whoami
  
@@ -900,13 +900,13 @@ The flow is:
 From <https://superuser.com/questions/1155771/tmux-split-into-4-panes> 
 
 
-
+~~~~
 :new<CR>  new session
 s  list sessions
 $  name session
-
+~~~~
 From <https://gist.github.com/MohamedAlaa/2961058> 
-
+~~~~
 Panes (splits)
 %  vertical split
 "  horizontal split
@@ -922,7 +922,8 @@ x  kill pane
 <prefix> z toggle pane zoom
 
 From <https://gist.github.com/MohamedAlaa/2961058> 
-
+~~~~
+~~~~
 Windows (tabs)
 c  create window
 w  list windows
@@ -931,7 +932,7 @@ p  previous window
 f  find window
 ,  name window
 &  kill window
-
+~~~~
 From <https://gist.github.com/MohamedAlaa/2961058> 
 
 #Sync Panes 
@@ -940,6 +941,7 @@ You can do this by switching to the appropriate window, typing your Tmux prefix 
 	
 ~~~~	
 :setw synchronize-panes 
+~~~~ 
 ~~~~
 You can optionally add on or off to specify which state you want; otherwise the option is simply toggled. This option is specific to one window, so it won’t change the way your other sessions or windows operate. When you’re done, toggle it off again by repeating the command. 
 
@@ -949,7 +951,7 @@ d  detach
 t  big clock
 ?  list shortcuts
 :  prompt
-
+~~~~
 From <https://gist.github.com/MohamedAlaa/2961058>   
 
 
@@ -1023,21 +1025,22 @@ sar -S
 From <https://www.gxd88.cn/sar>  
 
  
-I/O: 
+#I/O: 
 ~~~~
 sar -b 
 ~~~~
-I/O by Block Device: 
 
+#I/O by Block Device: 
+~~~~
 sar -d -p 
-
+~~~~
  
-Check Run queue and Load Average: 
-
+#Check Run queue and Load Average: 
+~~~~
 sar -q 
-
- Network Stats: 
-
+~~~~
+#Network Stats: 
+~~~~
  sar -n DEV 
  
 
@@ -1070,11 +1073,13 @@ UDP – Displays UDPv4 network traffic
 SOCK6, IP6, EIP6, ICMP6, UDP6 are for IPv6 
 
 ALL – This displays all of the above information. The output will be very long. 
+~~~~ 
 
- Historic Information: 
-
+ #Historic Information: 
+~~~~
  sar -f /var/log/sa/sa15 -n DEV 
- 
+~~~~ 
+
  #Uptime: 
 
 ~~~~

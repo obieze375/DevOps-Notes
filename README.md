@@ -1090,19 +1090,21 @@ ALL – This displays all of the above information. The output will be very long
 # Files & Directories
 
 
-pwd command 
+#pwd command 
 
 • pwd : prints current working directory 
-	
+~~~~	
 Example: 
 	
 paul@debian8:~$ pwd 
 	
 /home/paul
+~~~~ 
 
-cd 
+#cd 
 
 • cd -> changes your current directory + also return to your home dir
+~~~~
 Example: 
 	
 paul@debian8$ cd /etc 
@@ -1110,17 +1112,20 @@ paul@debian8$ cd /etc
 paul@debian8$ pwd 
 	
 /etc
+~~~~ 
 
-cd – command continued 
 
+#cd – command continued 
+~~~~
 paul@debian8$ cd 
 	
 paul@debian8$ pwd 
 	
 /home/paul
+~~~~ 
 
-cd .. – Return to previous directory 
-
+#cd .. – Return to previous directory 
+~~~~
 paul@debian8$ pwd 
 	
 /usr/share/games 
@@ -1130,13 +1135,15 @@ paul@debian8$ cd ..
 paul@debian8$ pwd  
 	
 /usr/share
+~~~~ 
 
-Path Completion 
+#Path Completion 
 
 • The tab key can help you in typing a path without errors. Typing cd /et
 followed by the tab key will expand the command line to cd /etc/.
 When typing cd /Et followed by the tab key, nothing will happen
-because you typed the wrong path (upper case E).
+because you typed the wrong path (upper case E). 
+
 • You will need fewer key strokes when using the tab key, and you will
 be sure your typed path is correct!
 
@@ -1181,7 +1188,7 @@ drwxr-xr-x 17 obi  obi       4096 Jan 10 18:28 .config/
 #mkdir – Makes new directory
 
 Creates Directory 
-
+~~~~
 paul@debian8:~/mydir$ mkdir otherstuff 
 	
 paul@debian8:~/mydir$ ls -l 
@@ -1189,9 +1196,10 @@ paul@debian8:~/mydir$ ls -l
 total 8 drwxr-xr-x 2 paul paul 4096 Sep 17 00:08 otherstuff 
 	
 drwxr-xr-x 2 paul paul 4096 Sep 17 00:08 stuff
+~~~~ 
 
-mkdir –p – Creates Parent with new directory 
-
+#mkdir –p – Creates Parent with new directory 
+~~~~
 paul@debian8:~$ mkdir -p mydir2/mysubdir2/threedirsdeep 
 	
 paul@debian8:~$ cd mydir2 
@@ -1203,33 +1211,36 @@ total 4 drwxr-xr-x 3 paul paul 4096 Sep 17 00:11 mysubdir2
 paul@debian8:~/mydir2$ cd mysubdir2 
 	
 paul@debian8:~/mydir2/mysubdir2$
-
- Search threw Directory -  
-
+~~~~
+#Search through Directory -  
+~~~~
 sudo du -a /dir/ | sort -n -r | head -n 20
+~~~~
 
-
-rmdir – Deletes Directory 
-
+#rmdir – Deletes Directory 
+~~~~
 • paul@debian8:~/mydir$ rmdir otherstuff 
 	
-• paul@debian8:~/mydir$ cd .. 
+• paul@debian8:~/mydir$ cd ..  
+~~~~
 	
-rmdir –p – Deletes Directory 
-	
+#rmdir –p – Deletes Directory 
+~~~~	
 • paul@debian8:~$ rmdir -p test42/subdir 
 	
 • @debian8:~
-
-mv directory directory - moves file to another location 
-
+~~~~
+#mv directory directory - moves file to another location 
+~~~~
 • mv directory directory - moves file to another location 
+~~~~
 
+#cat - Check contents of file 
+~~~~
+• cat /etc/hosts
 
-	• cat /etc/hosts
-
-	• cat /etc/hosts | grep <string_your're_looking_for>  (To search for a value through a file)
-	
+• cat /etc/hosts | grep <string_your're_looking_for>  (To search for a value through a file)
+~~~~	
 grep -v pattern file.txt 
 
 

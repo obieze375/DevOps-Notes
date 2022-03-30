@@ -1,7 +1,7 @@
-# obieze375-github.io
+
 
 # Git Aliases
-
+~~~~
 alias ga='git add' 
 
 alias gaa='git add .' 
@@ -67,14 +67,18 @@ alias gstl='git stash list'
 alias gstp='git stash pop'  
 
 alias gsts='git stash save'
-
+~~~~
 
 
 # Git Functions
 
 
 # Git log find by commit message
-function glf() { git log --all --grep="$1"; }
+
+~~~~
+function glf() { git log --all --grep="$1"; } 
+
+~~~~
 
 From <https://jonsuh.com/blog/git-command-line-shortcuts/>  
 
@@ -84,35 +88,49 @@ From <https://jonsuh.com/blog/git-command-line-shortcuts/>
 
 # Git log find by commit me
 
+~~~~
 1. Edit ~/.bash_aliases or ~/.bashrc file using: vi ~/.bash_aliases
 2. Append your bash alias
 3. For example append: alias update='sudo yum update'
 4. Save and close the file.
-5. Activate alias by typing: source ~/.bash_aliases
+5. Activate alias by typing: source ~/.bash_aliases 
+~~~~
 
-Please note that ~/.bash_aliases file only works if the following line presents in the ~/.bashrc file:
+Please note that ~/.bash_aliases file only works if the following line presents in the ~/.bashrc file: 
+~~~~
 if [ -f ~/.bash_aliases ]; then
 . ~/.bash_aliases
-fi
+fi 
+~~~~ 
+
 Are above lines are missing in your ~/.bashrc file? Just append at the end of the ~/.bashrc, using a text editor such as vi/vim or joe. 
 Examples
-Let us create four aliases as follows:
-$ vi ~/.bash_aliases
-OR
-$ joe ~/.bashrc
+Let us create four aliases as follows: 
+~~~~
+$ vi ~/.bash_aliases 
+~~~~
+OR 
+~~~~
+$ joe ~/.bashrc 
+~~~~
 Append text: 
 
 # update our debian/ubuntu box 
 
-alias update='sudo -- sh -c "apt update && apt upgrade"'
+~~~~
+alias update='sudo -- sh -c "apt update && apt upgrade"' 
+~~~~
  
 # make grep output colorful  
-
-alias grep='grep --color=auto'
+~~~~
+alias grep='grep --color=auto' 
+~~~~
  
 # set eth0 as an interface for eth0   
 
-alias vnstat='vnstat -i eth0'
+~~~~
+alias vnstat='vnstat -i eth0' 
+~~~~
  
 # flush redis cache for wp 
 
@@ -741,7 +759,7 @@ fi
 
 
 
-clear – Clear the terminal window 
+#clear – Clear the terminal window 
 
 • clear
 
@@ -753,18 +771,20 @@ reset – Resets the terminal
 
 • history
 
-history | grep - Search for a specific command from the history
+history | grep - Search for a specific command from the history 
+
 • 3. Delete a line from the history with history -d line_number
 • 4. If you want your commands not to remain in the history, run them
 with a space before them after you will have set
-HISTCONTROL=ignorespace
+HISTCONTROL=ignorespace 
+
 • ! e.g. !357 -> re-runs command if entered into terminal
 
-xkill – Close a frozen window/application 
+#xkill – Close a frozen window/application 
 
 • xkill
 
-Tab Completion 
+#Tab Completion 
 
 • Use TAB key for completion of characters on CLI 
 
@@ -784,7 +804,7 @@ Tab Completion
 
 • ctrl + _ = Undo
 
-Alter Screen Resolution 
+#Alter Screen Resolution 
 
 • xrandr --output --mode 1920x1200
 
@@ -941,18 +961,17 @@ crontab -l | grep <script_name>
 
 # Check Version
 
-
+~~~~
 cat /etc/oracle-release 
-
-
+~~~~
 
 # Diagnostics
  
 
 RAM 
-
+~~~~
 	• free -th 
-
+~~~~
 
 RAM & CPU
 
@@ -971,21 +990,21 @@ hostnamectl
 SAR: 
 
 Basic Output:
-
+~~~~
 sar   
-
+~~~~
 CPU Usage per Core: 
-
+~~~~
 sar -P ALL 
-
+~~~~
 Memory Usage: 
-
+~~~~
 sar -r   
-
+~~~~
 Swap Usage: 
-
+~~~~
 sar -S 
-
+~~~~
  
 
 From <https://www.gxd88.cn/sar>  
@@ -1199,6 +1218,7 @@ grep -v pattern file.txt
 
 Vi Command Mode and Navigation
 
+~~~~		
 k  - Up one line.  
 		
 j -  Down one line.    
@@ -1214,10 +1234,11 @@ b  - Left one word.
 ^  - Go to the beginning of the line. 
 		
 $  - Go to the end of the line.
-V
+~~~~
 
 Vi Insert Mode 
 
+~~~~		
 i Insert at the cursor position. 
 		
 I Insert at the beginning of the line.  
@@ -1225,9 +1246,11 @@ I Insert at the beginning of the line.
 a Append after the cursor position.  
 		
 A Append at the end of the line.
-
+~~~~ 
+		
 Vi Line Mode 
 
+~~~~
 :w Writes (saves) the file.    
 		
 :w! Forces the file to be saved.  
@@ -1239,9 +1262,11 @@ Vi Line Mode
 :wq! Write and quit.  
 		
 :x Same as :wq. 
-
+~~~~ 
+		
 Vi Line Mode 
 
+~~~~
 :n Positions the cursor at line n. 
 		
 :$ Positions the cursor on the last line. 
@@ -1251,14 +1276,16 @@ Vi Line Mode
 :set nonu Turn off line numbering. 
 		
 :help [subcommand] Get help.
-
+~~~~ 
+		
 Vi Modes 
-
+~~~~
 Mode Key 
 		
 Command Esc 
 		
 Insert i I a A 
+~~~~ 
 		
 Line : 
 
@@ -1266,7 +1293,8 @@ Vi - Repeating Commands
 
 ● Repeat a command by preceding it with a
 number. 
-		
+
+~~~~	
 ○ 5k = Move up a line 5 times 
 		
 ○ 80i = Insert 80 times 
@@ -1275,6 +1303,7 @@ number.
 
 Vi - Deleting Text 
 
+~~~~	
 x Delete a character. 
 		
 dw Delete a word. 
@@ -1282,9 +1311,10 @@ dw Delete a word.
 dd Delete a line.  
 		
 D Delete from the current position.
-
+~~~~ 
+		
 Vi - Changing Text 
-
+~~~~
 r Replace the current character.  
 		
 cw Change the current word.       
@@ -1296,9 +1326,11 @@ c$ Change the text from the current position.
 C Same as c$.  
 		
 ~ Reverses the case of a character.
-
+~~~~ 
+		
 Vi - Copying and Pasting 
 
+~~~~		
 yy Yank (copy) the current line.  
 		
 y Yank the .   
@@ -1307,18 +1339,22 @@ p Paste the most recent deleted or yanked text.
 		
 4yy - Pastes 4 lines down page 
 
-Vi - Undo / Redo 
-
+~~~~ 
+		
+Vi - Undo / Redo  
+		
+~~~~
 u Undo 
-		
+~~~~		
 Ctrl-R Redo  
+~~~~	 
 		
-Vi - Searching  
-		
+#Vi - Searching  
+~~~~		
 / Start a forward search.  
 		
 ? Start a reverse search.
-
+~~~~
 Demo - vi
 ---TODO: Overlay with characters that I'm
 using.---- (Might be hard, maybe come back and
@@ -1357,7 +1393,7 @@ set nu
 # Groups & Users
 
 
-
+~~~~
 groupadd group_name  
 
  
@@ -1367,9 +1403,9 @@ Example:
  
 
 groupadd friends  
+~~~~
 
-Usermod  
-
+usermod
  
 
 usermod [ options ] username  
@@ -1395,7 +1431,8 @@ Usermod
 grep mysql /etc/passwd 
 
  
-
+~~~~ 
+		
 mysql:x:97:1003:MySQL Server: 
 
  
@@ -1412,7 +1449,7 @@ mysql:x:97:1003:MySQL User:
 
 /opt/mysql:/usr/sbin/nologin 
 
- 
+~~~~ 
 
 /etc/group 
 
@@ -1801,19 +1838,19 @@ groups=504(tclark),506(authors)
 
 
 #Change Hostname: 
-
+~~~~ 
+	
 hostnamectl set-hostname 'host_name' 
 
  
 
 hostnamectl set-hostname 'node01'  
+~~~~
 
-#Checking Open: 
-
-hecking Open files  
+#Checking Open files  
 
  
-
+~~~~
 • lsof 
 
  
@@ -1843,13 +1880,13 @@ hecking Open files
 • init 1 root 6r DIR 0,10 0 1 inotify 
 
 • init 1 root 7u unix 0xc1513880 0t0 8450 socket 
-
+~~~~
  
 
 #List User Specific Open Files  
 
  
-
+~~~~
 • lsof -u cyberpunk 
 
  
@@ -1872,10 +1909,11 @@ hecking Open files
 
 • sshd 1838 cyberpunk mem REG 253,0 874580 190255 /lib/libkrb5.so.3.3 
 
- 
+ ~~~~
 
 Find Processes running on Specific Port 
 
+~~~~
 • # lsof -i TCP:22 
 
  
@@ -1885,17 +1923,16 @@ Find Processes running on Specific Port
 • sshd 1471 root 3u IPv4 12683 0t0 TCP *:ssh (LISTEN) 
 
 • sshd 1471 root 4u IPv6 12685 0t0 TCP *:ssh (LISTEN) 
-
+~~~~
  
 
 #List Only IPv4 & IPv6 Open Files  
 
- 
+ ~~~~
 
 • # lsof -i 4 
 
  
-
 • COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME 
 
 • rpcbind 1203 rpc 6u IPv4 11326 0t0 UDP *:sunrpc 
@@ -1908,8 +1945,10 @@ Find Processes running on Specific Port
 
 • avahi-dae 1241 avahi 14u IPv4 11580 0t0 UDP *:58600 
 
+~~~~	
  
-
+~~~~ 
+	
 • # lsof -i 6 
 
  
@@ -1928,12 +1967,13 @@ Find Processes running on Specific Port
 
 • cupsd 1346 root 6u IPv6 12112 0t0 TCP localhost:ipp (LISTEN) 
 
- 
+ ~~~~
 
 #List Open Files of TCP Port ranges 1-1024  
 
  
-
+~~~~ 
+	
 lsof -i TCP:1-1024  
 
  
@@ -1959,13 +1999,13 @@ lsof -i TCP:1-1024
 • httpd 1918 root 5u IPv6 15991 0t0 TCP *:http (LISTEN) 
 
 • httpd 1918 root 7u IPv6 15995 0t0 TCP *:https (LISTEN) 
-
+~~~~
  
 
 #Exclude User with ‘^’ Character  
 
  
-
+~~~~
 • # lsof -i -u^root  
 
  
@@ -1998,11 +2038,11 @@ lsof -i TCP:1-1024
 
 • rpc.statd 1277 rpcuser 11u IPv6 11862 0t0 TCP *:56428 (LISTEN) 
 
- 
+~~~~ 
 
 #Find Out who’s Looking What Files and Commands?  
 
- 
+~~~~ 
 
 • # lsof -i –u 
 
@@ -2012,11 +2052,12 @@ lsof -i TCP:1-1024
 
 • ping 2525 cyberpunk cwd DIR 253,0 12288 15 /etc 
 
+~~~~	
  
 
 #List all Network Connections  
 
- 
+~~~~ 
 
 • # lsof -i 
 
@@ -2028,12 +2069,12 @@ lsof -i TCP:1-1024
 
 • rpcbind 1203 rpc 7u IPv4 11330 0t0 UDP *:954 
 
- 
+~~~~ 
 
 #Search by PID  
 
  
-
+~~~~
 • # lsof -p 1  
 
  
@@ -2049,16 +2090,17 @@ lsof -i TCP:1-1024
 • init 1 root mem REG 253,0 1889704 190149 /lib/libc-2.12.so 
 
 • init 1 root mem REG 253,0 142472 189970 /lib/ld-2.12.so 
-
+~~~~
  
 
 #Kill all Activity of Particular User  
 
  
-
+~~~~
 • # kill -9 `lsof -t -u  
 
-
+~~~~ 
+	
 Network Interfaces: 
 
 Bring Interface up / down  
@@ -2069,19 +2111,19 @@ Bring Interface up / down
 
 #Bring Interface up  
 
- 
+~~~~ 
 
 ifup eth0  
 
- 
+~~~~ 
 
 #Bring Interface down  
 
- 
+~~~~ 
 
 ifdown eth0  
 
- 
+~~~~ 
 
 Network Interface  
 
@@ -2090,7 +2132,7 @@ Network Interface
 #Check network interfaces: 
 
  
-
+~~~~
 ip addr  
 
 Monitor: 
@@ -2131,12 +2173,12 @@ root@server1 ~]# ip addr show
 
   List out all connections  
 
+ ~~~~
+
+#The first and most simple command is to list out all the current connections. 
+
  
-
-The first and most simple command is to list out all the current connections. 
-
- 
-
+~~~~
 $ netstat -a  
 
  
@@ -2155,14 +2197,14 @@ tcp 0 0 enlightened.local:49980 del01s07-in-f14.1:https ESTABLISHED
 
 tcp6 0 0 ip6-localhost:ipp [::]:* LISTEN 
 
- 
+~~~~
 
 #List only TCP or UDP connections 
 
 • $ 
 
  
-
+~~~~
 netstat -at 
 
  
@@ -2183,12 +2225,12 @@ tcp 0 0 enlightened.local:45038 a96-17-181-10.depl:http
 
 ESTABLISHED 
 
- 
+ ~~~~
 
 #List udp connections only  
 
  
-
+~~~~
 $ netstat -au  
 
  
@@ -2209,12 +2251,12 @@ udp 0 0 localhost:ntp :
 
 udp 0 0 *:ntp : 
 
- 
+ ~~~~
 
 #Disable reverse dns lookup for faster output  
 
  
-
+~~~~
  $ netstat -ant  
 
  
@@ -2232,13 +2274,13 @@ tcp 0 0 192.168.1.2:49058 173.255.230.5:80 ESTABLISHED
 tcp 0 0 192.168.1.2:33324 173.194.36.117:443 ESTABLISHED 
 
 tcp6 0 0 ::1:631 :::* LISTEN 
-
+~~~~
  
 
 #List out only listening connections  
 
  
-
+~~~~
 • $ netstat -tnl 
 
  
@@ -2252,7 +2294,7 @@ tcp 0 0 127.0.1.1:53 0.0.0.0:* LISTEN
 tcp 0 0 127.0.0.1:631 0.0.0.0:* LISTEN 
 
 ffctcp6 0 0 ::1:631 :::* LISTEN 
-
+~~~~
  
 
 netstat -tulpn  
@@ -2456,7 +2498,7 @@ ping -c 3 google.com
 $ ping -c 3 google.com 
 
  
-
+~~~~
 PING google.com (216.58.2.7) 56 bytes of data. 
 
 64 bytes from 216.58.2.7: icmp_seq=1 ttl=53 time=20.1 ms 
@@ -2472,9 +2514,9 @@ PING google.com (216.58.2.7) 56 bytes of data.
 2004ms 
 
 rtt min/avg/max/mdev = 21.489/22.924/24.154/1.111 ms 
-
+~~~~
  
-
+~~~~
 $ ping -c 3 google.com  
 
  
@@ -2494,9 +2536,9 @@ From 216.58.2.7 icmp_seq=3 Destination Host Unreachable
 loss, time 2002ms 
 
 pipe 3 
-
+~~~~
  
-
+~~~~
 $ ping -c 3 10.0.2.2  
 
  
@@ -2516,8 +2558,7 @@ PING 10.0.2.2 (10.0.2.2) 56(84) bytes of data.
 2001ms 
 
 rtt min/avg/max/mdev = 0.103/0.192/0.272/0.070 ms 
-
- 
+~~~~ 
 
 #Traceroute  
 
@@ -2545,8 +2586,8 @@ Diagnosing Network Connections 413
 
 ms 216.58.216.78 20.724 ms 
 
-LinuxTrainingAcademy.com 
 
+~~~~
 $ tracepath -n google.com 
 
 1?: [LOCALHOST] pmtu 1500 
@@ -2584,7 +2625,7 @@ The netstat Command
 -u Limit the output to UDP (netstat -nulp) 
 ~~~~
  
-
+~~~~
 [jason@linuxsvr ~]$ netstat -i 
 
  
@@ -2596,7 +2637,7 @@ Iface MTU RX-OK RX-ERR RX-DRP RX-OVR TX-OK TX-ERR TX-DRP TX-OVR Flg
 eth0 1500 3975 0 0 0 2627 0 0 0 BMRU 
 
 lo 65536 8 0 0 0 8 0 0 0 LRU 
-
+~~~~
  
 ~~~~
 [jason@linuxsvr ~]$ netstat -rn  
@@ -2654,7 +2695,7 @@ telnet> quit
 closed. 
 ~~~~
 
-
+~~~~
 [root@server1 ~]# nmcli con show  
 
  
@@ -2702,10 +2743,12 @@ connection.master: --
 connection.slave-type: -- 
 
 connection.autoconnect-slaves: -1 (default)  
+~~~~
 
-
+	
 Configure eth0 interface with ipv6 and DNS 
 
+~~~~	
 • Already existing IPv4 network configurations should not be impacted.  
 
  
@@ -2746,9 +2789,9 @@ To display Manual page for nmcli-examples - man nmcli-examples
 #Configure Static Route: 
 
 Configure static route on system.example.com for destination 10.1.1.0/24 via 192.168.99.30.  
-
+~~~~
  
-
+~~~~
 • Route configuration must be persistent after reboot. 
 
 • eth0 should be used as exit interface.  
@@ -2784,7 +2827,7 @@ vim /etc/sysconfig/network-scripts/route-system
  
 
 :wq  
-
+~~~~
  
 #Configure hostname resolution: 
 
@@ -2836,7 +2879,7 @@ We have only one network, so it is not possible to test this. To test this worki
 not on 192.168.99.0/24 network and then test ssh connection from ipaserver.example.com, it must be denied. 
 
  
-
+~~~~
 Command Action/Description  
 
  
@@ -2858,7 +2901,8 @@ Reloading firewall to make changes effective - firewall-cmd --reload
  
 
 To verify firewall configs after making changes - firewall-cmd --list-all  
-
+~~~~
+	
 Packet Capture: 
 
 tcpdump 
@@ -3243,13 +3287,11 @@ Host *
 
 bash -v hello1.sh  
 
-#Can't ssh to an app Server:  
-
-
- 
+#Can't ssh to an app Server:   
 
 #Ping IP from localhost  
 
+	~~~~
 Attempt to ssh from localhost  
 
   
@@ -3269,12 +3311,14 @@ If the previous 2 fail attempt to log into the server directly e.g. via ILO if i
  
 
 Notify all the engineers and teams who have been working on the server and check if any of the changes they made could have caused the server's sshd capabilities to stop functioning. E.g. If a certain config file was edited, then revert the changes made to it and test and so forth  
-
+~~~~
  
 #Slowness on Server: 
 
+~~~~	
 Check CPU, RAM, & Swap usage using top command  
 
  
 
 Based on the results the best option is to identify and kill PIDS that is causing the issue and if that is not resolution reboot the node and free up swap space as it doesn't get released after RAM usage goes down 
+~~~~

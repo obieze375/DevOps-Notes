@@ -226,9 +226,8 @@ for name [in list]
 do
   statements that can use $name
 done
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 for (( initialisation ; ending condition ; update ))
 do
   statements...

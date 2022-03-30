@@ -1011,9 +1011,9 @@ From <https://www.gxd88.cn/sar>
 
  
 I/O: 
-
+~~~~
 sar -b 
-
+~~~~
 I/O by Block Device: 
 
 sar -d -p 
@@ -1062,10 +1062,11 @@ ALL – This displays all of the above information. The output will be very long
 
  sar -f /var/log/sa/sa15 -n DEV 
  
- Uptime: 
+ #Uptime: 
 
+~~~~
  w 
-
+~~~~
 
 
 # Files & Directories
@@ -1372,20 +1373,25 @@ Substitution Command II
 
 
 
-Mass Delete and move to the bottom of file 
-
+#Mass Delete and move to the bottom of file 
+~~~~
 • dG
-
+~~~~
 Move to the bottom of file
-
+~~~~
 	• ' o '                                             
+~~~~
 
-Move to the bottom of the file: 
-
+#Move to the bottom of the file:  
+					     
+~~~~
 Shift + g 
-
-*** To reclaim previous command used**
+~~~~ 
+					     
+#To reclaim previous command used 
+~~~~				     
 press shift key + ‘:’ and press the up arrow key 
+~~~~				     
 
 set nu
 
@@ -1435,18 +1441,21 @@ grep mysql /etc/passwd
 		
 mysql:x:97:1003:MySQL Server: 
 
- 
+~~~~  
 
+~~~~ 
 /opt/mysql:/usr/sbin/nologin 
-
+~~~~ 
  
-
+~~~~ 
 usermod -c "MySQL User" mysql 
-
+~~~~  
+~~~~ 		
 grep mysql /etc/passwd 
 
 mysql:x:97:1003:MySQL User: 
-
+~~~~  
+~~~~ 		
 /opt/mysql:/usr/sbin/nologin 
 
 ~~~~ 
@@ -1584,9 +1593,9 @@ The path to the user's shell.
 #Useradd  
 
  
-
+~~~~
 useradd –c "Grant Stewart" –m –s /bin/bash grant 
-
+~~~~
  
 
 Note:This is one command line. It's displayed on 
@@ -1594,38 +1603,37 @@ Note:This is one command line. It's displayed on
 multiple lines for readability. 
 
  
-
+~~~~
 useradd –c "Grant Stewart" –m –s /bin/bash grant 
-
+~~~~
  
 
 #SECONDARY USER ACCOUNT Creation:  
 
  
-
-adduser kabbott <Create user> 
-
+~~~~
+adduser jbloggs <Create user> 
+~~~~
  
-
-passwd kabbott  <Set Password> 
-
+~~~~
+passwd jbloggs  <Set Password> 
+~~~~
  
-
-chage -d 0 kabbott  Triggers user to change it when they log in 
-
+~~~~
+chage -d 0 jbloggs  Triggers user to change it when they log in 
+~~~~
  
-
-chage -E 6 kabbott - 6 month expiry date 
-
+~~~~
+chage -E 6 jbloggs - 6 month expiry date 
+~~~~
  
-
+~~~~
 id cpearson 
-
+~~~~
  
-
-usermod -a -G <group_name> kabbott - add to group  
-
- 
+~~~~
+usermod -a -G <group_name> jbloggs - add to group  
+~~~~ 
 
 #Create a password using passwd  
 

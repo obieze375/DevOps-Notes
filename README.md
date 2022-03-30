@@ -349,50 +349,50 @@ fi
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php> 
 
 
-1. #!/bin/bash
-2. # Basic if statement
-3. if [ $1 -gt 100 ]
-4. then
-5. echo Hey that\'s a large number.
-6. pwd
-7. fi
-8. date
+#!/bin/bash
+# Basic if statement
+if [ $1 -gt 100 ]
+then
+echo Hey that\'s a large number.
+pwd
+fi
+date
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php> 
 
-1. #!/bin/bash
-2. # elif statements
-3. if [ $1 -ge 18 ]
-4. then
-5. echo You may go to the party.
-6. elif [ $2 == 'yes' ]
-7. then
-8. echo You may go to the party but be back before midnight.
-9. else
-10. echo You may not go to the party.
-11. fi
+#!/bin/bash
+# elif statements
+if [ $1 -ge 18 ]
+then
+echo You may go to the party.
+elif [ $2 == 'yes' ]
+then
+echo You may go to the party but be back before midnight.
+else
+echo You may not go to the party.
+fi
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php> 
 
-1. #!/bin/bash
-2. # Nested if statements
-3. if [ $1 -gt 100 ]
-4. then
-5. echo Hey that\'s a large number.
-6. if (( $1 % 2 == 0 ))
-7. then
-8. echo And is also an even number.
-9. fi
-10. fi
+#!/bin/bash
+# Nested if statements
+if [ $1 -gt 100 ]
+then
+echo Hey that\'s a large number.
+if (( $1 % 2 == 0 ))
+then
+echo And is also an even number.
+fi
+fi
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php> 
 
-1. #!/bin/bash
-2. # and example
-3. if [ -r $1 ] && [ -s $1 ]
-4. then
-5. echo This file is useful.
-6. fi
+#!/bin/bash
+# and example
+if [ -r $1 ] && [ -s $1 ]
+then
+echo This file is useful.
+fi
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php>  
 
@@ -537,36 +537,36 @@ wait                # waits until all background jobs have finished
     statements ;;
 esac
 
-1. #!/bin/bash
-2. # case example
-3. case $1 in
-4. start)
-5. echo starting
-6. ;;
-7. stop)
-8. echo stoping
-9. ;;
-10. restart)
-11. echo restarting
-12. ;;
-13. *)
-14. echo don\'t know
-15. ;;
-16. esac
+#!/bin/bash
+# case example
+case $1 in
+start)
+echo starting
+;;
+stop)
+echo stoping
+;;
+restart)
+echo restarting
+;;
+*)
+echo don\'t know
+;;
+esac
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php> 
 
-1. #!/bin/bash
-2. # Print a message about disk useage.
-3. space_free=$( df -h | awk '{ print $5 }' | sort -n | tail -n 1 | sed 's/%//' )
-4. case $space_free in
-5. [1-5]*)
-6. echo Plenty of disk space available
-7. ;;
-8. [6-7]*)
-9. echo There could be a problem in the near future
-10. ;;
-11. 8*)
+#!/bin/bash
+# Print a message about disk useage.
+space_free=$( df -h | awk '{ print $5 }' | sort -n | tail -n 1 | sed 's/%//' )
+case $space_free in
+[1-5]*)
+echo Plenty of disk space available
+;;
+[6-7]*)
+echo There could be a problem in the near future
+;;
+8*)
 12. echo Maybe we should look at clearing out old files
 13. ;;
 14. 9*)
@@ -591,12 +591,12 @@ done
 #!/bin/bash
 # Basic until loop
 counter=1
-4. until [ $counter -gt 10 ]
-5. do
-6. echo $counter
-7. ((counter++))
-8. done
-9. echo All done
+until [ $counter -gt 10 ]
+do
+echo $counter
+((counter++))
+done
+echo All done
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-loops.php#while>   
 
@@ -722,7 +722,7 @@ reset – Resets the terminal
 
 • reset
 
-history – Lists all recent commands 
+#history – Lists all recent commands 
 
 • history
 
@@ -1163,7 +1163,7 @@ mv directory directory - moves file to another location
 grep -v pattern file.txt 
 
 
-Editing Files with Vi 
+# Editing Files with Vi 
 
 Vi Command Mode and Navigation
 
@@ -1195,41 +1195,59 @@ Vi Line Mode
 
 Vi Line Mode 
 
-:n Positions the cursor at line n.
-:$ Positions the cursor on the last line.
-:set nu Turn on line numbering.
-:set nonu Turn off line numbering.
+:n Positions the cursor at line n. 
+		
+:$ Positions the cursor on the last line. 
+		
+:set nu Turn on line numbering. 
+		
+:set nonu Turn off line numbering. 
+		
 :help [subcommand] Get help.
 
 Vi Modes 
 
-Mode Key
-Command Esc
-Insert i I a A
+Mode Key 
+		
+Command Esc 
+		
+Insert i I a A 
+		
 Line : 
 
 Vi - Repeating Commands 
 
 ● Repeat a command by preceding it with a
-number.
-○ 5k = Move up a line 5 times
-○ 80i = Insert 80 times
+number. 
+		
+○ 5k = Move up a line 5 times 
+		
+○ 80i = Insert 80 times 
+		
 ○ 80i_ = Insert 80 "_" characters
 
 Vi - Deleting Text 
 
-x Delete a character.
-dw Delete a word.
-dd Delete a line.
+x Delete a character. 
+		
+dw Delete a word. 
+		
+dd Delete a line.  
+		
 D Delete from the current position.
 
 Vi - Changing Text 
 
-r Replace the current character.
-cw Change the current word.
-cc Change the current line.
-c$ Change the text from the current position.
-C Same as c$.
+r Replace the current character.  
+		
+cw Change the current word.       
+		
+cc Change the current line. 
+		
+c$ Change the text from the current position.  
+		
+C Same as c$.  
+		
 ~ Reverses the case of a character.
 
 Vi - Copying and Pasting 
@@ -1862,7 +1880,7 @@ Find Processes running on Specific Port
 
  
 
-• # lsof -i TCP:1-1024  
+lsof -i TCP:1-1024  
 
  
 

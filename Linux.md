@@ -743,15 +743,24 @@ xkill – Close a frozen window/application
 
 • xkill
 
-Tab Completion
-• Use TAB key for completion of characters on CLI
-• ctrl + u = Clear everything before the cursor
-• ctrl + a = To beginning of line
-• ctrl + e = To end of line
-• ctrl + b = Back one word
-• ctrl + f = Forward one word
-• ctrl + w = Cut last word
-• ctrl + k = Clear everything after the cursor
+Tab Completion 
+
+• Use TAB key for completion of characters on CLI 
+
+• ctrl + u = Clear everything before the cursor 
+
+• ctrl + a = To beginning of line 
+
+• ctrl + e = To end of line 
+
+• ctrl + b = Back one word 
+
+• ctrl + f = Forward one word 
+
+• ctrl + w = Cut last word 
+
+• ctrl + k = Clear everything after the cursor 
+
 • ctrl + _ = Undo
 
 Alter Screen Resolution 
@@ -886,19 +895,19 @@ t  big clock
 From <https://gist.github.com/MohamedAlaa/2961058>   
 
 
-# ----------------------
-# Crontab
-# ----------------------  
 
-# [Crontab schedule]
-# +---------------- minute (0 - 59)
-# |  +------------- hour (0 - 23)
-# |  |  +---------- day of month (1 - 31)
-# |  |  |  +------- month (1 - 12)
-# |  |  |  |  +---- day of week (0 - 6) (Sunday=0)
-# |  |  |  |  |
-# *  *  *  *  * command to be executed <script>
-# -- -- -- -- - --------------------------------- 
+# Crontab
+
+
+[Crontab schedule]
++---------------- minute (0 - 59)
+|  +------------- hour (0 - 23)
+|  |  +---------- day of month (1 - 31)
+|  |  |  +------- month (1 - 12)
+|  |  |  |  +---- day of week (0 - 6) (Sunday=0)
+|  |  |  |  |
+*  *  *  *  * command to be executed <script>
+-- -- -- -- - --------------------------------- 
 
 crontab  -e  
 
@@ -1016,31 +1025,43 @@ ALL – This displays all of the above information. The output will be very long
 
 pwd command 
 
-• pwd : prints current working directory
-Example:
-paul@debian8:~$ pwd
+• pwd : prints current working directory 
+	
+Example: 
+	
+paul@debian8:~$ pwd 
+	
 /home/paul
 
 cd 
 
 • cd -> changes your current directory + also return to your home dir
-Example:
-paul@debian8$ cd /etc
-paul@debian8$ pwd
+Example: 
+	
+paul@debian8$ cd /etc 
+	
+paul@debian8$ pwd 
+	
 /etc
 
 cd – command continued 
 
-paul@debian8$ cd
-paul@debian8$ pwd
+paul@debian8$ cd 
+	
+paul@debian8$ pwd 
+	
 /home/paul
 
 cd .. – Return to previous directory 
 
-paul@debian8$ pwd
-/usr/share/games
-paul@debian8$ cd ..
-paul@debian8$ pwd
+paul@debian8$ pwd 
+	
+/usr/share/games 
+	
+paul@debian8$ cd .. 
+	
+paul@debian8$ pwd  
+	
 /usr/share
 
 Path Completion 
@@ -1090,22 +1111,30 @@ drwxr-xr-x 17 obi  obi       4096 Jan 10 18:28 .config/
 
 
 
-mkdir – Makes new directory
+#mkdir – Makes new directory
 
 Creates Directory 
 
-paul@debian8:~/mydir$ mkdir otherstuff
-paul@debian8:~/mydir$ ls -l
-total 8 drwxr-xr-x 2 paul paul 4096 Sep 17 00:08 otherstuff
+paul@debian8:~/mydir$ mkdir otherstuff 
+	
+paul@debian8:~/mydir$ ls -l 
+	
+total 8 drwxr-xr-x 2 paul paul 4096 Sep 17 00:08 otherstuff 
+	
 drwxr-xr-x 2 paul paul 4096 Sep 17 00:08 stuff
 
 mkdir –p – Creates Parent with new directory 
 
-paul@debian8:~$ mkdir -p mydir2/mysubdir2/threedirsdeep
-paul@debian8:~$ cd mydir2
-paul@debian8:~/mydir2$ ls -l
-total 4 drwxr-xr-x 3 paul paul 4096 Sep 17 00:11 mysubdir2
-paul@debian8:~/mydir2$ cd mysubdir2
+paul@debian8:~$ mkdir -p mydir2/mysubdir2/threedirsdeep 
+	
+paul@debian8:~$ cd mydir2 
+	
+paul@debian8:~/mydir2$ ls -l 
+	
+total 4 drwxr-xr-x 3 paul paul 4096 Sep 17 00:11 mysubdir2 
+	
+paul@debian8:~/mydir2$ cd mysubdir2 
+	
 paul@debian8:~/mydir2/mysubdir2$
 
  Search threw Directory -  
@@ -1115,10 +1144,14 @@ sudo du -a /dir/ | sort -n -r | head -n 20
 
 rmdir – Deletes Directory 
 
-• paul@debian8:~/mydir$ rmdir otherstuff
-• paul@debian8:~/mydir$ cd ..
-rmdir –p – Deletes Directory
-• paul@debian8:~$ rmdir -p test42/subdir
+• paul@debian8:~/mydir$ rmdir otherstuff 
+	
+• paul@debian8:~/mydir$ cd .. 
+	
+rmdir –p – Deletes Directory 
+	
+• paul@debian8:~$ rmdir -p test42/subdir 
+	
 • @debian8:~
 
 mv directory directory - moves file to another location 

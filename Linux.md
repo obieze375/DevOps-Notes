@@ -220,11 +220,14 @@ $ flush_redis
 
 # For Loops 
   
-
+-------------------------------------------------------------
 for x in {1..10}
 do
   statements
-done
+done 
+-------------------------------------------------------------
+
+
 
 for name [in list]
 do
@@ -271,13 +274,13 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php>
 
 
 
-1. #!/bin/bash
-2. # Passing arguments to a function
-3. print_something () {
-4. echo Hello $1
-5. }
-6. print_something Mars
-7. print_something Jupiter
+#!/bin/bash
+# Passing arguments to a function
+print_something () {
+echo Hello $1
+}
+print_something Mars
+print_something Jupiter
 
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php> 
 
@@ -1691,11 +1694,11 @@ $ id
 uid=503(tclark) gid=506(authors) 
 groups=504(tclark),506(authors)  
 
-# ----------------------
-# Networks
-# ----------------------  
 
-Change Hostname: 
+# Networks
+
+
+#Change Hostname: 
 
 hostnamectl set-hostname 'host_name' 
 
@@ -1825,7 +1828,7 @@ List Only IPv4 & IPv6 Open Files
 
  
 
-List Open Files of TCP Port ranges 1-1024  
+#List Open Files of TCP Port ranges 1-1024  
 
  
 
@@ -1857,7 +1860,7 @@ List Open Files of TCP Port ranges 1-1024
 
  
 
-Exclude User with ‘^’ Character  
+#Exclude User with ‘^’ Character  
 
  
 
@@ -1895,7 +1898,7 @@ Exclude User with ‘^’ Character
 
  
 
-Find Out who’s Looking What Files and Commands?  
+#Find Out who’s Looking What Files and Commands?  
 
  
 
@@ -1909,7 +1912,7 @@ Find Out who’s Looking What Files and Commands?
 
  
 
-List all Network Connections  
+#List all Network Connections  
 
  
 
@@ -2638,7 +2641,7 @@ To display Manual page for nmcli - man nmcli
 To display Manual page for nmcli-examples - man nmcli-examples   
 
 
-Configure Static Route: 
+#Configure Static Route: 
 
 Configure static route on system.example.com for destination 10.1.1.0/24 via 192.168.99.30.  
 
@@ -2650,7 +2653,7 @@ Configure static route on system.example.com for destination 10.1.1.0/24 via 192
 
  
 
-Command Action/Description  
+#Command Action/Description  
 
  
 
@@ -2681,7 +2684,7 @@ vim /etc/sysconfig/network-scripts/route-system
 :wq  
 
  
-Configure hostname resolution: 
+#Configure hostname resolution: 
 
 
 • Set the hosts file as priority for hostname resolution in nsswitch.conf file.  
@@ -2692,7 +2695,7 @@ Configure hostname resolution:
 
  
 
-Command Action/Description   
+#Command Action/Description   
 
  
 
@@ -2822,9 +2825,9 @@ tcpdump -w /temp/traffic.pcap -i eno1 -v host 7.191.5.161
 
 tcpdump -w /<dir>/traffic.pcap -i <interface> -v host <ip_addr_interface_is_sending_traffic_to> 
 
-# ----------------------
+
 # Package Management
-# ---------------------- 
+ 
 
 Update & Upgrade OS packages 
 
@@ -2842,7 +2845,7 @@ Uninstall packages
 
 	• sudo apt-get remove
 
-CENTOS/REDHAT COMMANDS 
+# CENTOS/REDHAT COMMANDS 
 
 Install package 
 

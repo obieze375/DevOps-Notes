@@ -1542,6 +1542,7 @@ mysql:x:97:1003:MySQL User:
 
 ~~~~ 
 
+~~~~
 /etc/group 
 
 root:x:0: 
@@ -1551,12 +1552,12 @@ sales:x:1001:john,mary
 The format of the /etc/group file: 
 
 group_name:password:GID:account1,accountN 
-
+~~~~
  
 
 groups [username] 
 
-groupsroot 
+groups root 
 
  
 
@@ -1566,6 +1567,7 @@ root
 
 groupadd [ options ]group_name 
 
+~~~~
 groupadd web 
 
 tail -1 /etc/group 
@@ -1578,7 +1580,7 @@ tail -1 /etc/group
 
 db:x:2500: 
 
- 
+~~~~ 
 
  
 

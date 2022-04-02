@@ -1207,18 +1207,18 @@ drwxr-xr-x 17 obi  obi       4096 Jan 10 18:28 .config/
 
 ~~~~~
 file – determines file type of file
-~~~~~
+~~~~
 paul@laika:~$ file pic33.png
 pic33.png: PNG image data, 3840 x 1200, 8-bit/color RGBA, noninterlaced
 paul@laika:~$ file /etc/passwd
 /etc/passwd: ASCII text
 paul@laika:~$ file HelloWorld.c
 HelloWorld.c: ASCII C program text
-~~~~~
+~~~~
 
 # touch – creates empty files 
 
-~~~~~
+~~~~
 paul@debian7:~$ ls -l total 0
 paul@debian7:~$ touch file42
 paul@debian7:~$ touch file33
@@ -1226,72 +1226,72 @@ paul@debian7:~$ ls –l
 total 0
 -rw-r--r-- 1 paul paul 0 Oct 15 08:57 file33
 -rw-r--r-- 1 paul paul 0 Oct 15 08:56 file42
-~~~~~ 
+~~~~ 
 
 # File Creation Commands
-~~~~~
+~~~~
 vim
 nano
 cat
 The Ctrl d key combination will send an EOF (End of File) to the running
 process ending the cat command 
-~~~~~
+~~~~
 
 # Check contents of File 
-~~~~~
+~~~~
 cat /etc/passwd
 root:x:0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/bin:/sbin/nologin
 narad:x:500:500::/home/narad:/bin/bash
-~~~~~
+~~~~
 
 # rm – Deletes file forever 
-~~~~~ 
+~~~~
 paul@debian7:~$ ls
 BigBattle.txt file33 file42 SinkoDeMayo
 paul@debian7:~$ rm BigBattle.txt
 paul@debian7:~$ ls
 file33 file42 SinkoDeMayo
 paul@debian7:~
-~~~~~ 
+~~~~ 
 
 # rm –i – Deleting file with a check 
 
-~~~~~ 
+~~~~ 
 paul@debian7:~$ rm -i file33
 rm: remove regular empty file `file33'? Yes 
-~~~~~  
+~~~~  
 
 # rm-f – Delete files 
 
-~~~~~ 
+~~~~ 
 • VERY STRONG WAY TO DELETE FILES 
 
 rm -f /* - Deletes all files in directory
-~~~~~  
+~~~~  
 
 # cp – Copy One file 
 
-~~~~~ 
+~~~~ 
 paul@debian7:~$ ls
 file42 SinkoDeMayo
 paul@debian7:~$ cp file42 file42.copy
 paul@debian7:~$ ls
 file42 file42.copy SinkoDeMayo
-~~~~~  
+~~~~ 
 
 # Copy to another Directory 
 
-~~~~~ 
+~~~~ 
 paul@debian7:~$ mkdir dir42
 paul@debian7:~$ cp SinkoDeMayo dir42
 paul@debian7:~$ ls dir42/
 SinkoDeMay
-~~~~~  
+~~~~  
 
 # cp –r – Copy complete Directories 
 
-~~~~~ 
+~~~~ 
 paul@debian7:~$ ls
 dir42 file42 file42.copy SinkoDeMayo
 paul@debian7:~$ cp -r dir42/ dir33
@@ -1299,10 +1299,10 @@ paul@debian7:~$ ls
 dir33 dir42 file42 file42.copy SinkoDeMayo
 paul@debian7:~$ ls dir33/
 SinkoDeMayo
-~~~~~  
+~~~~  
 
 # copy multiple files to directory 
-~~~~~ 
+~~~~
 paul@debian7:~$ cp file42 file42.copy SinkoDeMayo dir42/
 paul@debian7:~$ ls
 dir42/ file42 file42.copy SinkoDeMay
@@ -1310,40 +1310,26 @@ cp – i – To prevent overwriting of files
 paul@debian7:~$ cp -i SinkoDeMayo file42
 cp: overwrite `file42’? N
 paul@debian7:~$
-~~~~~  
+~~~~  
 
 # More Copy notes 
 
-~~~~~ 
+~~~~ 
 cp filename/directory - copy file and directory
 cp filename directory/directory - copy and move file
 cp filename directory/directory/filename.bak - creates backup file
-~~~~~  
+~~~~  
 
 # mv - Rename files with mv 
-
+~~~~
 paul@debian7:~$ mv file42 file33
 paul@debian7:~$ ls
 dir33 dir42 file33 file42.copy SinkoDeMayo
 paul@debian7:~$
+~~~~
 
-# find – To locate files of programs 
+Running bash script 
 
-• find ./etc filename - to locate file in filesystem
-locate – To also locate files of programs
-• Example:
-• locate
-head - can also display the first n lines of a
-file
-paul@debian7~$ head -4 /etc/passwd
-root:x:0:0:root:/root:/bin/bash
-daemon:x:1:1:daemon:/usr/sbin:/bin/sh bin:x:2:2:bin:/bin:/bin/sh
-sys:x:3:3:sys:/dev:/bin/sh
-paul@debian7~head – continued Can give out first n bytes paul@debian7~head–continuedCangiveoutfirstnbytespaul@debian7  head -c14 /etc/passwd
-root:x:0:0:roopaul@debian7~tail – See the last n lines of a file paul@debian7~tail–Seethelastnlinesofafilepaul@debian7  tail -3 /etc/services
-fido 60179/tcp # fidonet EMSI over TCP
-
-Local services
 paul@debian7~$
 ./ - to run bash script
 

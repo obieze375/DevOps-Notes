@@ -1207,6 +1207,8 @@ drwxr-xr-x 17 obi  obi       4096 Jan 10 18:28 .config/
 
 ~~~~
 file – determines file type of file
+~~~~ 
+
 ~~~~
 paul@laika:~$ file pic33.png
 pic33.png: PNG image data, 3840 x 1200, 8-bit/color RGBA, noninterlaced

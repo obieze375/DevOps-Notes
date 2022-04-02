@@ -3577,44 +3577,48 @@ If the previous 2 fail attempt to log into the server directly e.g. via ILO if i
 #Tip for diagnosing the issue:  
 
  
-
+~~~~
 Notify all the engineers and teams who have been working on the server and check if any of the changes they made could have caused the server's sshd capabilities to stop functioning. E.g. If a certain config file was edited, then revert the changes made to it and test and so forth  
 ~~~~
  
-#Slowness on Server: 
+# Slowness on Server: 
 
-~~~~	
+	
 Check CPU, RAM, & Swap usage using top command  
 
  
-
+~~~~
 Based on the results the best option is to identify and kill PIDS that is causing the issue and if that is not resolution reboot the node and free up swap space as it doesn't get released after RAM usage goes down 
 ~~~~
 
 	
 # Git Commands 
+
+ 
 	
 To clone repository 
 
 ~~~~	 
 
- git clone <url>  
+git clone <url>  
  
 ~~~~ 
 
+~~~~  
+	
 Git add and commit together  
 
 ~~~~
 
 git commit -am "comment"   
 
-~~~~ 
+~~~~
 
 Push changes to repo 
 
 ~~~~	 
 
- git push 
+git push 
  
 ~~~~ 
 
@@ -3681,3 +3685,4 @@ Delete branch:
 git branch -D <branch_name>  
 
 ~~~~	
+

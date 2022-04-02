@@ -3606,46 +3606,66 @@ Based on the results the best option is to identify and kill PIDS that is causin
 # Git Commands 
 	
 To clone repository 
+
 ~~~~	
 - git clone <url> 
-~~~~
+~~~~ 
+
 Git add and commit together  
+
 ~~~~
 - git commit -am "comment"  
-~~~~
+~~~~ 
+
 Push changes to repo 
+
 ~~~~		
 - git push   
-~~~~
+~~~~ 
+
 Checkout branch 
+
 ~~~~	
 - git checkout –b <new branch name>
-~~~~
+~~~~ 
+
 Discard changes in working directory
+
 ~~~~
 - git checkout -- <filename>
-~~~~
+~~~~ 
+
 Check branches  
+
 ~~~~	
 - git branch  
-~~~~
+~~~~ 
+
 Shows the status of the repository
+
 ~~~~
 - git status  
-~~~~
+~~~~ 
+
 Using Linux in git: 
+
 ~~~~
 - git rm  etc
-~~~~
+~~~~ 
+
 Pull in changes from repo: 
+
 ~~~~
 - git pull  
-~~~~
+~~~~ 
+
 Revert commit:  
+
 ~~~~
 - git revert <git_id>
 ~~~~	
 Delete branch: 
+
 ~~~~	
 - git branch -D <branch_name> 
 ~~~~	

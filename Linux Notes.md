@@ -133,7 +133,7 @@ alias vnstat='vnstat -i eth0'
 ~~~~
  
 # flush redis cache for wp 
-
+~~~~
 alias flush_redis='redis-cli -h 127.0.0.1 FLUSHDB'
 Save and close the file.
 How to load aliases
@@ -158,7 +158,7 @@ Just type alias name:
 $ update
 $ vnstat
 $ flush_redis
-
+~~~~
 
 
 
@@ -759,17 +759,17 @@ fi
 
 
 
-#clear – Clear the terminal window 
+clear – Clear the terminal window 
 ~~~~
 • clear
 ~~~~
 
-#reset – Resets the terminal 
+reset – Resets the terminal 
 ~~~~
 • reset
 ~~~~ 
 
-#history – Lists all recent commands 
+history – Lists all recent commands 
 ~~~~
 • history
 
@@ -783,11 +783,12 @@ HISTCONTROL=ignorespace
 • ! e.g. !357 -> re-runs command if entered into terminal
 ~~~~ 
 
-#xkill – Close a frozen window/application 
-
+xkill – Close a frozen window/application 
+~~~~
 • xkill
+~~~~
 
-#Tab Completion 
+Tab Completion 
 ~~~~
 • Use TAB key for completion of characters on CLI 
 
@@ -813,14 +814,14 @@ HISTCONTROL=ignorespace
 • xrandr --output --mode 1920x1200 
 ~~~~
 
-Ctrl + r - Reverse search
+#Ctrl + r - Reverse search
 
 Type Ctrl+r to open the reverse search tool.
 Search for any command from the history and press Ctrl+r again for
 the previous one that contain the string you’re looking for. 
 
-#General commands 
-
+General commands 
+~~~~
 • ./ - Runs file as executable 
 
 • -- version – Checks version of installation 
@@ -835,7 +836,7 @@ shutdown -r -> Shutdowns and reboots the node
 
 General commands continued…
 • -- help – use to get information on command e.g. ls --help 
-
+~~~~
 
 
 # tmux
@@ -844,31 +845,35 @@ General commands continued…
 
 To install : yum install tmux
 
-#start new: 
-       ~~~~
-	• tmux 
-       ~~~~
-#start new with session name: 
-       ~~~~
-	• tmux new -s myname   
-       ~~~~
+start new: 
+~~~~
+• tmux 
+~~~~ 
+
+start new with session name: 
+
+~~~~
+• tmux new -s myname   
+~~~~
 	
-attach: 
+Attach: 
 
 #tmux a  #  (or at, or attach) 
 
-attach to named:  
+Attach to named:  
 
-	• tmux a -t myname
+~~~~
+• tmux a -t myname
+~~~~ 
 
 #list sessions: 
        ~~~~
 	• tmux ls
        ~~~~
 #kill session: 
-       ~~~~
-	• tmux kill-session -t myname 
-       ~~~~
+~~~~
+• tmux kill-session -t myname 
+~~~~
 
 Kill all the tmux sessions: 
 
@@ -1025,21 +1030,22 @@ sar -S
 From <https://www.gxd88.cn/sar>  
 
  
-#I/O: 
+I/O: 
 ~~~~
 sar -b 
 ~~~~
 
-#I/O by Block Device: 
+I/O by Block Device: 
 ~~~~
 sar -d -p 
 ~~~~
  
-#Check Run queue and Load Average: 
+Check Run queue and Load Average: 
 ~~~~
 sar -q 
 ~~~~
-#Network Stats: 
+
+Network Stats: 
 ~~~~
  sar -n DEV 
  
@@ -1075,7 +1081,7 @@ SOCK6, IP6, EIP6, ICMP6, UDP6 are for IPv6
 ALL – This displays all of the above information. The output will be very long. 
 ~~~~ 
 
- #Historic Information: 
+Historic Information: 
 ~~~~
  sar -f /var/log/sa/sa15 -n DEV 
 ~~~~ 
@@ -1090,7 +1096,7 @@ ALL – This displays all of the above information. The output will be very long
 # Files & Directories
 
 
-#pwd command 
+pwd command 
 
 • pwd : prints current working directory 
 ~~~~	
@@ -1101,7 +1107,7 @@ paul@debian8:~$ pwd
 /home/paul
 ~~~~ 
 
-#cd 
+cd 
 
 • cd -> changes your current directory + also return to your home dir
 ~~~~
@@ -1115,7 +1121,7 @@ paul@debian8$ pwd
 ~~~~ 
 
 
-#cd – command continued 
+cd – command continued 
 ~~~~
 paul@debian8$ cd 
 	
@@ -1124,7 +1130,7 @@ paul@debian8$ pwd
 /home/paul
 ~~~~ 
 
-#cd .. – Return to previous directory 
+cd .. – Return to previous directory 
 ~~~~
 paul@debian8$ pwd 
 	
@@ -1137,7 +1143,7 @@ paul@debian8$ pwd
 /usr/share
 ~~~~ 
 
-#Path Completion 
+Path Completion 
 
 • The tab key can help you in typing a path without errors. Typing cd /et
 followed by the tab key will expand the command line to cd /etc/.
@@ -1151,27 +1157,34 @@ ls – command
 
 • ls – lists contents of directory
 
+~~~~
 • Example:
 stuff summer.txt
 paul@debian8:~$ ls
 allfiles.txt dmesg.txt services
 paul@debian8:~
+~~~~
 
 ls –a - Shows all files including hidden ones 
 
+~~~~
 allfiles.txt .bash_profile dmesg.txt .lesshst stuff .. .bash_history
 .bashrc services .ssh summer.txt
 • Example:
 • paul@debian8:~$ ls -a
 paul@debian8:~$
+~~~~ 
 
 ls -hal 
 
 • Shows all files with read and write permissions
+
+~~~~
 ls –ltr 
+~~~~ 
 
 ll – Lists contents of directory and gives date 
-
+~~~~
 obi@eze:~$ ll
 total 189456
 drwxr-xr-x 21 obi  obi       4096 Jan 25 18:30 ./
@@ -1182,12 +1195,13 @@ drwx------ 15 obi  obi       4096 Jan 10 15:57 .cache/
 -rwxr-xr-x  1 obi  obi         42 Jan 10 17:40 command_sub.sh*
 -rwxr-xr-x  1 obi  obi         42 Jan 10 17:41 command_substitution.sh*
 drwxr-xr-x 17 obi  obi       4096 Jan 10 18:28 .config/
+~~~~
 
 
-
-#mkdir – Makes new directory
+mkdir – Makes new directory
 
 Creates Directory 
+
 ~~~~
 paul@debian8:~/mydir$ mkdir otherstuff 
 	
@@ -1198,7 +1212,8 @@ total 8 drwxr-xr-x 2 paul paul 4096 Sep 17 00:08 otherstuff
 drwxr-xr-x 2 paul paul 4096 Sep 17 00:08 stuff
 ~~~~ 
 
-#mkdir –p – Creates Parent with new directory 
+mkdir –p – Creates Parent with new directory 
+
 ~~~~
 paul@debian8:~$ mkdir -p mydir2/mysubdir2/threedirsdeep 
 	
@@ -1212,35 +1227,43 @@ paul@debian8:~/mydir2$ cd mysubdir2
 	
 paul@debian8:~/mydir2/mysubdir2$
 ~~~~
-#Search through Directory -  
+
+Search through Directory -  
+
 ~~~~
 sudo du -a /dir/ | sort -n -r | head -n 20
 ~~~~
 
-#rmdir – Deletes Directory 
+rmdir – Deletes Directory 
+
 ~~~~
 • paul@debian8:~/mydir$ rmdir otherstuff 
 	
 • paul@debian8:~/mydir$ cd ..  
 ~~~~
 	
-#rmdir –p – Deletes Directory 
+rmdir –p – Deletes Directory 
+
 ~~~~	
 • paul@debian8:~$ rmdir -p test42/subdir 
 	
 • @debian8:~
 ~~~~
-#mv directory directory - moves file to another location 
+
+mv directory directory - moves file to another location 
+
 ~~~~
 • mv directory directory - moves file to another location 
 ~~~~
 
-#cat - Check contents of file 
+cat - Check contents of file 
+
 ~~~~
 • cat /etc/hosts
 
 • cat /etc/hosts | grep <string_your're_looking_for>  (To search for a value through a file)
-~~~~	
+~~~~	 
+
 grep -v pattern file.txt 
 
 
@@ -1379,22 +1402,28 @@ u Undo
 Ctrl-R Redo  
 ~~~~	 
 		
-#Vi - Searching  
+Vi - Searching  
 ~~~~		
 / Start a forward search.  
 		
 ? Start a reverse search.
+~~~~ 
+
+
+Demo - vi 
+
 ~~~~
-Demo - vi
 ---TODO: Overlay with characters that I'm
 using.---- (Might be hard, maybe come back and
 do that later????)
 key-mon --nomouse --scale=2.1
-
+~~~~
 Substitution Command 
 
+~~~~
 • :%s/NEW VALUE TO INPUT/g  
 • :%s/NEW VALUE TO INPUT/gic
+~~~~ 
 
 Substitution Command II 
 
@@ -1402,30 +1431,53 @@ Substitution Command II
 
 
 
-#Mass Delete and move to the bottom of file 
+Mass Delete and move to the bottom of file 
+
 ~~~~
 • dG
-~~~~
+~~~~ 
+
 Move to the bottom of file
+
 ~~~~
 	• ' o '                                             
 ~~~~
 
-#Move to the bottom of the file:  
+Move to the bottom of the file:  
 					     
 ~~~~
 Shift + g 
 ~~~~ 
 					     
-#To reclaim previous command used 
+To reclaim previous command used 
+
 ~~~~				     
 press shift key + ‘:’ and press the up arrow key 
 ~~~~				     
 
-set nu
+Set Numbering: 
+~~~~
+set nu 
+~~~~
+Check for tabs: 
+~~~~
+:set list 
+~~~~ 
+
+Remove tab checker: 
+
+~~~~
+:set nolist 
+~~~~ 
+
+Go to line: 
+
+~~~~
+:644 
+~~~~
 
 
-# Groups & Users
+#Groups & Users
 
 
 ~~~~
@@ -1442,7 +1494,7 @@ groupadd friends
 
 usermod
  
-
+~~~~
 usermod [ options ] username  
 
  
@@ -1458,13 +1510,14 @@ Specify the default group.
 -G GROUP1,GROUPN Additional groups. 
 
 -s /shell/path Path to the user's shell. 
-
+~~~~
  
 
 Usermod  
 
+~~~~
 grep mysql /etc/passwd 
-
+~~~~
  
 ~~~~ 
 		
@@ -1532,7 +1585,7 @@ db:x:2500:
 Groupmod  
 
  
-
+~~~~
 groupmod [options] group_name 
 
 -g GID 
@@ -1540,56 +1593,57 @@ groupmod [options] group_name
 -n GROUP 
 
 Change the group ID to GID. 
+~~~~ 
 
-Rename the group to GROUP. 
+# Rename the group to GROUP. 
 
  
-
+~~~~
 groupmod 
-
+~~~~
  
-
+~~~~
 grep web /etc/group 
 
 web:x:1003: 
-
+~~~~
  
-
+~~~~
 groupmod -g 1234 web 
 
 grep web /etc/group 
 
- 
-
 web:x:1234: 
-
+~~~~
  
-
+~~~~
 groupmod -n http web 
 
 grep http /etc/group 
 
 http:x:1234:  
+~~~~ 
 
-Group Deletion  
+#Group Deletion  
 
  
-
+~~~~
 groupdel <group_name> 
 
- 
-
 groupdel db  
+~~~~
+
+cat and grep file for particular expression: 
 
 cat /etc/group | grep <part_group_name>  
 
-Troubleshooting User accounts: 
+# Troubleshooting User accounts: 
 
-The issue was the client didn't have access to the BE of the Prod domain so they couldn't use winscp to login 
+#The issue was the client didn't have access to the BE of the Prod domain so they couldn't use winscp to login 
 
  
 
-#Create BE and check if they can login  
+# Create BE and check if they can login  
 
 If they can't, try and login into their account from another Linux box  e.g. ssh <theiruserid>@<targetserver>   
 
@@ -1597,7 +1651,7 @@ If you can login, then check their if their user permissions are correct via lsl
 
 Check if the client can telnet to port 22 on the server (This rules out any network issues on their side)  
 
-#Create new user with Useradd  
+# Create new user with Useradd  
 
  
 
@@ -1667,7 +1721,7 @@ usermod -a -G <group_name> jbloggs - add to group
 #Create a password using passwd  
 
  
-
+~~~~
 passwd grant 
 
  
@@ -1679,9 +1733,9 @@ Retype new UNIX password:
 passwd: password updated 
 
 successfully 
-
+~~~~
  
-
+~~~~
 tail -1 /etc/passwd 
 
  
@@ -1690,14 +1744,14 @@ grant:x:1000:1000:Grant Stewart:/home/grant
 
 :/bin/bash 
 
- 
+~~~~ 
 
+~~~~
 tail -1 /etc/shadow 
-
- 
-
+	
 grant:66iDDsgsPYtR8c2Uc.:16507:0:99999:7::: 
-
+~~~~ 
+	
 Account information for "grant" 
 
  
@@ -2043,7 +2097,7 @@ lsof -i TCP:1-1024
 
  
 ~~~~
-• # lsof -i -u^root  
+• lsof -i -u^root  
 
  
 
@@ -2081,7 +2135,7 @@ lsof -i TCP:1-1024
 
 ~~~~ 
 
-• # lsof -i –u 
+• lsof -i –u 
 
 • COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME 
 
@@ -2096,7 +2150,7 @@ lsof -i TCP:1-1024
 
 ~~~~ 
 
-• # lsof -i 
+• lsof -i 
 
  
 
@@ -3060,7 +3114,7 @@ Get Details
 
 
 
-
+~~~~
 Run CPU intensive process on System with nice value of -5 to give more CPU attention than default.  
  
 
@@ -3075,7 +3129,7 @@ CPU attention will be given.
  
 
 Never run process with nice value of -20 ,CPU will give highest priority and no other jobs will be able to run. 
-
+~~~~
  
 
 Command Action/Description  
@@ -3091,7 +3145,7 @@ To adjust nice value                - renice -n 5 -p PID
  
 
 To verify changes                   - top   
-
+~~~~
 
 Run below command in back ground with nice value of 10. 
 
@@ -3104,13 +3158,13 @@ sleep 3600
 Command Action/Description  
 
  
-
+~~~~
 To start a process with pre-defined nice value -  nice -n 10 sleep 3600 &   
-
+~~~~
  
-
+~~~~
 To verify results -  top   
-
+~~~~
 
 # What to do if a process is locked 
 
@@ -3247,29 +3301,28 @@ eze@ubuntu:~/.ssh$ ssh-copy-id -i ~/.ssh/key1.pub 192.168.142.136
 
 eze@ubuntu:~/.ssh$ ssh 192.168.142.136 
 ~~~~ 
-	
+~~~~	
 **** chmod 600 or 700 for ssh key to work **** 
-
+~~~~
 *** Copy SSH credentials cat id_rsa.pub | pbcopy ***
 
 
-SSH File Config
+# SSH File Config
 
-
-#Used for multiple users trying to access a box 
+~~~~
+Used for multiple users trying to access a box 
  
 	1. Create new user using adduser command on the box you want them to have access
-                                                     
+~~~~                                                     
                                                       
- 
-2)  
- 
-use this command to copy the public key to the server you're trying to access:  
-                                                          
- ssh-copy-id -i ~/.ssh/obi_rsa.pub ezeaka01@10.61.240.244 (username@ip_addr)
- 
+~~~~
+2) use this command to copy the public key to the server you're trying to access:  
+   ssh-copy-id -i ~/.ssh/obi_rsa.pub ezeaka01@10.61.240.244 (username@ip_addr) 
+~~~~
+
+~~~~
 3) nano config in /.ssh directory
- 
+  
 Edit config file like below: 
  
 Config file: 
@@ -3283,7 +3336,7 @@ Host *
 Example: 
  
 ssh ezeaka01@10.61.240.244
- 
+~~~~ 
  
  ~~~~
 ***********************  How to create ssh config   *****************************************************************************   
@@ -3326,25 +3379,25 @@ Host *
 
 #Debugging: 
 
+~~~~
 bash -v hello1.sh  
-
+~~~~ 
+	
 #Can't ssh to an app Server:   
 
-#Ping IP from localhost  
+~~~~	
+- Ping IP from localhost  
 
+- Attempt to ssh from localhost  
+	
+- Ping IP from another node in the same/another domain  
+
+- Attempt to ssh from that node to node in question  
 ~~~~
-Attempt to ssh from localhost  
-
   
-
-Ping IP from another node in the same/another domain  
-
-Attempt to ssh from that node to node in question  
-
-  
-
+~~~~
 If the previous 2 fail attempt to log into the server directly e.g. via ILO if it's a physical server like HP-UX series , or directly from Vsphere if a virtual server. If that issue fails, then it's need to be escalated to the infrastructure team/on site team of engineers to diagnose the issue further.  
-
+~~~~
  
 
 #Tip for diagnosing the issue:  

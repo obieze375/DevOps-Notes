@@ -1205,7 +1205,7 @@ drwxr-xr-x 17 obi  obi       4096 Jan 10 18:28 .config/
 
 # Working with files 
 
-~~~~~
+~~~~
 file – determines file type of file
 ~~~~
 paul@laika:~$ file pic33.png
@@ -1327,6 +1327,7 @@ paul@debian7:~$ ls
 dir33 dir42 file33 file42.copy SinkoDeMayo
 paul@debian7:~$
 ~~~~
+
 
 Running bash script 
 

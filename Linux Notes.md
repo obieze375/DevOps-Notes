@@ -648,7 +648,7 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-loops.php#while>
 
 # Variables
 
-
+~~~~ 
 
 	• varname=value                # defines a variable 
 
@@ -708,7 +708,7 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-loops.php#while>
 
 	• $(UNIX command)              # command substitution: runs the command and returns standard output 
 
-
+~~~~ 
 
 # While
  
@@ -809,17 +809,17 @@ Tab Completion
 • ctrl + _ = Undo
 ~~~~ 
 
-#Alter Screen Resolution 
+Alter Screen Resolution 
 ~~~~
 • xrandr --output --mode 1920x1200 
 ~~~~
 
-#Ctrl + r - Reverse search
-
+Ctrl + r - Reverse search
+~~~~ 
 Type Ctrl+r to open the reverse search tool.
 Search for any command from the history and press Ctrl+r again for
 the previous one that contain the string you’re looking for. 
-
+~~~~ 
 General commands 
 ~~~~
 • ./ - Runs file as executable 
@@ -3457,7 +3457,7 @@ Shows the status of the repository
 
 Using Linux in git: 
 
-git rm  etc
+- git rm  etc
 
 Pull in changes from repo: 
 
@@ -3466,4 +3466,8 @@ Pull in changes from repo:
 Revert commit:  
 
 - git revert <git_id>
+	
+Delete branch: 
+	
+- git branch -D <branch_name> 
 	

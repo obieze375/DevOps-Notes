@@ -1830,21 +1830,19 @@ files. (.profile, .bashrc,etc)
 
  
 
-More useraddoptions II 
+More user adoptions II 
 
  
-
+~~~~
 -r Create a system account. 
 
 -d /home/dir Specify the home directory. 
-
+~~~~
  
-
+~~~~
 Use -u to specify the UID 
-
- 
-
-useradd –c "MySQL Server" –d 
+useradd –c "MySQL Server" –d  
+~~~~
 
  
 
@@ -1863,12 +1861,13 @@ mysql:x:97:1003:MySQL Server:
 /opt/mysql:/usr/sbin/nologin  
 
 
-Delete user account:  
+# Delete user account:  
 
  
 
  
-
+~~~~ 
+	
 userdel [-r]username 
 
 ls /home 
@@ -1902,28 +1901,34 @@ ls /home
 eharris  
 
 lslogins <user_account_name>  
-
+~~~~
  
-
+~~~~
 $ id 
  
 uid=503(tclark) gid=506(authors) 
 groups=504(tclark),506(authors)  
+~~~~ 
+	
+# Logging into new group 
 
-Logging into new group 
-
+~~~~
 $ id 
  
 uid=503(tclark) gid=504(tclark) 
 groups=504(tclark),506(authors) 
- 
+~~~~  
+	
+~~~~	
 $ newgrp authors 
- 
+~~~~  
+	
+~~~~
 $ id 
  
 uid=503(tclark) gid=506(authors) 
 groups=504(tclark),506(authors)  
-
+~~~~
 
 # Networks
 
@@ -1938,14 +1943,14 @@ hostnamectl set-hostname 'host_name'
 hostnamectl set-hostname 'node01'  
 ~~~~
 
-#Checking Open files  
+# Checking Open files  
 
  
-~~~~
+
 • lsof 
 
  
-
+~~~~
 • COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME 
 
 • init 1 root cwd DIR 253,0 4096 2 / 

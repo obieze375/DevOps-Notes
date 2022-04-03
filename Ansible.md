@@ -8,6 +8,8 @@ Introduction:
 
 • After connecting to your nodes, Ansible pushes small programs called as “Ansible Modules”. Ansible runs that modules on your nodes and removes them when finished. Ansible manages your inventory in simple text files (These are the hosts file). Ansible uses the hosts file where one can group the hosts and can control the actions on a specific group in the playbooks.             
 
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/master/ansible_works.jpg?sanitize=true&raw=true" /> 
+
 Sample Hosts File 
 
 This is the content of hosts file −      
@@ -1001,11 +1003,15 @@ ubuntu                     : ok=2    changed=0    unreachable=0    failed=0    s
 
 ~~~~
 
-Yaml Linter: 
+Yaml Linter:  
 	
-The YAML format is key while developing Playbooks. We must pay extra attention to the indentation and structure of this file. For testing yaml files:
-	• web site: http://www.yamllint.com/
+~~~~	
+The YAML format is key while developing Playbooks. We must pay extra attention to the indentation and structure of this file. For testing yaml files: 
+	
+• web site: http://www.yamllint.com/ 
+	
 ATOM ide with linter-js-yaml and remote-sync (if you need) 
+~~~~ 
 	
 # Running Ansible 
 	
@@ -1018,6 +1024,214 @@ ansible-playbook command : used when you have a playbook.
 ~~~~ 
 	
 <img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/master/ansible-command-structure.png?sanitize=true&raw=true" />
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/master/ansible-command.png?sanitize=true&raw=true" /> 
+
+Copy File Playbook 
+
+Creating a test file 
+~~~~
+[user1@controller demo-playbook]$ cat > /tmp/test-file.txt
+Sample Text File!!!
+^C  
+~~~~ 
+
+~~~~
+---
+-
+  name: Copy file to target server(s)
+  hosts: all
+  tasks:
+    - name:  Copy file
+      copy:
+        src: /tmp/test-file.txt
+        dest: /tmp/test-file.txt
+
+[user1@controller demo-playbook]$ ansible-playbook copy-playbook.yaml
+
+PLAY [Copy file to target server(s)] ****************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************
+ok: [centos]
+ok: [ubuntu]
+
+TASK [Copy file] ************************************************************************************************************************
+changed: [centos]
+changed: [ubuntu]
+
+PLAY RECAP ******************************************************************************************************************************
+centos                     : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ubuntu                     : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ 
+
+root@ubuntu:~# su - user1
+$ cat /tmp/test-file.txt
+Sample Text File!!!
+$
+
+[user1@controller demo-playbook]$ ansible-playbook copy-playbook.yaml
+
+PLAY [Copy file to target server(s)] ****************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************
+ok: [centos]
+ok: [ubuntu]
+
+TASK [Copy file] ************************************************************************************************************************
+ok: [centos]
+ok: [ubuntu]
+
+PLAY RECAP ******************************************************************************************************************************
+centos                     : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ubuntu                     : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+~~~~
+
+	
+Terms  
+	
+~~~~	
+Ansible playbooks tend to be more of a configuration language than a programming language. Ansible playbook commands useYAML format. 
+	• Playbook -A single YAML file
+		○ Play - Defines a set of activities (tasks) to be run on hosts
+			§ Task - An action to be performed on the host. examples:
+				□ Execute a command
+				□ Run a script
+				□ Install a package
+				□ Shutdown/Restart
+~~~~ 
+
+Debugging Ansible 
+
+ Use ansible-playbook with-v or--verbose switches to get more information, use -vv or even-vvv for more information. -vvvv enables connection debugging! 
+~~~~
+ansible-playbook -i <play_book_name>.yml -v
+~~~~
+	
+Privilege Escalation: 
+	
+add a line become: yes or become: true inside playbook, this allows the playbook to run commands as root 
+
+
+~~~~
+---
+
+# Sample whoami-playbook.yaml
+
+ - hosts: all
+   become: true
+   tasks:
+       - name: do a uname
+         shell: uname -a > /home/user1/results.txt
+
+       - name: whoami
+         shell: whoami >> /home/user1/results.txt
+~~~~ 
+
+Switch to other User: 
+
+	
+Use become_user the user name that we want to switch to like compare it with sudo su - user .
+
+~~~~ 
+---
+- name: Run a command as the apache user
+  command: somecommand
+  become: yes
+  become_user: apache
+~~~~ 
+
+Handlers: 
+
+Sometimes you want a task to run only when a change is made on a machine. For example, you may want to start a service if a task updates the configuration of that service, but not if the configuration is unchanged. Ansible uses handlers to address this use case. Handlers are tasks that only run when notified. If a handler get notified multiple times, it just runs once. Each handler should have a globally unique name.  
+	
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/master/handlers.png?sanitize=true&raw=true" /> 
+
+# sample handler-playbook.yaml
+~~~~
+---
+
+
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: install vsftpd on ubuntu
+      apt: name=vsftpd update_cache=yes state=latest
+      ignore_errors: yes
+      notify: start vsftpd
+
+    - name: install vsftpd on centos
+      yum: name=vsftpd state=latest
+      ignore_errors: yes
+      notify: start vsftpd
+
+  handlers:
+    - name: start vsftpd
+      service: name=vsftpd enabled=yes state=started
+
+As there is no apt on centos, ignore_error cause playbook continue running other tasks even if this task fails. So if there is an error keep going! 
+
+[user1@controller demo-playbook]$ ansible-playbook handler-playbook.yaml
+
+PLAY [all] ******************************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************
+ok: [centos]
+ok: [ubuntu]
+
+TASK [install vsftpd on ubuntu] *********************************************************************************************************
+[WARNING]: Updating cache and auto-installing missing dependency: python-apt
+fatal: [centos]: FAILED! => {"changed": false, "cmd": "apt-get update", "msg": "[Errno 2] No such file or directory", "rc": 2}
+...ignoring
+changed: [ubuntu]
+
+TASK [install vsftpd on centos] *********************************************************************************************************
+ok: [ubuntu]
+changed: [centos]
+
+RUNNING HANDLER [start vsftpd] **********************************************************************************************************
+ok: [ubuntu]
+changed: [centos]
+
+PLAY RECAP ******************************************************************************************************************************
+centos                     : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=1
+ubuntu                     : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+~~~~
+
+
+Running Playbooks locally 
+
+Using localhost in ansible playbook hosts argument
+we can run ansible playbook locally or in ansible control machine by mentioning ‘localhost’ in ansible playbook in hosts argument. In the hosts argument mention localhost so this entire playbook will run on locally or ansible control machine.
+root<a target="_blank" href="https://www.decodingdevops.com/profile/maniprabu/">maniprabu</a>-172-31-37-35:~# 
+
+~~~~ 
+	
+---
+- hosts: localhost
+gather_facts: no
+
+tasks:
+- name: run ansible playbook locally
+debug:
+msg: "Hi This Is DecodingDevOps"
+~~~~
+This playbook will run on your local machine. 
+	
+Note: you can also mention 127.0.0.1 in the place of localhost the playbook, Both localhost and 127.0.0.1 represents local machine only.  
+
+Running as Targets 
+
+~~~~ 
+	
+---
+- hosts: "{{ target_env }}"
+gather_facts: no
+
+tasks:
+- name: run ansible playbook locally
+debug:
+msg: "Hi This Is DecodingDevOps"
+~~~~
 
 Defining Variables 
 
@@ -1096,7 +1310,7 @@ Often in a playbook you want to execute or skip a task based on the outcome of a
 
 
 
-# sample playbook for conditionals  condition-playbook1.yaml
+# sample playbook for conditionals condition-playbook1.yaml
 ~~~~ 
 ---
 - hosts: all
@@ -1388,7 +1602,7 @@ Attaching the example output just to make one understand how we used the stdout_
 
 
 
-# Mutli-package Installation with loops
+# Multi-package Installation with loops
 
 When automating server setup, sometimes you’ll need to repeat the execution of the same task using different values. For instance, you may need to install  multiple packages , or ... .  
 
@@ -1502,6 +1716,197 @@ ubuntu                     : ok=2    changed=0    unreachable=0    failed=0    s
 
 ~~~~
 
+# Loops with sequence 
+
+~~~~
+---
+
+# sample loop with with_sequenece loop-playbook3.yaml
+
+- hosts: ubuntu
+  become: yes
+
+  tasks:
+   - name: show file(s) contents
+     debug: msg={{ item }}
+     with_sequence: start=1 end=5
+
+[user1@controller demo-var]$ ansible-playbook loop-playbook3.yaml
+
+PLAY [ubuntu] ***************************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************
+ok: [ubuntu]
+
+TASK [show file(s) contents] ************************************************************************************************************
+ok: [ubuntu] => (item=1) => {
+    "msg": "1"
+}
+ok: [ubuntu] => (item=2) => {
+    "msg": "2"
+}
+ok: [ubuntu] => (item=3) => {
+    "msg": "3"
+}
+ok: [ubuntu] => (item=4) => {
+    "msg": "4"
+}
+ok: [ubuntu] => (item=5) => {
+    "msg": "5"
+}
+
+PLAY RECAP ******************************************************************************************************************************
+ubuntu                     : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+~~~~ 
+	 
+# Variables Example: 
+
+The playbook is used to update name server entry into resolv.conf file on localhost. The name server information is also updated in the inventory file as a variable nameserver_ip. Refer to the inventory file.
+Replace the ip of the name server in this playbook to use the value from the inventory file, so that in the future if you had to make any changes you simply have to update the inventory file.
+
+
+~~~~
+Playbook Entry
+---
+-
+    name: 'Update nameserver entry into resolv.conf file on localhost'
+    hosts: localhost
+    tasks:
+        -
+            name: 'Update nameserver entry into resolv.conf file'
+            lineinfile:
+                path: /etc/resolv.conf
+                line: 'nameserver {{  nameserver_ip  }}'
+~~~~
+
+
+# Sample Inventory File
+~~~~
+localhost ansible_connection=localhost nameserver_ip=10.1.250.10
+~~~~ 
+
+# Example 2:
+We have added a new task to disable SNMP port in the playbook. However the port is hardcoded in the playbook. Update the inventory file to add a new variable snmp_port and assign the value used here. Then update the playbook to use value from the variable.
+
+~~~~  
+---
+-
+    name: 'Update nameserver entry into resolv.conf file on localhost'
+    hosts: localhost
+    tasks:
+        -
+            name: 'Update nameserver entry into resolv.conf file'
+            lineinfile:
+                path: /etc/resolv.conf
+                line: 'nameserver {{ nameserver_ip }}'
+        -
+            name: 'Disable SNMP Port'
+            firewalld:
+                port: '{{ snmp_port }}'
+                permanent: true
+                state: disabled
+
+~~~~ 
+~~~~ 
+---
+-
+    hosts: localhost
+    vars:
+        car_model: 'BMW M3'
+        country_name: USA
+        title: 'Systems Engineer'
+    tasks:
+        -
+            command: 'echo "My car''s model is {{ car_model }}"'
+        -
+            command: 'echo "I live in the {{ country_name }}"'
+        -
+            command: 'echo "I work as a {{ title }}"'
+~~~~ 
+
+When Condition 
+
+
+The given playbook attempts to start mysql service on all_servers. Use the when condition to run this task if the host (ansible_host) is the database server.
+Refer to the inventory file to identify the name of the database server.
+
+
+
+~~~~
+---
+
+-
+    name: 'Execute a script on all web server nodes'
+    hosts: all_servers
+    tasks:
+        -
+            service: 'name=mysql state=started'
+            when: 'ansible_host=="server4.company.com"' 
+
+~~~~  
+	
+When using Ansible facts 
+
+Often you want to execute or skip a task based on facts. As we mentioned before Facts are attributes of individual hosts, including IP address, operating system, the status of a filesystem, and many more. With conditionals based on facts: 
+
+	• You can install a certain package only when the operating system is a particular version.
+	• You can skip configuring a firewall on hosts with internal IP addresses.
+	• You can perform cleanup tasks only when a filesystem is getting full.
+	Not all facts exist for all hosts. For example, the ‘lsb_major_release’ fact only exists when the lsb_release package is installed on the target host. 
+	
+ In example below, we remove web server package from each server based on its os family:
+
+~~~~
+---
+#sample conditional with facts condition-playbook2.yaml
+
+- hosts: all
+  become: yes
+
+  tasks:
+
+    - name: Remove Apache on Ubuntu Server
+      apt: name=apache2 state=absent
+      when: ansible_os_family == "Debian"
+
+    - name: Remove Apache on CentOS  Server
+      yum: name=httpd  state=absent
+      when: ansible_os_family == "RedHat"
+~~~~
+
+
+# We have created a group for web servers. Similarly create a group for database servers named 'db_servers' and add db1 server to it
+# --------------------------------
+# Sample Inventory File
+
+# Web Servers
+web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+web2 ansible_host=server2.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+
+# Database Servers
+db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_ssh_pass=Password123!
+
+[web_servers]
+web1
+web2
+web3
+
+[db_servers]
+db1
+
+![image](https://user-images.githubusercontent.com/91855277/161423898-35790b58-9402-4162-9719-8ffa86239a2e.png)
+
+
+
+# Sample Inventory File
+~~~~ 
+localhost ansible_connection=localhost nameserver_ip=10.1.250.10 snmp_port=160-161
+~~~~ 
+
+
+
 
 # Exception Handling 
 
@@ -1522,7 +1927,9 @@ tasks:
       
       always: 
          - debug: msg = "this will execute in all scenarios. Always will get logged" 
-~~~~
+~~~~ 
+			    
+
 Following is the syntax for exception handling.
 
 
@@ -1540,6 +1947,756 @@ Always gets executed in all cases.
 
 So if we compare the same with java, then it is similar to try, catch and finally block.
 
+ 
 
-	    
+Understanding YAML 
+			    
+In this section, we will learn the different ways in which the YAML data is represented.
 
+Rules for Creating YAML file 
+
+When you are creating a file in YAML, you should remember the following basic rules:
+	• YAML is case sensitive
+	• The files should have .yaml or.yml as the extension
+	• YAMLdoes not allow the use of tabs while creating YAML files; spaces are allowed instead
+
+
+Data serialization  
+
+Whenever you want to send some data structure or an object across computer networks, say the Internet, you have to turn it into a special format to read it and store it. The process is commonly known as serialization and is of enormous importance on the web. A common usage example of serialization is when reading data from databases and transferring it across the web.
+
+What is YAML? 
+
+ YAML is a data serialization format that stands for YAML ain’t Markup language.
+The main advantage of using YAML is readability and writability. If you have a configuration file that needs to be easier for humans to read, it’s better to use YAML. YAML is not a complete substitution of JSON as JSON and XML have their places too; nevertheless, it’s useful learning YAML. 
+			    
+ Another benefit of YAML is its support of various data types like cases, arrays, dictionaries, lists, and scalars. It has good support for the most popular languages like JavaScript, Python, Ruby, Java, etc.
+
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/master/yaml.jpg?sanitize=true&raw=true" /> 
+
+Understanding YAML
+In this section, we will learn the different ways in which the YAML data is represented.
+ 
+key-value pair
+YAML uses simple key-value pair to represent the data. The dictionary is represented in key: value pair.
+ 
+Note − There should be space between : and value.
+ 
+Example: A student record 
+
+~~~~
+--- - Optional YAML start syntax 
+james: 
+   name: james john 
+   rollNo: 34 
+   div: B 
+   sex: male 
+… #Optional YAML end syntax 
+Abbreviation
+You can also use abbreviation to represent dictionaries.
+~~~~ 
+
+Example
+James: {name: james john, rollNo: 34, div: B, sex: male}
+
+
+The following are the building blocks of a YAML file: 
+	
+1. Key Value Pair — The basic type of entry in a YAML file is of a key value pair. After the Key and colon there is a space and then the value. 
+	
+2. Arrays/Lists — Lists would have a number of items listed under the name of the list. The elements of the list would start with a -. There can be a n of lists, however the indentation of various elements of the array matters a lot. 
+	
+3. Dictionary/Map — A more complex type of YAML file would be a Dictionary and Map.
+
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/master/yaml-type.jpg?sanitize=true&raw=true" /> 
+
+Datatypes: 
+	
+~~~~
+Strings: 
+
+
+# Strings don't require quotes:
+title: Introduction to YAML
+
+# But you can still use them:
+title-with-quotes: 'Introduction to YAML'
+
+# Multiline strings start with |
+execute: |
+    npm ci
+    npm build
+    npm test
+~~~~ 
+~~~~
+Numbers: 
+
+# Integers:
+age: 35
+
+# Float:
+price: 18.99
+
+~~~~ 
+
+~~~~ 
+Boolean
+
+# Boolean values can be written in different ways:
+published: false
+published: False
+published: FALSE
+~~~~ 
+
+Null 
+~~~~
+Null can be represented by simply not setting a value:
+null-value: 
+
+# Or more explicitly:
+null-value: null
+null-value: NULL
+null-value: Null
+~~~~
+
+ 
+Dates & timestamps 
+
+~~~~
+ISO-Formatted dates can be used
+
+date: 2002-12-14
+canonical: 2001-12-15T02:59:43.1Z
+iso8601: 2001-12-14t21:59:43.10-05:00
+spaced: 2001-12-14 21:59:43.10 -5
+~~~~
+
+Arrays / Lists
+~~~~
+# A list of numbers using hyphens:
+numbers:
+    - one
+    - two
+    - three
+
+# The inline version
+numbers: [ one, two, three ]
+~~~~
+
+Dictionaries 
+
+ 
+Dictionaries 
+	
+~~~~
+# An employee record
+martin:
+  name: Martin D'vloper
+  job: Developer
+  skill: Elite
+
+# The inline version
+martin: {name: Martin D'vloper, job: Developer, skill: Elite}  
+~~~~ 
+	
+Rules for Creating YAML file 
+
+When you are creating a file in YAML, you should remember the following basic rules:
+	• YAML is case sensitive
+	• The files should have .yaml or.yml as the extension
+	• YAMLdoes not allow the use of tabs while creating YAML files; spaces are allowed instead
+
+
+Module 
+
+Script: 
+
+
+Update the playbook with a play to Execute a script on all web server nodes. The script is located at /tmp/install_script.sh
+ 
+~~~~
+-
+    name: 'Execute a script on all web server nodes'
+    hosts: web_nodes
+    tasks:
+        -
+            name: 'Execute a script on all web server nodes'
+            script: /tmp/install_script.sh
+
+~~~~
+
+# Sample Inventory File
+
+# Web Servers 
+~~~~
+sql_db1 ansible_host=sql01.xyz.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Lin$Pass
+sql_db2 ansible_host=sql02.xyz.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Lin$Pass
+web_node1 ansible_host=web01.xyz.com ansible_connection=ssh ansible_user=administrator ansible_ssh_pass=Win$Pass
+web_node2 ansible_host=web02.xyz.com ansible_connection=ssh ansible_user=administrator ansible_ssh_pass=Win$Pass
+web_node3 ansible_host=web03.xyz.com ansible_connection=ssh ansible_user=administrator ansible_ssh_pass=Win$Pass
+
+[db_nodes] 
+
+sql_db1
+sql_db2
+
+[web_nodes]   
+
+web_node1
+web_node2
+web_node3
+
+[all_nodes:children]
+db_nodes
+web_nodes
+~~~~
+
+Service: 
+	
+
+Update the playbook to add a new task to start httpd services on all web nodes
+Use the Service module
+
+~~~~
+-
+    name: 'Execute a script on all web server nodes'
+    hosts: web_nodes
+    tasks:
+        -
+            name: 'Execute a script'
+            script: /tmp/install_script.sh
+        -
+            name: 'Start httpd service'
+            service: 'name=httpd state=started'  
+
+~~~~ 
+
+# Sample Inventory File
+~~~~
+  # Web Servers
+  sql_db1 ansible_host=sql01.xyz.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Lin$Pass
+  sql_db2 ansible_host=sql02.xyz.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Lin$Pass
+  web_node1 ansible_host=web01.xyz.com ansible_connection=ssh ansible_user=administrator ansible_ssh_pass=Win$Pass
+  web_node2 ansible_host=web02.xyz.com ansible_connection=ssh ansible_user=administrator ansible_ssh_pass=Win$Pass
+  web_node3 ansible_host=web03.xyz.com ansible_connection=ssh ansible_user=administrator ansible_ssh_pass=Win$Pass
+
+  [db_nodes]
+  sql_db1
+  sql_db2
+
+  [web_nodes]
+  web_node1
+  web_node2
+  web_node3
+
+  [all_nodes:children]
+  db_nodes
+  web_nodes
+~~~~
+
+Lineinfile Module 
+
+Update the playbook to add a new task in the beginning to add an entry into /etc/resolv.conf file for hosts. The line to be added is nameserver 10.1.250.10
+Note: The new task must be executed first, so place it accordingly.
+
+Use the Lineinfile module
+~~~~
+-
+    name: 'Execute a script on all web server nodes and start httpd service'
+    hosts: web_nodes
+    tasks:
+        -
+            name: 'Update entry into /etc/resolv.conf'
+            lineinfile:
+                path: /etc/resolv.conf
+                line: 'nameserver 10.1.250.10'
+        -
+            name: 'Execute a script'
+            script: /tmp/install_script.sh
+        -
+            name: 'Start httpd service'
+            service:
+                name: httpd
+                state: present
+
+~~~~
+
+User: 
+~~~~	
+Update the playbook to add a new task at second position (right after adding entry to resolv.conf) to create a new web user. 
+~~~~ 
+~~~~
+Use the user module for this. User details to be used are given below:
+Username: web_user
+uid: 1040
+group: developers
+~~~~
+ 
+~~~~
+-
+    name: 'Execute a script on all web server nodes and start httpd service'
+    hosts: web_nodes
+    tasks:
+        -
+            name: 'Update entry into /etc/resolv.conf'
+            lineinfile:
+                path: /etc/resolv.conf
+                line: 'nameserver 10.1.250.10'
+        -
+            name: 'Create a new user'
+            user:
+                name: web_user
+                uid: 1040
+                group: developers
+        -
+            name: 'Execute a script'
+            script: /tmp/install_script.sh
+        -
+            name: 'Start httpd service'
+            service:
+                name: httpd
+                state: present
+~~~~ 
+
+# Sample Inventory File
+~~~~
+  # Web Servers
+  sql_db1 ansible_host=sql01.xyz.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Lin$Pass
+  sql_db2 ansible_host=sql02.xyz.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Lin$Pass
+  web_node1 ansible_host=web01.xyz.com ansible_connection=ssh ansible_user=administrator ansible_ssh_pass=Win$Pass
+  web_node2 ansible_host=web02.xyz.com ansible_connection=ssh ansible_user=administrator ansible_ssh_pass=Win$Pass
+  web_node3 ansible_host=web03.xyz.com ansible_connection=ssh ansible_user=administrator ansible_ssh_pass=Win$Pass
+
+  [db_nodes]
+  sql_db1
+  sql_db2
+
+  [web_nodes]
+  web_node1
+  web_node2
+  web_node3
+
+  [all_nodes:children]
+  db_nodes
+  web_nodes
+~~~~
+
+Mail  
+	
+#Sample Ansible mail-playbook.yml 
+	
+~~~~
+---
+
+-
+  name: sending mail 
+  hosts: localhost
+  tasks:
+    - name: sending mail to root
+      mail:
+         subject: 'System has been successfully configured'
+      delegate_to: localhost
+       
+    - name: Sending an e-mail using Gmail SMTP servers
+      mail:
+        host: smtp.gmail.com
+        port: 587
+        username: username@gmail.com
+        password: mysecret
+        to: John Smith <john.smith@example.com>
+        subject: Ansible-report
+        body: 'System has been successfully provisioned.'
+      delegate_to: localhost
+    
+    - name: sendMail to a mail server with attachments
+      mail:
+        host: smtp.example.com
+        port: 465
+        username: payam@example.com
+        password: P@sswd
+        from: payam@example.com
+        to: jadi@example.com
+        attach: /etc/fstab /etc/hosts
+        subject: Ansible-report
+        body: 'System  has been successfully provisioned.'
+       
+ ~~~~
+
+
+~~~~
+# Sample Inventory File
+
+  # Web Servers
+  sql_db1 ansible_host=sql01.xyz.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Lin$Pass
+  sql_db2 ansible_host=sql02.xyz.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Lin$Pass
+  web_node1 ansible_host=web01.xyz.com ansible_connection=ssh ansible_user=administrator ansible_ssh_pass=Win$Pass
+  web_node2 ansible_host=web02.xyz.com ansible_connection=ssh ansible_user=administrator ansible_ssh_pass=Win$Pass
+  web_node3 ansible_host=web03.xyz.com ansible_connection=ssh ansible_user=administrator ansible_ssh_pass=Win$Pass
+
+  [db_nodes]
+  sql_db1
+  sql_db2
+
+  [web_nodes]
+  web_node1
+  web_node2
+  web_node3
+
+  [all_nodes:children]
+  db_nodes
+  web_nodes
+~~~~
+
+
+Yum:  
+	
+~~~~
+---
+#Sample Ansible yum-playbook.yml
+-
+  name: Install package(s) using yum
+  hosts: centos
+  become: yes
+  tasks:
+    - name: Install the latest version of Apache
+      yum:
+        name: httpd
+        state: latest
+
+    - name: Install apache >= 2.4
+      yum:
+        name: httpd>=2.4
+        state: present
+        
+    - name: Install a list of packages (suitable replacement for 2.11 loop deprecation warning)
+      yum:
+        name: Install apache and postgresql
+          - httpd
+          - postgresql
+          - postgresql-server
+        state: present
+~~~~
+
+Firewall 
+~~~~
+---
+#Sample Ansible Playbook-firewalld.yml
+-
+  name: Set Firewall Configurations
+  hosts: centos
+  become: yes
+  tasks:
+    -  firewalld:
+         service: https
+         permanent: true
+         state: enabled
+    
+    -  firewalld:
+         port: 8080/tcp
+         permanent: true
+         state: disabled
+         
+    -  firewalld:
+         port: 162-162/udp
+         permanent: true
+         state: disabled
+         
+    -  firewalld:
+         source: 192.168.100.0/24
+         zone: internal
+         state: enabled        
+	
+~~~~ 
+
+Custom  
+	
+Custom Modules
+Ansible modules are in fact python programs which are located on /usr/lib/pythonX.Y/dist-packages/ansible/modules. You can write down any custom program in python langiage and place it there and use it. Check ansible github web page for default modules ( https://github.com/ansible/ansible/tree/devel/lib/ansible/modules) but that's more advanced topic.
+
+
+Debug 
+  
+When you are working with Ansible playbooks, it’s great to have some debug options. Ansible provides a debug module that makes this task easier. It is used to print the message in the log output. The message is nothing but any variable values or output of any task. 
+~~~~
+---
+
+#Sample playbook for debugging debug-playbook.yaml
+- hosts: centos
+  vars:
+    - first_var: "HAhaha"
+
+  tasks:
+    - name: show results
+      debug: msg="The variable first_var is set to - {{ first_var }}"
+
+[user1@controller demo-var]$ ansible-playbook debug-playbook.yaml
+
+PLAY [centos] ***************************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************
+ok: [centos]
+
+TASK [show results] *********************************************************************************************************************
+ok: [centos] => {
+    "msg": "The variable first_var is set to - HAhaha"
+}
+
+PLAY RECAP ******************************************************************************************************************************
+centos                     : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+	
+~~~~
+	
+Creating custom modules  
+
+Python Library 
+~~~~  
+#!/usr/bin/python3
+ 
+ANSIBLE_METADATA = {
+    'metadata_version': '1.1',
+    'status': ['preview'],
+    'supported_by': 'community'
+}
+ 
+DOCUMENTATION = '''
+---
+module: icmp
+short_description: simple module for icmp ping
+version_added: "2.10"
+description:
+    - "simple module for icmp ping"
+options:
+    target:
+        description:
+            - The target to ping
+        required: true
+author:
+    - James Spurin (@spurin)
+'''
+ 
+EXAMPLES = '''
+# Ping an IP
+- name: Ping an IP
+  icmp:
+    target: 127.0.0.1
+# Ping a host
+- name: Ping a host
+  icmp:
+    target: centos1
+'''
+ 
+RETURN = '''
+'''
+ 
+from ansible.module_utils.basic import AnsibleModule
+ 
+def run_module():
+    # define the available arguments/parameters that a user can pass to
+    # the module
+    module_args = dict(
+        target=dict(type='str', required=True)
+    ) # Module_args contains 'target' var in dictionary
+ 
+    # seed the result dict in the object
+    # we primarily care about changed and state
+    # change is if this module effectively modified the target
+    # state will include any data that you want your module to pass back
+    # for consumption, for example, in a subsequent task
+    result = dict(
+        changed=False
+    )
+ 
+    # the AnsibleModule object will be our abstraction working with Ansible
+    # this includes instantiation, a couple of common attr would be the
+    # args/params passed to the execution, as well as if the module
+    # supports check mode
+    module = AnsibleModule(
+        argument_spec=module_args,
+        supports_check_mode=True 
+    ) # module_args passes through module  
+ 
+    # if the user is working with this module in only check mode we do not
+    # want to make any changes to the environment, just return the current
+    # state with no modifications
+    if module.check_mode:
+        return result
+ 
+    # manipulate or modify the state as needed (this is going to be the
+    # part where your module will do what it needs to do)
+    
+ping_result = module.run_command('ping -c 1 {}'.format(module.params['target'])) # runs command and pings target in module
+ 
+    # use whatever logic you need to determine whether or not this module
+    # made any modifications to your target
+    if module.params['target']:
+        result['debug'] = ping_result
+        result['rc'] = ping_result[0]
+        if result['rc']:
+          result['failed'] = True
+          module.fail_json(msg='failed to ping', **result)
+        else:
+          result['changed'] = True
+          module.exit_json(**result)
+ 
+def main():
+    run_module() # run run_module 
+ 
+if __name__ == '__main__':
+    main() #run main
+
+
+~~~~ 
+
+Ansible playbook that uses custom module 
+
+~~~~ 
+---
+# YAML documents begin with the document separator ---
+ 
+# The minus in YAML this indicates a list item.  The playbook contains a list
+# of plays, with each play being a dictionary
+-
+ 
+  # Hosts: where our play will run and options it will run with
+  hosts: linux
+ 
+  # Tasks: the list of tasks that will be executed within the play, this section
+  # can also be used for pre and post tasks
+  tasks:
+ 
+    - name: Test icmp module
+      icmp:
+        target: 127.0.0.1 # target is passed to the python script which is the module in the library directory 
+ 
+# Three dots indicate the end of a YAML document
+...	
+
+~~~~
+
+Templates 
+
+			    
+ Sometimes we need to transfer text files to remote hosts. Those text files are usually configuration files. When we are working with a single server, the configuration file may contain information specific to that server like hostname, IP address, etc. Since we’re working with a single server, we could create the file on the Ansible controller and then use the copy module in a playbook to copy it to the server. 
+
+But what if we have multiple web servers each needing that same configuration file but each with their own specific values? We can’t just copy the configuration file to all machines; it’s only built for a single server with a specific hostname, IP address, etc. So we need an Ansible template.
+	Ansible templates allow you to define text files with variables instead of static values and then replace those variables at playbook runtime. 
+	
+Ansible Template files
+ An Ansible template is a text file built with the Jinja2 templating language with a j2 file extension. A Jinja2 template looks exactly like the text file you’d like to get onto a remote host. The only difference is that instead of static values, the file contains variables.
+ For demonstration, lets install web server on both centos and ubuntu in our lab environment and make sure everything is going fine :
+
+
+
+~~~~
+[user1@controller demo-temp]$ ansible ubuntu -b -m apt -a "name=apache2 state=present"
+[user1@controller demo-temp]$ ansible centos -b -m yum -a "name=httpd state=present"
+
+
+Next create a template for web server default page (index.html.j2): 
+
+<html>
+<center>
+<h1> This machine's hostname is {{ ansible_hostname }}</h1>
+<h2> os family is {{ ansible_os_family }}</h2>
+<small>file version is {{ file_version }}</small>
+{# This is comment, it will not appear in final output #}
+</center>
+</html>
+~~~~
+ and related playpook to use this template: 
+
+~~~~ 
+---
+#sample playbook using template for web server- template-playbook.yaml
+
+- hosts: all
+  become: yes
+  vars:
+   file_version: 1.0
+
+  tasks:
+   - name: install default web page
+     template:
+       src: index.html.j2
+       dest: /var/www/html/index.html
+       mode: 0777
+
+
+~~~~
+
+# Playbooks Examples: 
+			    
+Using Shell Module 
+
+~~~~ 
+--- 
+- hosts: loc
+  tasks:
+  - name: Ansible Shell chdir and executable parameters 
+    shell: ls -lrt > temp.txt 
+    args:
+      chdir: /root/ansible/shell_chdir_example 
+      executable: /bin/bash
+- hosts: loc
+  tasks:
+  - name: Ansible command module with chdir and executable parameters
+    command: ls -lrt
+    args:
+      chdir: /home/mdtutorials2/command_chdir_example
+      executable: /bin/bash
+~~~~		  
+
+Include statement 
+	
+~~~~   
+	
+include plays and tasks
+Using include statements is our trick to split a large playbook into smaller pieces. We can also move task to a separate file and use include statement to include tasks from: 
+
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/master/include.jpg?sanitize=true&raw=true" /> 
+
+[user1@controller demo-file]$ cat update-systems-play.yaml
+---
+
+- hosts: all
+  become: yes
+
+  tasks:
+   - name: update apt
+     apt: upgrade=dist update_cache=yes
+     when: ansible_os_family == "Debian"
+
+   - name: update yum
+     yum: name=* state=latest update_cache=yes
+     when: ansible_os_family == "RedHat"  
+
+[user1@controller demo-file]$ cat install-web-task.yaml
+---
+
+- name: install on debian
+  apt: name=apache2 state=latest update_cache=yes
+  when: ansible_os_family == "Debian"
+
+- name: install on centos
+  yum: name=httpd state=latest update_cache=yes
+  when: ansible_os_family == "RedHat"
+
+- name: start debian service
+  service: name=apache2 enabled=yes state=started
+  when: ansible_os_family == "Debian"
+
+- name: start centos service
+  service: name=httpd enabled=yes state=started
+  when: ansible_os_family == "RedHat"
+
+[user1@controller demo-file]$ cat include-playbook.yaml
+---
+
+- include: update-systems-play.yaml
+
+- hosts: all
+  become: yes
+  tasks:
+   - include: install-web-task.yaml	
+~~~~

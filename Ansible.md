@@ -1,4 +1,205 @@
-#Variables 
+Introduction: 
+
+• Ansible is simple open source IT engine which automates application deployment, intra service orchestration, cloud provisioning and many other IT tools. Ansible is easy to deploy because it does not use any agents or custom security infrastructure. 
+	
+• Ansible uses playbook to describe automation jobs, and playbook uses very simple language i.e. YAML (It’s a human-readable data serialization language & is commonly used for configuration files, but could be used in many applications where data is being stored)which is very easy for humans to understand, read and write. Hence the advantage is that even the IT infrastructure support guys can read and understand the playbook and debug if needed (YAML – It is in human readable form). 
+
+• Ansible is designed for multi-tier deployment. Ansible does not manage one system at time, it models IT infrastructure by describing all of your systems are interrelated. Ansible is completely agentless which means Ansible works by connecting your nodes through ssh(by default). But if you want other method for connection like Kerberos, Ansible gives that option to you. 
+
+• After connecting to your nodes, Ansible pushes small programs called as “Ansible Modules”. Ansible runs that modules on your nodes and removes them when finished. Ansible manages your inventory in simple text files (These are the hosts file). Ansible uses the hosts file where one can group the hosts and can control the actions on a specific group in the playbooks.             
+
+Sample Hosts File 
+
+This is the content of hosts file −      
+
+#File name: hosts
+#Description: Inventory file for your application. Defines machine type abc
+node to deploy specific artifacts
+
+# Defines machine type def node to upload metadata. 
+~~~
+[abc-node]
+#server1 ansible_host = <target machine for DU deployment> ansible_user = <Ansible
+user> ansible_connection = ssh
+server1 ansible_host = <your host name> ansible_user = <your unix user>
+ansible_connection = ssh
+[def-node]
+#server2 ansible_host = <target machine for artifact upload>
+ansible_user = <Ansible user> ansible_connection = ssh
+server2 ansible_host = <host> ansible_user = <user> ansible_connection = ssh 
+~~~
+
+# 3 Node Set-Up 
+~~~~
+Step 1: Install Python on RHEL 8 / CentOS 8
+
+	• sudo dnf -y install python3-pip  
+	
+	• sudo pip3 install --upgrade pip
+For Python2 users you have to install python2-pip
+	• sudo dnf -y install python2-pip  
+	
+	• sudo pip2 install --upgrade pip 
+~~~~ 
+
+Step 2: Install Ansible on RHEL 8 / CentOS 8 
+
+There are two methods from which you can install Ansible on CentOS 8 / RHEL 8.
+
+Method 1: Install Ansible on CentOS 8 / RHEL 8 from EPEL 
+
+Add EPEL repository to your CentOS 8 / RHEL 8 system. 
+~~~~
+	• sudo dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm 
+~~~~	
+Then Enable EPEL playground repository and install Ansible on CentOS 8 / RHEL 8 from it. 
+~~~~
+	• sudo dnf install  --enablerepo epel-playground  ansible 
+~~~~
+This will default to using Python 3, so some Python 3 packages are installed.
+Dependencies resolved.
+===================================================================================================================================================
+ Package                            Arch                     Version                                       Repository                         Size
+===================================================================================================================================================
+Installing:
+ ansible                            noarch                   2.8.5-2.epel8.playground                      epel-playground                    15 M
+Installing dependencies:
+ python3-jmespath                   noarch                   0.9.0-11.el8                                  AppStream                          45 k
+ python3-pyasn1                     noarch                   0.3.7-6.el8                                   AppStream                         126 k
+ python3-bcrypt                     x86_64                   3.1.6-2.epel8.playground.1                    epel-playground                    44 k
+ python3-pynacl                     x86_64                   1.3.0-5.epel8.playground                      epel-playground                   100 k
+ sshpass                            x86_64                   1.06-9.epel8.playground                       epel-playground                    27 k
+ libsodium                          x86_64                   1.0.18-2.el8                                  epel                              162 k
+Installing weak dependencies:
+ python3-paramiko                   noarch                   2.4.3-1.epel8.playground                      epel-playground                   289 k
+Transaction Summary
+===================================================================================================================================================
+Install  8 Packages
+Total download size: 15 M
+Installed size: 81 M
+Is this ok [y/N]: y
+Check the version of Ansible installed on your CentOS 8 / RHEL 8 system.
+
+	• $ ansible --version 
+
+ansible 2.8.5
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/home/cloud-user/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3.6/site-packages/ansible
+  executable location = /usr/bin/ansible
+  python version = 3.6.8 (default, Jul  1 2019, 16:43:04) [GCC 8.2.1 20180905 (Red Hat 8.2.1-3)]
+
+Method 2: Install Ansible on CentOS 8 / RHEL 8 using pip 
+~~~~
+Once you have Pip installed, you can use it to get Ansible installed in your CentOS 8 / RHEL 8 machine.
+$ pip3 install ansible --user
+
+For Python2 pip, use:
+$ pip2 install ansible --user
+
+You can see Ansible installed using the following command:
+$ ansible --version
+ansible 2.7.5
+config file = None
+configured module search path = ['/home/jmutai/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+ansible python module location = /home/jmutai/.local/lib/python3.6/site-packages/ansible
+executable location = /home/jmutai/.local/bin/ansible
+python version = 3.6.6 (default, Oct 16 2018, 01:53:53) [GCC 8.2.1 20180905 (Red Hat 8.2.1-3)] 
+~~~~
+
+Step 3: Testing Ansible on CentOS 8 / RHEL 8 Linux  
+
+~~~~
+To test Ansible, you should have OpenSSH service running on the remote server.
+$ sudo systemctl status sshd
+● sshd.service - OpenSSH server daemon
+Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; vendor preset: enabled)
+Active: active (running) since Sat 2018-12-29 20:17:11 EAT; 39min ago
+Docs: man:sshd(8)
+man:sshd_config(5)
+Main PID: 820 (sshd)
+Tasks: 1 (limit: 11510)
+Memory: 4.6M
+CGroup: /system.slice/sshd.service
+└─820 /usr/sbin/sshd -D -oCiphers=aes256-gcm@openssh.com,chacha20-poly1305@openssh.com,aes256-ctr,aes256-cbc,aes128-gcm@openssh.com,aes128->
+Dec 29 20:17:11 rhel8.local systemd[1]: Starting OpenSSH server daemon…
+Dec 29 20:17:11 rhel8.local sshd[820]: Server listening on 0.0.0.0 port 22.
+Dec 29 20:17:11 rhel8.local sshd[820]: Server listening on :: port 22.
+Dec 29 20:17:11 rhel8.local systemd[1]: Started OpenSSH server daemon.
+Dec 29 20:19:03 rhel8.local sshd[1499]: Accepted publickey for jmutai from 192.168.122.1 port 35902 ssh2: RSA SHA256:b/8AoYgbThoBYPcFh7CetJuGY/Tl7s4fi>
+Dec 29 20:19:03 rhel8.local sshd[1499]: pam_unix(sshd:session): session opened for user jmutai by (uid=0)
+~~~~ 
+
+# Create Ansible inventory file, default is /etc/ansible/hosts 
+
+I like creating inventory file in my working directory. 
+
+$ vim hosts
+Copy the IP address of your remote server(s) to manage and add to Ansible inventory file.
+$ echo "192.168.122.197" > hosts
+You can also create a group of hosts like below: 
+~~~~
+[web]
+192.168.122.197
+
+[db]
+192.168.122.198
+
+[staging]
+192.168.122.199
+192.168.122.200
+192.168.122.201 
+~~~~ 
+
+Generate SSH key and copy it to remote servers. 
+
+~~~~
+$ ssh-keygen
+$ ssh-copy-id  jmutai@192.168.122.197
+Use ping module to test ansible:
+$ ansible  -i hosts  192.168.122.197 -m ping  
+192.168.122.197 | SUCCESS => {
+"changed": false,
+"ping": "pong"
+}
+The -i option is used to provide path to inventory file. You should get the same output for hosts group name.
+$ ansible  -i hosts  web -m ping  
+192.168.122.197 | SUCCESS => {
+"changed": false,
+"ping": "pong"
+}
+For commands that need sudo, pass the option --ask-become-pass. This will ask for privilege escalation password. This may require installation of the sshpass program.
+$ ansible  -i hosts  web -m command -a "sudo yum install vim"  --ask-become-pass
+....
+192.168.122.197 | CHANGED | rc=0 >>
+ Updating Subscription Management repositories.
+ Updating Subscription Management repositories.
+ Last metadata expiration check: 0:52:23 ago on Sat 29 Dec 2018 08:28:46 PM EAT.
+ Package vim-enhanced-2:8.0.1763-7.el8.x86_64 is already installed.
+ Dependencies resolved.
+ Nothing to do.
+ Complete! 
+~~~~
+
+What is Configuration Management      
+
+• Configuration management in terms of Ansible means that it maintains configuration of the product performance by keeping a record and updating detailed information which describes an enterprise’s hardware and software.  
+
+• Such information typically includes the exact versions and updates that have been applied to installed software packages and the locations and network addresses of hardware devices. For e.g. If you want to install the new version of WebLogic/WebSphere server on all of the machines present in your enterprise, it is not feasible for you to manually go and update each and every machine.  
+
+	• You can install WebLogic/WebSphere in one go on all of your machines with Ansible playbooks and inventory written in the most simple way. All you have to do is list out the IP addresses of your nodes in the inventory and write a playbook to install WebLogic/WebSphere. Run the playbook from your control machine & it will be installed on all your nodes.                     
+
+How Ansible Works?              
+
+The picture given below shows the working of Ansible.
+Ansible works by connecting to your nodes and pushing out small programs, called "Ansible modules" to them. Ansible then executes these modules (over SSH by default), and removes them when finished. Your library of modules can reside on any machine, and there are no servers, daemons, or databases required.   
+	
+	![Screenshot](ansible_works.jpg)
+
+• The management node in the above picture is the controlling node (managing node) which controls the entire execution of the playbook. It’s the node from which you are running the installation. The inventory file provides the list of hosts where the Ansible modules needs to be run and the management node does a SSH connection and executes the small modules on the hosts machine and installs the product/software.  
+
+• Beauty of Ansible is that it removes the modules once those are installed so effectively it connects to host machine , executes the instructions and if it’s successfully installed removes the code which was copied on the host machine which was executed.
+
 
 Variables 
 
@@ -17,7 +218,787 @@ remote_file
 file_1, file1
 remoteserver$1
 remote_server_1, remote_server1 
+~~~~ 
+
+Inventory 
+
+Default: 
+
 ~~~~
+/etc/ansible/hosts:
+
+[root@control1 ~]# cat /etc/ansible/hosts
+# This is the default ansible 'hosts' file.
+#
+# It should live in /etc/ansible/hosts
+#
+#   - Comments begin with the '#' character
+#   - Blank lines are ignored
+#   - Groups of hosts are delimited by [header] elements
+#   - You can enter hostnames or ip addresses
+#   - A hostname/ip can be a member of multiple groups
+
+# Ex 1: Ungrouped hosts, specify before any group headers.
+
+## green.example.com
+## blue.example.com
+## 192.168.100.1
+## 192.168.100.10
+
+# Ex 2: A collection of hosts belonging to the 'webservers' group
+
+## [webservers]
+## alpha.example.org
+## beta.example.org
+## 192.168.1.100
+## 192.168.1.110
+
+# If you have multiple hosts following a pattern you can specify
+# them like this:
+
+## www[001:006].example.com
+
+# Ex 3: A collection of database servers in the 'dbservers' group
+
+## [dbservers]
+##
+## db01.intranet.mydomain.net
+## db02.intranet.mydomain.net
+## 10.25.1.56
+## 10.25.1.57
+
+# Here's another example of host ranges, this time there are no
+# leading 0s:
+
+## db-[99:101]-node.example.com
+
+~~~~
+
+Inventory File samples 
+
+~~~~
+#Sample Inventory File
+server1.company.com
+192.168.10.2
+
+#Grouping servers
+server1.company.com
+192.16.10.2
+
+[mail]
+192.168.10.3
+server4.company.com
+
+[db]
+server5.company.com
+server6.company.com
+~~~~
+
+Using alias 
+
+~~~~ 
+
+web1 ansible_host=server1.company.com
+
+db1 ansible_host=server2.company.com
+
+mail1 ansible_host=192.168.10.3
+
+web2 ansible_host=server4.company.com 
+
+~~~~
+
+Create Inventory 
+
+~~~~ 
+[user1@controller ~]$ mkdir demo-inventory
+[user1@controller ~]$ cd demo-inventory/
+[user1@controller demo-inventory]$ ll
+total 0
+[user1@controller demo-inventory]$ vim inventory.txt
+[user1@controller demo-inventory]$ cat inventory.txt
+ubuntu  
+
+The list of machines in the inventory can be found out through the ansible --list-hosts all command :
+
+
+[user1@controller demo-inventory]$ ansible --list-hosts all -i inventory.txt
+  hosts (1):
+    ubuntu
+
+We can specify a different inventory file at the command line using the -i <path> option.
+ And now, First Ansible Task! You can ping all of your inventory machines using the following command:
+
+[user1@controller demo-inventory]$  ansible ubuntu -m ping -i inventory.txt
+ubuntu | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+
+so that confirms that our ansible controller can successfully communicate or connect to the target machines. lets update inventory.txt file by adding second target: 
+
+[user1@controller demo-inventory]$ cat inventory.txt
+ubuntu 
+centos 
+
+and lets  see the results: 
+
+[user1@controller demo-inventory]$ ansible all  -m ping -i inventory.txt
+centos | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+ubuntu | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+
+There is a group that Ansible creates by default and that's called theall group. The all group is a built-in group that Ansible creates and it has all the servers in our inventory file part of that group.
+If there is a problem with python on one of your target nodes, you can send a raw module (we will talk about it later):
+
+[user1@controller demo-inventory]$ ansible -m raw -a "/usr/bin/uptime" -i inventory.txt all
+centos | CHANGED | rc=0 >>
+ 10:12:35 up 23:33,  2 users,  load average: 0.00, 0.01, 0.05
+Shared connection to centos closed.
+
+ubuntu | CHANGED | rc=0 >>
+ 22:42:35 up 19:20,  2 users,  load average: 0.00, 0.00, 0.00
+Shared connection to ubuntu closed.
+
+And if you like to see which python version has been installed on remote machines use shell module(we will talk about it later): 
+
+[user1@controller demo-inventory]$ ansible -m shell -a "python -V" -i inventory.txt all
+centos | CHANGED | rc=0 >>
+Python 2.7.5
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host ubuntu should use
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with
+prior Ansible releases. A future Ansible release will default to using the
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This
+feature will be removed in version 2.12. Deprecation warnings can be disabled
+by setting deprecation_warnings=False in ansible.cfg.
+ubuntu | CHANGED | rc=0 >>
+Python 2.7.17
+
+Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg
+
+Now that you know about inventory files let put our targets nodes information on /etc/ansible/hosts :
+
+[root@controller ~]# tail -n7 /etc/ansible/hosts
+
+ubuntu
+centos
+
+[lab]
+ubuntu
+centos
+
+~~~~
+
+# Ansible Adhoc Commands  
+
+Ran ansible playbook 
+
+~~~~ 
+	• ansible-playbook -i /home/ansible/inventory /home/ansible/web.yml   
+
+
+• ansible-playbook -i <play_book_name>.yml     
+
+
+Running the Playbook 
+
+ansible-playbook user.yml --extra-vars "target = "<your host variable>"
+
+If {{ target }} isn't defined, the playbook does nothing. A group from the hosts file can also be passed through if need be. This does not harm if the extra vars is not provided. 
+
+Playbook targeting a single host 
+
+$ ansible-playbook user.yml --extra-vars "target = <your hosts variable>" --listhosts 	
+~~~~
+	
+
+Syntax Check 
+	
+~~~~ 
+• ansible-playbook  <play_book_name>.yml  --syntax-check
+~~~~ 
+	
+Testing Connection to Ansible Hosts 
+	
+~~~~  
+	
+The following command will test connectivity between your Ansible control node and all your Ansible hosts. This command uses the current system user and its corresponding SSH key as the remote login, and includes the -m option, which tells Ansible to run the ping module. It also features the -i flag, which tells Ansible to ping the hosts listed in the specified inventory file
+
+	• ansible all-i inventory-m ping
+ 
+
+If this is the first time you’re connecting to these servers via SSH, you’ll be asked to confirm the authenticity of the hosts you’re connecting to via Ansible. When prompted, type yes and then hit ENTER to confirm.
+You should get output similar to this:
+
+Output
+server1 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+server2 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+Once you get a "pong" reply back from a host, it means the connection is live and you’re ready to run Ansible commands on that server.
+Adjusting Connection Options
+By default, Ansible tries to connect to the nodes as a remote user with the same name as your current system user, using its corresponding SSH keypair.
+To connect as a different remote user, append the command with the -u flag and the name of the intended user:
+
+	• ansible all -i inventory -m ping-u sammy
+ 
+
+If you’re using a custom SSH key to connect to the remote servers, you can provide it at execution time with the --private-key option:
+
+	• ansible all -i inventory -m ping--private-key=~/.ssh/custom_id
+ 
+Once you’re able to connect using the appropriate options, you can adjust your inventory file to automatically set your remote user and private key, in case they are different from the default values assigned by Ansible. Then, you won’t need to provide those parameters in the command line.
+The following example inventory file sets up the ansible_user variable only for the server1 server:
+~/ansible/inventory 
+
+server1 ansible_host=203.0.113.111 ansible_user=sammyserver2 ansible_host=203.0.113.112
+ 
+
+Ansible will now use sammy as the default remote user when connecting to the server1 server.
+To set up a custom SSH key, include the ansible_ssh_private_key_file variable as follows:
+~/ansible/inventory 
+
+server1 ansible_host=203.0.113.111 ansible_ssh_private_key_file=/home/sammy/.ssh/custom_idserver2 ansible_host=203.0.113.112
+ 
+
+In both cases, we have set up custom values only for server1. If you want to use the same settings for multiple servers, you can use a child group for that:
+~/ansible/inventory 
+
+[group_a]203.0.113.111
+203.0.113.112
+[group_b]203.0.113.113
+[group_a:vars]ansible_user=sammyansible_ssh_private_key_file=/home/sammy/.ssh/custom_id
+ 
+
+This example configuration will assign a custom user and SSH key only for connecting to the servers listed in group_a.
+
+~~~~
+
+Defining targets for command execution	 
+	
+
+	
+When running ad hoc commands with Ansible, you can target individual hosts, as well as any combination of groups, hosts and subgroups. For instance, this is how you would check connectivity for every host in a group named servers:
+
+~~~~~ 
+• ansible servers-i inventory -m ping 
+~~~~~ 
+ 
+
+You can also specify multiple hosts and groups by separating them with colons:
+~~~~~
+• ansible server1:server2:dbservers-i inventory -m ping
+~~~~~ 
+
+To include an exception in a pattern, use an exclamation mark, prefixed by the escape character \, as follows. This command will run on all servers from group1, except server2:
+~~~~~
+• ansible group1:\!server2-i inventory -m ping
+~~~~~ 
+
+In case you’d like to run a command only on servers that are part of both group1 and group2, for instance, you should use & instead. Don’t forget to prefix it with a \ escape character:
+~~~~~
+• ansible group1:\&group2-i inventory -m ping 
+~~~~~
+
+~~~~~	
+To ping all connections: 
+
+
+[user1@controller demo-playbook]$  ansible all -m ping
+centos | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+ubuntu | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+~~~~~
+	
+Running Ansible Modules 
+
+Ansible modules are pieces of code that can be invoked from playbooks and also from the command-line to facilitate executing procedures on remote nodes. Examples include the apt module, used to manage system packages on Ubuntu, and the user module, used to manage system users. The ping command used throughout this guide is also a module, typically used to test connection from the control node to the hosts.Ansible ships with an extensive collection of built-in modules, some of which require the installation of additional software in order to provide full functionality. You can also create your own custom modules using your language of choice.
+	
+~~~~  
+	
+
+To execute a module with arguments, include the -a flag followed by the appropriate options in double quotes, like this:
+
+• ansible target-i inventory -m module-a "module options" 
+	
+As an example, this will use the apt module to install the package tree on server1:
+
+• ansible server1-i inventory -m apt-a "name=tree"
+
+~~~~ 
+
+Running Bash Commands 
+
+	
+When a module is not provided via the -m option, the command module is used by default to execute the specified command on the remote server(s).
+This allows you to execute virtually any command that you could normally execute via an SSH terminal, as long as the connecting user has sufficient permissions and there aren’t any interactive prompts.
+This example executes the uptime command on all servers from the specified inventory: 
+	
+~~~~  
+
+
+	• ansible all-i inventory -a "uptime"
+~~~~
+~~~~
+Copy
+
+Output
+server1| CHANGED | rc=0 >>
+ 14:12:18 up 55 days,  2:15,  1 user,  load average: 0.03, 0.01, 0.00
+server2| CHANGED | rc=0 >>
+ 14:12:19 up 10 days,  6:38,  1 user,  load average: 0.01, 0.02, 0.00	
+~~~~ 
+
+# Using Privilege Escalation to Run Commands with sudo 
+	
+If the command or module you want to execute on remote hosts requires extended system privileges or a different system user, you’ll need to use Ansible’s privilege escalation module, become.  
+	
+This module is an abstraction for sudo as well as other privilege escalation software supported by Ansible on different operating systems. 
+	
+For instance, if you wanted to run a tail command to output the latest log messages from Nginx’s error log on a server named server1 from inventory, you would need to include the --become option as follows:
+
+~~~~
+ansible server1-i inventory -a "tail /var/log/nginx/error.log"--become
+~~~~ 
+
+This would be the equivalent of running a sudo tail /var/log/nginx/error.log command on the remote host, using the current local system user or the remote user set up within your inventory file. 
+	
+Privilege escalation systems such as sudo often require that you confirm your credentials by prompting you to provide your user’s password. That would cause Ansible to fail a command or playbook execution. You can then use the --ask-become-pass or -K option to make Ansible prompt you for that sudo password:
+
+~~~~
+ansible server1-i inventory -a "tail /var/log/nginx/error.log"--become -K
+~~~~
+
+Installing & Removing Packages: 
+
+The following example uses the apt module to install the nginx package on all nodes from the provided inventory file:
+
+~~~~
+ansible all -i inventory -m apt-a "name=nginx"--become -K
+~~~~ 
+
+To remove a package, include the state argument and set it to absent: 
+	
+~~~~
+ansible all -i inventory -m apt-a "name=nginxstate=absent"--become  -K
+~~~~
+
+# File Transfer 
+
+With the file module, you can copy files between the control node and the managed nodes, in either direction. The following command copies a local text file to all remote hosts in the specified inventory file:
+
+~~~~
+ansible all -i inventory -m copy-a "src=./file.txtdest=~/myfile.txt" 
+~~~~
+ 
+
+To copy a file from the remote server to your control node, include the remote_src option:
+
+~~~~
+ansible all -i inventory -m copy-a "src=~/myfile.txtremote_src=yesdest=./file.txt"  
+~~~~
+
+Create new directory: 
+
+~~~~
+$ Ansible abc -m file -a "dest = /path/user1/new mode = 777 owner = user1 group = user1 state = directory" 
+~~~~ 
+
+Delete whole directory and files: 
+
+~~~~
+$ Ansible abc -m file -a "dest = /path/user1/new state = absent"
+~~~~  
+
+Managing Packages 
+
+
+
+The Ad-hoc commands are available for yum and apt. Following are some Ad-hoc commands using yum.
+The following command checks if yum package is installed or not, but does not update it. 
+	
+~~~~ 	
+Ansible abc -m yum -a "name = demo-tomcat-1 state = present"  
+~~~~	
+
+The following command check the package is not installed. 
+	
+~~~~	
+$ Ansible abc -m yum -a "name = demo-tomcat-1 state = absent"   
+~~~~	 
+	
+The following command checks the latest version of package is installed. 
+	
+~~~~	
+$ Ansible abc -m yum -a "name = demo-tomcat-1 state = latest" 
+~~~~
+
+Gathering facts 
+	
+Facts can be used for implementing conditional statements in playbook. You can find adhoc information of all your facts through the following Ad-hoc command −
+~~~~
+$ Ansible all -m setup 
+~~~~
+
+Changing File Permissions 
+
+To modify permissions on files and directories on your remote nodes, you can use the file module.
+The following command will adjust permissions on a file named file.txt located at /var/www on the remote host. It will set the file’s umask to 600, which will enable read and write permissions only for the current file owner. Additionally, it will set the ownership of that file to a user and a group called sammy:
+
+~~~~
+ansible all -i inventory -m file-a "dest=/var/www/file.txtmode=600owner=sammygroup=sammy"--become  -K
+~~~~ 
+
+Because the file is located in a directory typically owned by root, we might need sudo permissions to modify its properties. That’s why we include the --become and -K options. These will use Ansible’s privilege escalation system to run the command with extended privileges, and it will prompt you to provide the sudo password for the remote user.
+
+Restarting Services 
+
+You can use the service module to manage services running on the remote nodes managed by Ansible. This will require extended system privileges, so make sure your remote user has sudo permissions and you include the --become option to use Ansible’s privilege escalation system. Using -K will prompt you to provide the sudo password for the connecting user.!
+~~~~ 
+
+To restart the nginx service on all hosts in group called webservers, for instance, you would run:
+
+ansible webservers-i inventory -m service-a "name=nginxstate=restarted"--become  -K!
+
+~~~~
+
+	
+Restarting Servers 
+
+Although Ansible doesn’t have a dedicated module to restart servers, you can issue a bash command that calls the /sbin/reboot command on the remote host.
+Restarting the server will require extended system privileges, so make sure your remote user has sudo permissions and you include the --become option to use Ansible’s privilege escalation system. Using -K will prompt you to provide the sudo password for the connecting user.
+Warning: The following command will fully restart the server(s) targeted by Ansible. That might cause temporary disruption to any applications that rely on those servers.
+To restart all servers in a webservers group, for instance, you would run:
+~~~~
+ansible webservers-i inventory -a "/sbin/reboot"--become  -K
+~~~~ 
+
+
+
+By default, Ansible will run the above Ad-hoc commands form current user account. If you want to change this behavior, you will have to pass the username in Ad-hoc commands as follows −
+~~~~ 
+$ Ansible abc -a "/sbin/reboot" -f 12 -u username 
+~~~~  
+	
+Gathering Information about remote Nodes: 
+
+The setup module returns detailed information about the remote systems managed by Ansible, also known as system facts.
+To obtain the system facts for server1, run:
+~~~~
+ansible server1-i inventory -m setup
+~~~~ 
+
+This will print a large amount of JSON data containing details about the remote server environment. To print only the most relevant information, include the "gather_subset=min" argument as follows:
+~~~~
+ansible server1-i inventory -m setup-a "gather_subset=min"
+~~~~ 
+
+To print only specific items of the JSON, you can use the filter argument. This will accept a wildcard pattern used to match strings, similar to fnmatch. For example, to obtain information about both the ipv4 and ipv6 network interfaces, you can use *ipv* as filter:
+~~~~
+ansible server1-i inventory -m setup-a "filter=*ipv*"
+~~~~ 
+
+~~~~
+Output
+server1 | SUCCESS => {
+    "ansible_facts": {
+        "ansible_all_ipv4_addresses": [
+            "203.0.113.111", 
+            "10.0.0.1"
+        ], 
+        "ansible_all_ipv6_addresses": [
+            "fe80::a4f5:16ff:fe75:e758"
+        ], 
+        "ansible_default_ipv4": {
+            "address": "203.0.113.111", 
+            "alias": "eth0", 
+            "broadcast": "203.0.113.111", 
+            "gateway": "203.0.113.1", 
+            "interface": "eth0", 
+            "macaddress": "a6:f5:16:75:e7:58", 
+            "mtu": 1500, 
+            "netmask": "255.255.240.0", 
+            "network": "203.0.113.0", 
+            "type": "ether"
+        }, 
+        "ansible_default_ipv6": {}
+    }, 
+    "changed": false
+}
+If you’d like to check disk usage, you can run a Bash command calling the df utility, as follows:
+~~~~
+ansible all -i inventory -a "df -h"
+~~~~ 
+~~~~	
+Copy
+
+Output
+server1 | CHANGED | rc=0 >>
+Filesystem      Size  Used Avail Use% Mounted on
+udev            3.9G     0  3.9G   0% /dev
+tmpfs           798M  624K  798M   1% /run
+/dev/vda1       155G  2.3G  153G   2% /
+tmpfs           3.9G     0  3.9G   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs           3.9G     0  3.9G   0% /sys/fs/cgroup
+/dev/vda15      105M  3.6M  101M   4% /boot/efi
+tmpfs           798M     0  798M   0% /run/user/0
+server2 | CHANGED | rc=0 >>
+Filesystem      Size  Used Avail Use% Mounted on
+udev            2.0G     0  2.0G   0% /dev
+tmpfs           395M  608K  394M   1% /run
+/dev/vda1        78G  2.2G   76G   3% /
+tmpfs           2.0G     0  2.0G   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs           2.0G     0  2.0G   0% /sys/fs/cgroup
+/dev/vda15      105M  3.6M  101M   4% /boot/efi
+tmpfs           395M     0  395M   0% /run/user/0
+~~~~  
+	
+Shutting down servers  
+	
+~~~~	
+[user1@controller demo-adhoc]$ ansible all -b -a "shutdown -r"
+centos | CHANGED | rc=0 >>
+Shutdown scheduled for Mon 2021-06-28 13:58:27 +0430, use 'shutdown -c' to cancel.
+ubuntu | CHANGED | rc=0 >>
+Shutdown scheduled for Mon 2021-06-28 02:28:27 PDT, use 'shutdown -c' to cancel.
+~~~~
+
+# Playbook Structure 
+
+Playbooks are the files where Ansible code is written. Playbooks are written in YAML format. YAML stands for Yet Another Markup Language. Playbooks are one of the core features of Ansible and tell Ansible what to execute. They are like a to-do list for Ansible that contains a list of tasks.
+Playbooks contain the steps which the user wants to execute on a particular machine. Playbooks are run sequentially. Playbooks are the building blocks for all the use cases of Ansible.
+
+Playbook Structure
+
+Each playbook is an aggregation of one or more plays in it. Playbooks are structured using Plays. There can be more than one play inside a playbook.
+The function of a play is to map a set of instructions defined against a particular host.
+YAML is a strict typed language; so, extra care needs to be taken while writing the YAML files. There are different YAML editors but we will prefer to use a simple editor like notepad++. Just open notepad++ and copy and paste the below yaml and change the language to YAML (Language → YAML).
+A YAML starts with --- (3 hyphens)
+
+
+Create a Playbook
+Let us start by writing a sample YAML file. We will walk through each section written in a yaml file.
+~~~~
+--- 
+   name: install and configure DB
+   hosts: testServer
+   become: yes
+ 
+   vars: 
+      oracle_db_port_value : 1521
+   
+   tasks:
+   -name: Install the Oracle DB
+      yum: <code to install the DB>
+    
+   -name: Ensure the installed service is enabled and running
+   service:
+      name: <your service name>
+~~~~
+
+The above is a sample Playbook where we are trying to cover the basic syntax of a playbook. Save the above content in a file as test.yml. A YAML syntax needs to follow the correct indentation and one needs to be a little careful while writing the syntax.
+
+
+The Different YAML Tags 
+
+Let us now go through the different YAML tags. The different tags are described below −
+name
+This tag specifies the name of the Ansible playbook. As in what this playbook will be doing. Any logical name can be given to the playbook. 
+	
+hosts 
+	
+This tag specifies the lists of hosts or host group against which we want to run the task. The hosts field/tag is mandatory. It tells Ansible on which hosts to run the listed tasks. The tasks can be run on the same machine or on a remote machine. One can run the tasks on multiple machines and hence hosts tag can have a group of hosts’ entry as well.
+
+vars 
+	
+Vars tag lets you define the variables which you can use in your playbook. Usage is similar to variables in any programming language.
+
+tasks 
+	
+All playbooks should contain tasks or a list of tasks to be executed. Tasks are a list of actions one needs to perform. A tasks field contains the name of the task. This works as the help text for the user. It is not mandatory but proves useful in debugging the playbook. Each task internally links to a piece of code called a module. A module that should be executed, and arguments that are required for the module you want to execute.
+
+Example 2: Simple Playbook
+
+~~~~
+---
+
+  - name: Simple Playbook
+    hosts: webservers
+    tasks:
+      - name: ensure apache is at the latest version
+        yum:
+          name: httpd
+          state: latest
+~~~~ 
+
+Example 3: Apache
+
+~~~~  
+
+
+abcd.yml -> Installs Apache
+
+---
+- hosts: all
+tasks:
+- name: install apchae2 in all 100 servers
+apt:
+name: apache2
+state: present
+- name: start apche2 in all 100 servers
+service:
+name: apache2
+state: started
+
+From <https://www.decodingdevops.com/ansible-basics-tutorial-commands/> 
+
+
+~~~~
+
+Example Play1 
+~~~~	
+---
+
+#Sample Ansible Playbook1.yml
+-
+  name: Play1
+  hosts: centos
+  tasks:
+    - name : Execute command 'date'
+      command: date
+      
+    - name : Execute script on server
+      script: my_script.sh
+      
+    - name : Install httpd service
+      yum:
+        name: httpd
+        state: present
+      
+    - name : Start web server
+      service:
+        name: httpd
+        state: started 
+~~~~
+
+Remember the host we want to perform these operations against is always set at a play level. You could have any host or groups specified here but you must ensure that the host or group is first defined in the inventory file we created earlier. The host defined in the inventory file must match the host used in the Playbook .  
+
+All connection information for the host is retrieved from the inventory file. There is no hard rule to use all the hosts defined in the inventory file. We can choose one or multiple or a group or multiple groups from the inventory file in the play.
+
+We can also split the list of tasks into two separate plays (using our YAML skills):
+
+The'-' indicates that it is an item in the list. So the Playbook is a list of dictionaries. Each play is a dictionary and has a set of properties called name, hosts and tasks . Remember these are properties of a dictionary and so the order doesn't really matter. So even if you swap the position of name and hosts, it's still a valid play.  
+
+How ever this is not the same for tasks. The tasks is a list as denoted by the dashes. List are ordered collections, So the position of entries matter. Swapping the position of entries here, really matters.   
+
+The different actions run by tasks are called modules. In our example, command, script, yum and service are Ansible Modules. There hundreds of other modules available. We will talk about them later
+~~~~
+---
+
+#Sample Ansible Playbook2.yml
+-
+  name: Play1
+  hosts: centos
+  tasks:
+    - name : Execute command 'date'
+      command: date
+      
+    - name : Execute script on server
+      script: my_script.sh
+
+-
+  name: Play2
+  hosts: centos
+  tasks:
+    - name : Install httpd service
+      yum:
+        name: httpd
+        state: present
+      
+    - name : Start web server
+      service:
+        name: httpd
+        state: started
+~~~~
+
+# Test Connectivity 
+~~~~	
+---
+
+#ping-playbook.yaml
+-
+  name: Test Connectivity
+  hosts: all
+  tasks:
+    - name: Ping test
+      ping:
+
+[user1@controller demo-playbook]$ ansible-playbook ping-playbook.yaml
+
+PLAY [Test Connectivity] ****************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************
+ok: [centos]
+ok: [ubuntu]
+
+TASK [Ping test] ************************************************************************************************************************
+ok: [centos]
+ok: [ubuntu]
+
+PLAY RECAP ******************************************************************************************************************************
+centos                     : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ubuntu                     : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+~~~~
+
+Yaml Linter: 
+	
+The YAML format is key while developing Playbooks. We must pay extra attention to the indentation and structure of this file. For testing yaml files:
+	• web site: http://www.yamllint.com/
+ATOM ide with linter-js-yaml and remote-sync (if you need) 
+	
+# Running Ansible 
+	
+There are Two ways of running Ansible: 
+
+ansible command (ad-hoc commands) : Used when we want to use ansible for One task, such as Testing connectivity between ansible controller and target, Shutting down a set of server, ... . In that case we can run ansible with out writing a playbook. 
+	
+	• ansible-playbook command : used when you have a playbook.
+
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/master/ansible-command-structure.png?sanitize=true&raw=true" />
+
 Defining Variables 
 
 Variables can be defined in a variety of places in an Ansible project. However, this can be simplified to three basic scope levels:
@@ -456,10 +1437,96 @@ ubuntu                     : ok=2    changed=0    unreachable=0    failed=0    s
 #Loops with_file 
 
 
+# sample loop with with_file loop-playbook2.yaml
+
+~~~~ 
+--- 
+
+- hosts: ubuntu
+  become: yes
+
+  tasks:
+   - name: show file(s) contents
+     debug: msg={{ item }}
+     with_file:
+      - myfile1.txt
+      - myfile2.txt 
+
+
+[user1@controller demo-var]$ cat myfile1.txt
+This is myfile1.txt, first line :-)
+[user1@controller demo-var]$
+[user1@controller demo-var]$ cat myfile2.txt
+This is myfile2.txt, first line :-0
+
+
+[user1@controller demo-var]$ ansible-playbook loop-playbook2.yaml
+
+PLAY [ubuntu] ***************************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************
+ok: [ubuntu]
+
+TASK [show file(s) contents] ************************************************************************************************************
+ok: [ubuntu] => (item=This is myfile1.txt, first line :-)) => {
+    "msg": "This is myfile1.txt, first line :-)"
+}
+ok: [ubuntu] => (item=This is myfile2.txt, first line :-0) => {
+    "msg": "This is myfile2.txt, first line :-0"
+}
+
+PLAY RECAP ******************************************************************************************************************************
+ubuntu                     : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+~~~~
+
+
+# Exception Handling 
+
+Exception handling in Ansible is similar to exception handling in any programming language. An example of the exception handling in playbook is shown below.
+
+~~~~ 
+
+---
+tasks: 
+   - name: Name of the task to be executed 
+      block: 
+         - debug: msg = 'Just a debug message , relevant for logging' 
+         - command: <the command to execute> 
+      
+      rescue: 
+         - debug: msg = 'There was an exception.. ' 
+         - command: <Rescue mechanism for the above exception occurred) 
+      
+      always: 
+         - debug: msg = "this will execute in all scenarios. Always will get logged" 
+~~~~
+Following is the syntax for exception handling.
+
+
+rescue and always are the keywords specific to exception handling.
+
+
+Block is where the code is written (anything to be executed on the Unix machine).
+
+
+If the command written inside the block feature fails, then the execution reaches rescue block and it gets executed. In case there is no error in the command under block feature, then rescue will not be executed.
+
+
+Always gets executed in all cases.
+
+
+So if we compare the same with java, then it is similar to try, catch and finally block.
+
+
+Here, Block is similar to try block where you write the code to be executed and rescue is similar to catch block and always is similar to finally.
+
+~~~~		    
+			    
+---
 
 # sample loop with with_file loop-playbook2.yaml
-~~~~ 
----
+
 - hosts: ubuntu
   become: yes
 

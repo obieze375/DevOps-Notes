@@ -5,7 +5,7 @@ Variables
 Just like any other Scripting or programming language we can use variable in ansible playbooks. Variables could store different values for different items. Variables help us to have shorter and more readable playbooks. Imagine we want to apply patches on hundreds of servers, the only thing we need is single playbook with some variables for all hundred servers! It's the variables that store information about different IP addresses, host names, username or passwords,... 
 
 Naming Variables 
-
+~~~~
 Variable names must start with a letter, and they can only contain letters, numbers, and underscores. The following table illustrates the difference between invalid and valid variable names.
 INVALID VARIABLE NAMES
 VALID VARIABLE NAMES
@@ -17,7 +17,7 @@ remote_file
 file_1, file1
 remoteserver$1
 remote_server_1, remote_server1 
-
+~~~~
 Defining Variables 
 
 Variables can be defined in a variety of places in an Ansible project. However, this can be simplified to three basic scope levels:
@@ -28,13 +28,14 @@ If the same variable name is defined at more than one level, the level with the 
 
 Host scope: We have already seen using variables when we talked about Ansible inventory files. As as example lets write down a playbook to configure multiple firewall configuration. We want to make it reusable for some one else to change ports, for that lets move variables to the inventory file:
 
-#Sample inventory file with variables-inventory.txt 
-
-centos http_port=8080 snmp_port=161-162 internal_ip_range=192.168.100.0
+#Sample inventory file with variables-inventory.txt  
 
 ~~~~
+centos http_port=8080 snmp_port=161-162 internal_ip_range=192.168.100.0
+~~~~
+~~~~
 # sample firewall playbook  firewall-playbook.yaml
-
+---
 -
   name: Set Firewall Configurations
   hosts: centos
@@ -61,11 +62,9 @@ centos http_port=8080 snmp_port=161-162 internal_ip_range=192.168.100.0
          zone: internal
          state: enabled
 ~~~~
-
+~~~~
 [user1@controller demo-var]$  ansible-playbook -i inventory.txt  firewall-playbook.yaml
-![image](https://user-images.githubusercontent.com/91855277/160940861-101108af-1981-4bf9-a19b-971178e9d931.png)
-
-
+~~~~
 
 #Conditionals 
 
@@ -73,6 +72,7 @@ Conditionals are used where one needs to run a specific step based on a conditio
  
 ~~~~
 #Tsting 
+---
 - hosts: all 
    vars: 
       test1: "Hello Vivek" 
@@ -84,7 +84,8 @@ Conditionals are used where one needs to run a specific step based on a conditio
 
 ~~~~
 
-#Conditions based on registered variables:
+# Conditions based on registered variables: 
+
 Often in a playbook you want to execute or skip a task based on the outcome of an earlier task. To create a conditional based on a registered variable:  
 
 	1. Register the outcome of the earlier task as a variable.
@@ -92,8 +93,9 @@ Often in a playbook you want to execute or skip a task based on the outcome of a
 
 
 
-#sample playbook for conditionals  condition-playbook1.yaml
-~~~~
+# sample playbook for conditionals  condition-playbook1.yaml
+~~~~ 
+---
 - hosts: all
   become: yes
 
@@ -107,7 +109,7 @@ Often in a playbook you want to execute or skip a task based on the outcome of a
       yum: name=httpd state=latest
       failed_when: "'FAILED' in results"
 ~~~~
-![image](https://user-images.githubusercontent.com/91855277/160940756-01d21e9d-b999-488d-bd73-1b8a2367a970.png)
+
 
 play scope: Ansible playbook supports defining the variable in two forms, Either a Single liner variable declaration like we do in any common programming languages or as a separate file with full of variables and values like a properties file. 
 
@@ -116,8 +118,6 @@ play scope: Ansible playbook supports defining the variable in two forms, Either
 	
  Lets repeat previous example by moving variables in to the playbook ,It can be done with vars like this: 
 
-
----
 
 #sample firewall playbook with vars firewall-playbook.yaml
 
@@ -133,7 +133,7 @@ play scope: Ansible playbook supports defining the variable in two forms, Either
 
 #sample firewall playbook with vars firewall-playbook.yaml
 ~~~~
--
+---
   name: Set Firewall Configurations
   hosts: centos
   become: true
@@ -163,9 +163,9 @@ play scope: Ansible playbook supports defining the variable in two forms, Either
          zone: internal
          state: enabled
 ~~~~
-![image](https://user-images.githubusercontent.com/91855277/160941485-3637278b-8789-45fa-982f-f65cafc78dd7.png)
 ~~~~
--
+--- 
+
   name: Set Firewall Configurations
   hosts: centos
   become: true
@@ -205,11 +205,11 @@ snmp_port: 161-162
 internal_ip_range: 192.168.100.0
 ~~~~
 
----
+
 
 #sample firewall playbook with var_files firewall-playbook.yaml
 ~~~~
--
+---
   name: Set Firewall Configurations
   hosts: centos
   become: true
@@ -236,16 +236,18 @@ internal_ip_range: 192.168.100.0
          permanent: true
          zone: internal
          state: enabled
+~~~~ 
 ~~~~
 [user1@controller demo-var]$ ansible-playbook  firewall-playbook.yaml
+~~~~
 
-
+~~~~
 Jinja2 templating : the format {{ }} we are using to use variables is called Jinja2 templating. Be careful about Quotes :
 	• source: {{ http_port }}
 	• source: "{{ http_port }}"
 	• source: " Somthing {{ http_port }} Somthing "
+~~~~
 
-![image](https://user-images.githubusercontent.com/91855277/160942597-44ed3504-a20b-4bd7-a629-6494e14624ae.png)
 
 Variable in playbooks are very similar to using variables in any programming language. It helps you to use and assign a value to a variable and use that anywhere in the playbook. One can put conditions around the value of the variables and accordingly use them in the playbook.
 
@@ -305,7 +307,6 @@ This will read the value of variable Output. Also as it is used in the msg tab, 
 
 Additionally, you can use the sub properties of the variable as well. Like in the case checking {{Output.changed}} whether the output got changed and accordingly use it.
 
-![image](https://user-images.githubusercontent.com/91855277/160942665-b70e9e19-3b73-4f41-a935-dd0a4a95720f.png)
 
 #Conditionals based on ansible_facts 
 
@@ -320,7 +321,8 @@ Often you want to execute or skip a task based on facts. As we mentioned before 
 
 ---
 #sample conditional with facts condition-playbook2.yaml
-~~~~
+~~~~ 
+---
 - hosts: all
   become: yes
 
@@ -336,7 +338,7 @@ Often you want to execute or skip a task based on facts. As we mentioned before 
 ~~~~
 ![image](https://user-images.githubusercontent.com/91855277/160943363-847f5e5b-bb87-4490-9219-bb084da9ad20.png)
 
-#Loops 
+# Loops 
 
 Below is the example to demonstrate the usage of Loops in Ansible.
 
@@ -381,16 +383,17 @@ Attaching the example output just to make one understand how we used the stdout_
 ~~~~
 
 
-![image](https://user-images.githubusercontent.com/91855277/160943468-25cd8499-acdd-45d1-bdc8-83e072423216.png)
 
-#Mutli-package Installation with loops
+
+# Mutli-package Installation with loops
 
 When automating server setup, sometimes you’ll need to repeat the execution of the same task using different values. For instance, you may need to install  multiple packages , or ... .  
 
----
+
 
 #sample playbook install packages noloop-playbook.yaml
-
+~~~~ 
+---
 - hosts: ubuntu
   become: yes
 
@@ -398,16 +401,17 @@ When automating server setup, sometimes you’ll need to repeat the execution of
     - yum: name=vim state=present
     - yum: name=nano state=present
     - yum: name=apache2 state=present
+~~~~
 
-![image](https://user-images.githubusercontent.com/91855277/160943531-62e15fd3-0b09-4e55-83cb-49ed84968619.png)
 
-#Loops with_items 
-
+# Loops with_items 
+~~~~
 [user1@controller demo-var]$ cat loop-playbook1.yaml
----
+~~~~
 
 # sample loop with with_itemp loop-playbook1.yaml
-
+~~~~
+---
 - hosts: ubuntu
   become: yes
 
@@ -447,14 +451,15 @@ ok: [ubuntu] => (item=[u'vim', u'nano', u'apache2'])
 PLAY RECAP ******************************************************************************************************************************
 ubuntu                     : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 
-![image](https://user-images.githubusercontent.com/91855277/160943830-3fa1fa45-58b3-42ce-b535-e03da03e27ca.png)
+
 
 #Loops with_file 
 
----
+
 
 # sample loop with with_file loop-playbook2.yaml
-
+~~~~ 
+---
 - hosts: ubuntu
   become: yes
 
@@ -491,4 +496,4 @@ ok: [ubuntu] => (item=This is myfile2.txt, first line :-0) => {
 PLAY RECAP ******************************************************************************************************************************
 ubuntu                     : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 
-![image](https://user-images.githubusercontent.com/91855277/160943893-c742635b-8f43-4673-a997-410c7de8e6f8.png)
+~~~~

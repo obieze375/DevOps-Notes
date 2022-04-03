@@ -56,6 +56,7 @@ Add EPEL repository to your CentOS 8 / RHEL 8 system.
 Then Enable EPEL playground repository and install Ansible on CentOS 8 / RHEL 8 from it. 
 ~~~~
 	• sudo dnf install  --enablerepo epel-playground  ansible 
+~~~~ 
 ~~~~
 This will default to using Python 3, so some Python 3 packages are installed.
 Dependencies resolved.
@@ -78,27 +79,35 @@ Transaction Summary
 Install  8 Packages
 Total download size: 15 M
 Installed size: 81 M
-Is this ok [y/N]: y
-Check the version of Ansible installed on your CentOS 8 / RHEL 8 system.
+Is this ok [y/N]: y 
+~~~~ 
 
-	• $ ansible --version 
+Check the version of Ansible installed on your CentOS 8 / RHEL 8 system. 
 
+~~~~
+• $ ansible --version 
+~~~~
+~~~~
 ansible 2.8.5
   config file = /etc/ansible/ansible.cfg
   configured module search path = ['/home/cloud-user/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
   ansible python module location = /usr/lib/python3.6/site-packages/ansible
   executable location = /usr/bin/ansible
   python version = 3.6.8 (default, Jul  1 2019, 16:43:04) [GCC 8.2.1 20180905 (Red Hat 8.2.1-3)]
+~~~~ 
 
 Method 2: Install Ansible on CentOS 8 / RHEL 8 using pip 
-~~~~
+
 Once you have Pip installed, you can use it to get Ansible installed in your CentOS 8 / RHEL 8 machine.
+~~~~
 $ pip3 install ansible --user
-
-For Python2 pip, use:
+~~~~
+For Python2 pip, use: 
+~~~~
 $ pip2 install ansible --user
-
-You can see Ansible installed using the following command:
+~~~~
+You can see Ansible installed using the following command: 
+~~~~
 $ ansible --version
 ansible 2.7.5
 config file = None
@@ -107,6 +116,7 @@ ansible python module location = /home/jmutai/.local/lib/python3.6/site-packages
 executable location = /home/jmutai/.local/bin/ansible
 python version = 3.6.6 (default, Oct 16 2018, 01:53:53) [GCC 8.2.1 20180905 (Red Hat 8.2.1-3)] 
 ~~~~
+
 
 Step 3: Testing Ansible on CentOS 8 / RHEL 8 Linux  
 
@@ -134,11 +144,12 @@ Dec 29 20:19:03 rhel8.local sshd[1499]: pam_unix(sshd:session): session opened f
 # Create Ansible inventory file, default is /etc/ansible/hosts 
 
 I like creating inventory file in my working directory. 
-
+~~~~
 $ vim hosts
 Copy the IP address of your remote server(s) to manage and add to Ansible inventory file.
 $ echo "192.168.122.197" > hosts
 You can also create a group of hosts like below: 
+~~~~
 ~~~~
 [web]
 192.168.122.197
@@ -188,7 +199,7 @@ What is Configuration Management
 
 • Such information typically includes the exact versions and updates that have been applied to installed software packages and the locations and network addresses of hardware devices. For e.g. If you want to install the new version of WebLogic/WebSphere server on all of the machines present in your enterprise, it is not feasible for you to manually go and update each and every machine.  
 
-	• You can install WebLogic/WebSphere in one go on all of your machines with Ansible playbooks and inventory written in the most simple way. All you have to do is list out the IP addresses of your nodes in the inventory and write a playbook to install WebLogic/WebSphere. Run the playbook from your control machine & it will be installed on all your nodes.                     
+• You can install WebLogic/WebSphere in one go on all of your machines with Ansible playbooks and inventory written in the most simple way. All you have to do is list out the IP addresses of your nodes in the inventory and write a playbook to install WebLogic/WebSphere. Run the playbook from your control machine & it will be installed on all your nodes.                     
 
 How Ansible Works?              
 
@@ -319,10 +330,11 @@ total 0
 [user1@controller demo-inventory]$ vim inventory.txt
 [user1@controller demo-inventory]$ cat inventory.txt
 ubuntu  
+~~~~ 
 
 The list of machines in the inventory can be found out through the ansible --list-hosts all command :
 
-
+~~~~
 [user1@controller demo-inventory]$ ansible --list-hosts all -i inventory.txt
   hosts (1):
     ubuntu
@@ -362,10 +374,11 @@ ubuntu | SUCCESS => {
     "changed": false,
     "ping": "pong"
 }
-
+~~~~ 
+	
 There is a group that Ansible creates by default and that's called theall group. The all group is a built-in group that Ansible creates and it has all the servers in our inventory file part of that group.
 If there is a problem with python on one of your target nodes, you can send a raw module (we will talk about it later):
-
+~~~~
 [user1@controller demo-inventory]$ ansible -m raw -a "/usr/bin/uptime" -i inventory.txt all
 centos | CHANGED | rc=0 >>
  10:12:35 up 23:33,  2 users,  load average: 0.00, 0.01, 0.05
@@ -391,9 +404,10 @@ ubuntu | CHANGED | rc=0 >>
 Python 2.7.17
 
 Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg
-
+~~~~ 
+	
 Now that you know about inventory files let put our targets nodes information on /etc/ansible/hosts :
-
+~~~~
 [root@controller ~]# tail -n7 /etc/ansible/hosts
 
 ubuntu
@@ -410,22 +424,23 @@ centos
 Ran ansible playbook 
 
 ~~~~ 
-	• ansible-playbook -i /home/ansible/inventory /home/ansible/web.yml   
-
-
-• ansible-playbook -i <play_book_name>.yml     
-
+ansible-playbook -i /home/ansible/inventory /home/ansible/web.yml   
+~~~~
+~~~~
+ansible-playbook -i <play_book_name>.yml     
+~~~~
 
 Running the Playbook 
-
+~~~~
 ansible-playbook user.yml --extra-vars "target = "<your host variable>"
-
+~~~~ 
+	
 If {{ target }} isn't defined, the playbook does nothing. A group from the hosts file can also be passed through if need be. This does not harm if the extra vars is not provided. 
 
 Playbook targeting a single host 
 
 $ ansible-playbook user.yml --extra-vars "target = <your hosts variable>" --listhosts 	
-~~~~
+
 	
 
 Syntax Check 
@@ -439,9 +454,9 @@ Testing Connection to Ansible Hosts
 ~~~~  
 	
 The following command will test connectivity between your Ansible control node and all your Ansible hosts. This command uses the current system user and its corresponding SSH key as the remote login, and includes the -m option, which tells Ansible to run the ping module. It also features the -i flag, which tells Ansible to ping the hosts listed in the specified inventory file
-
-	• ansible all-i inventory-m ping
- 
+~~~~
+ansible all-i inventory-m ping
+~~~~ 
 
 If this is the first time you’re connecting to these servers via SSH, you’ll be asked to confirm the authenticity of the hosts you’re connecting to via Ansible. When prompted, type yes and then hit ENTER to confirm.
 You should get output similar to this:
@@ -459,36 +474,37 @@ Once you get a "pong" reply back from a host, it means the connection is live an
 Adjusting Connection Options
 By default, Ansible tries to connect to the nodes as a remote user with the same name as your current system user, using its corresponding SSH keypair.
 To connect as a different remote user, append the command with the -u flag and the name of the intended user:
+~~~~
+ansible all -i inventory -m ping-u sammy
+~~~~ 
 
-	• ansible all -i inventory -m ping-u sammy
- 
-
-If you’re using a custom SSH key to connect to the remote servers, you can provide it at execution time with the --private-key option:
-
-	• ansible all -i inventory -m ping--private-key=~/.ssh/custom_id
- 
+If you’re using a custom SSH key to connect to the remote servers, you can provide it at execution time with the --private-key option: 
+	
+~~~~
+ansible all -i inventory -m ping--private-key=~/.ssh/custom_id
+~~~~ 
 Once you’re able to connect using the appropriate options, you can adjust your inventory file to automatically set your remote user and private key, in case they are different from the default values assigned by Ansible. Then, you won’t need to provide those parameters in the command line.
 The following example inventory file sets up the ansible_user variable only for the server1 server:
 ~/ansible/inventory 
-
+~~~~
 server1 ansible_host=203.0.113.111 ansible_user=sammyserver2 ansible_host=203.0.113.112
- 
+~~~~ 
 
 Ansible will now use sammy as the default remote user when connecting to the server1 server.
 To set up a custom SSH key, include the ansible_ssh_private_key_file variable as follows:
 ~/ansible/inventory 
-
+~~~~
 server1 ansible_host=203.0.113.111 ansible_ssh_private_key_file=/home/sammy/.ssh/custom_idserver2 ansible_host=203.0.113.112
- 
+~~~~ 
 
 In both cases, we have set up custom values only for server1. If you want to use the same settings for multiple servers, you can use a child group for that:
 ~/ansible/inventory 
-
+~~~~
 [group_a]203.0.113.111
 203.0.113.112
 [group_b]203.0.113.113
 [group_a:vars]ansible_user=sammyansible_ssh_private_key_file=/home/sammy/.ssh/custom_id
- 
+~~~~ 
 
 This example configuration will assign a custom user and SSH key only for connecting to the servers listed in group_a.
 
@@ -549,13 +565,13 @@ Ansible modules are pieces of code that can be invoked from playbooks and also f
 	
 
 To execute a module with arguments, include the -a flag followed by the appropriate options in double quotes, like this:
-
-• ansible target-i inventory -m module-a "module options" 
-	
+~~~~
+ansible target-i inventory -m module-a "module options" 
+~~~~
 As an example, this will use the apt module to install the package tree on server1:
-
-• ansible server1-i inventory -m apt-a "name=tree"
-
+~~~~
+ansible server1-i inventory -m apt-a "name=tree"
+~~~~
 ~~~~ 
 
 Running Bash Commands 
@@ -566,9 +582,7 @@ This allows you to execute virtually any command that you could normally execute
 This example executes the uptime command on all servers from the specified inventory: 
 	
 ~~~~  
-
-
-	• ansible all-i inventory -a "uptime"
+ansible all-i inventory -a "uptime"
 ~~~~
 ~~~~
 Copy
@@ -685,12 +699,11 @@ Because the file is located in a directory typically owned by root, we might nee
 Restarting Services 
 
 You can use the service module to manage services running on the remote nodes managed by Ansible. This will require extended system privileges, so make sure your remote user has sudo permissions and you include the --become option to use Ansible’s privilege escalation system. Using -K will prompt you to provide the sudo password for the connecting user.!
-~~~~ 
+ 
 
 To restart the nginx service on all hosts in group called webservers, for instance, you would run:
-
+~~~~
 ansible webservers-i inventory -m service-a "name=nginxstate=restarted"--become  -K!
-
 ~~~~
 
 	
@@ -700,13 +713,15 @@ Although Ansible doesn’t have a dedicated module to restart servers, you can i
 Restarting the server will require extended system privileges, so make sure your remote user has sudo permissions and you include the --become option to use Ansible’s privilege escalation system. Using -K will prompt you to provide the sudo password for the connecting user.
 Warning: The following command will fully restart the server(s) targeted by Ansible. That might cause temporary disruption to any applications that rely on those servers.
 To restart all servers in a webservers group, for instance, you would run:
+
 ~~~~
 ansible webservers-i inventory -a "/sbin/reboot"--become  -K
 ~~~~ 
 
 
 
-By default, Ansible will run the above Ad-hoc commands form current user account. If you want to change this behavior, you will have to pass the username in Ad-hoc commands as follows −
+By default, Ansible will run the above Ad-hoc commands form current user account. If you want to change this behavior, you will have to pass the username in Ad-hoc commands as follows − 
+	
 ~~~~ 
 $ Ansible abc -a "/sbin/reboot" -f 12 -u username 
 ~~~~  
@@ -714,17 +729,20 @@ $ Ansible abc -a "/sbin/reboot" -f 12 -u username
 Gathering Information about remote Nodes: 
 
 The setup module returns detailed information about the remote systems managed by Ansible, also known as system facts.
-To obtain the system facts for server1, run:
+To obtain the system facts for server1, run: 
+	
 ~~~~
 ansible server1-i inventory -m setup
 ~~~~ 
 
-This will print a large amount of JSON data containing details about the remote server environment. To print only the most relevant information, include the "gather_subset=min" argument as follows:
+This will print a large amount of JSON data containing details about the remote server environment. To print only the most relevant information, include the "gather_subset=min" argument as follows: 
+	
 ~~~~
 ansible server1-i inventory -m setup-a "gather_subset=min"
 ~~~~ 
 
-To print only specific items of the JSON, you can use the filter argument. This will accept a wildcard pattern used to match strings, similar to fnmatch. For example, to obtain information about both the ipv4 and ipv6 network interfaces, you can use *ipv* as filter:
+To print only specific items of the JSON, you can use the filter argument. This will accept a wildcard pattern used to match strings, similar to fnmatch. For example, to obtain information about both the ipv4 and ipv6 network interfaces, you can use *ipv* as filter: 
+	
 ~~~~
 ansible server1-i inventory -m setup-a "filter=*ipv*"
 ~~~~ 
@@ -758,10 +776,9 @@ server1 | SUCCESS => {
 }
 If you’d like to check disk usage, you can run a Bash command calling the df utility, as follows:
 ~~~~
-ansible all -i inventory -a "df -h"
-~~~~ 
+
 ~~~~	
-Copy
+ansible all -i inventory -a "df -h"
 
 Output
 server1 | CHANGED | rc=0 >>
@@ -994,10 +1011,12 @@ ATOM ide with linter-js-yaml and remote-sync (if you need)
 	
 There are Two ways of running Ansible: 
 
-ansible command (ad-hoc commands) : Used when we want to use ansible for One task, such as Testing connectivity between ansible controller and target, Shutting down a set of server, ... . In that case we can run ansible with out writing a playbook. 
+ansible command (ad-hoc commands) : Used when we want to use ansible for One task, such as Testing connectivity between ansible controller and target, Shutting down a set of server, ... . In that case we can run ansible with out writing a playbook.  
 	
-	• ansible-playbook command : used when you have a playbook.
-
+~~~~
+ansible-playbook command : used when you have a playbook.
+~~~~ 
+	
 <img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/master/ansible-command-structure.png?sanitize=true&raw=true" />
 
 Defining Variables 

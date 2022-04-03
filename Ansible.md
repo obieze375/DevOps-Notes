@@ -11,10 +11,11 @@ Introduction:
 Sample Hosts File 
 
 This is the content of hosts file −      
-
+~~~
 #File name: hosts
 #Description: Inventory file for your application. Defines machine type abc
 node to deploy specific artifacts
+~~~ 
 
 # Defines machine type def node to upload metadata. 
 ~~~
@@ -1014,8 +1015,10 @@ Host scope: We have already seen using variables when we talked about Ansible in
 ~~~~
 centos http_port=8080 snmp_port=161-162 internal_ip_range=192.168.100.0
 ~~~~
-~~~~
+
 # sample firewall playbook  firewall-playbook.yaml
+~~~~
+
 ---
 -
   name: Set Firewall Configurations
@@ -1110,7 +1113,7 @@ play scope: Ansible playbook supports defining the variable in two forms, Either
  Lets repeat previous example by moving variables in to the playbook ,It can be done with vars like this: 
 
 
----
+
 
 #sample firewall playbook with vars firewall-playbook.yaml
 ~~~~
@@ -1431,10 +1434,10 @@ ok: [ubuntu] => (item=[u'vim', u'nano', u'apache2'])
 
 PLAY RECAP ******************************************************************************************************************************
 ubuntu                     : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+~~~~
 
 
-
-#Loops with_file 
+Loops with_file 
 
 
 # sample loop with with_file loop-playbook2.yaml
@@ -1519,48 +1522,5 @@ Always gets executed in all cases.
 So if we compare the same with java, then it is similar to try, catch and finally block.
 
 
-Here, Block is similar to try block where you write the code to be executed and rescue is similar to catch block and always is similar to finally.
+	    
 
-~~~~		    
-			    
----
-
-# sample loop with with_file loop-playbook2.yaml
-
-- hosts: ubuntu
-  become: yes
-
-  tasks:
-   - name: show file(s) contents
-     debug: msg={{ item }}
-     with_file:
-      - myfile1.txt
-      - myfile2.txt 
-
-
-[user1@controller demo-var]$ cat myfile1.txt
-This is myfile1.txt, first line :-)
-[user1@controller demo-var]$
-[user1@controller demo-var]$ cat myfile2.txt
-This is myfile2.txt, first line :-0
-
-
-[user1@controller demo-var]$ ansible-playbook loop-playbook2.yaml
-
-PLAY [ubuntu] ***************************************************************************************************************************
-
-TASK [Gathering Facts] ******************************************************************************************************************
-ok: [ubuntu]
-
-TASK [show file(s) contents] ************************************************************************************************************
-ok: [ubuntu] => (item=This is myfile1.txt, first line :-)) => {
-    "msg": "This is myfile1.txt, first line :-)"
-}
-ok: [ubuntu] => (item=This is myfile2.txt, first line :-0) => {
-    "msg": "This is myfile2.txt, first line :-0"
-}
-
-PLAY RECAP ******************************************************************************************************************************
-ubuntu                     : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-
-~~~~

@@ -1244,7 +1244,14 @@ process ending the cat command
 cat /etc/passwd
 root:x:0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/bin:/sbin/nologin
-narad:x:500:500::/home/narad:/bin/bash
+narad:x:500:500::/home/narad:/bin/bash 
+~~~~ 
+
+# Check difference between 2 files 
+~~~~ 
+
+diff filename1 filename2
+
 ~~~~
 
 # rm – Deletes file forever 
@@ -1370,13 +1377,13 @@ paul@debian8:~/mydir2$ cd mysubdir2
 paul@debian8:~/mydir2/mysubdir2$
 ~~~~
 
-Search through Directory -  
+# Search through Directory -  
 
 ~~~~
 sudo du -a /dir/ | sort -n -r | head -n 20
 ~~~~
 
-rmdir – Deletes Directory 
+# rmdir – Deletes Directory 
 
 ~~~~
 • paul@debian8:~/mydir$ rmdir otherstuff 
@@ -1384,7 +1391,7 @@ rmdir – Deletes Directory
 • paul@debian8:~/mydir$ cd ..  
 ~~~~
 	
-rmdir –p – Deletes Directory 
+# rmdir –p – Deletes Directory 
 
 ~~~~	
 • paul@debian8:~$ rmdir -p test42/subdir 
@@ -1392,13 +1399,13 @@ rmdir –p – Deletes Directory
 • @debian8:~
 ~~~~
 
-mv directory directory - moves file to another location 
+# move file to another location 
 
 ~~~~
 • mv directory directory - moves file to another location 
 ~~~~
 
-cat - Check contents of file 
+# cat - Check contents of file 
 
 ~~~~
 • cat /etc/hosts
@@ -1407,13 +1414,13 @@ cat - Check contents of file
 ~~~~	 
 
 # Pattern searching 
-
+~~~~
 - grep -v pattern file.txt  
-
+~~~~
 Search for string and line number in file 
-
+~~~~
 - grep -inr 'string' filename/dir 
-
+~~~~
 #Find command 
 
 Find Files Using Name in Current Directory 
@@ -1425,13 +1432,13 @@ Find Files Using Name in Current Directory
 
 ~~~~
 
-Find Files Under Home Directory 
-
+# Find Files Under Home Directory 
+~~~~
 • Example:
 
 • # find /home -name tecmint.txt
 • /home/tecmint.txt!
-
+~~~~
 
 
 # Editing Files with Vi 
@@ -2756,7 +2763,7 @@ ping HOST
 ping -c COUNT HOST 
 
  
-
+~~~~
 Example: 
 
 ping -c 3 google.com 
@@ -2766,7 +2773,7 @@ ping -c 3 google.com
 $ ping -c 3 google.com 
 
  
-~~~~
+
 PING google.com (216.58.2.7) 56 bytes of data. 
 
 64 bytes from 216.58.2.7: icmp_seq=1 ttl=53 time=20.1 ms 
@@ -2868,9 +2875,13 @@ $ tracepath -n google.com
 ~~~~
 ... 
 
- 
+# Using curl to check firewall connectivity   
+	
+~~~~ 
+curl -k https://<url>:<port.no>
+~~~~
 
-#Netstat  
+# Netstat  
 
  
 

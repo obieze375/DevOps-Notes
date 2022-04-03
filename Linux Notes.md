@@ -1721,7 +1721,7 @@ The format of the /etc/group file:
 group_name:password:GID:account1,accountN 
 ~~~~
  
-
+~~~~
 groups [username] 
 
 groups root 
@@ -1730,7 +1730,7 @@ groups root
 
 root 
 
- 
+~~~~ 
 
 groupadd [ options ]group_name 
 
@@ -1927,24 +1927,24 @@ Account information for "grant"
 
 More useradd options  
 
- 
+~~~~
 
 -g GROUP Specify the default group. 
 
 -G GROUP1,GROUPN Additional groups. 
-
+~~~~
  
-
+~~~~
 useradd –c "Eddie Harris" –m –s 
-
+~~~~
  
-
+~~~~
 /bin/bash –g sales –G projectx 
 
 eharris 
-
+~~~~
  
-
+~~~~
 useradd 
 
 passwd eharris 
@@ -1956,31 +1956,32 @@ Enter new UNIX password:
 Retype new UNIX password: 
 
 passwd: password updated successfully 
-
+~~~~
  
 
 System or ApplicationAccounts 
 
+~~~~
 useradd –c "Apache Web Server 
-
+~~~~
  
-
+~~~~
 User" –d /opt/apache –r –s 
 
 /usr/sbin/nologin apache 
-
+~~~~
  
-
+~~~~
 tail -1 /etc/passwd 
-
+~~~~
  
-
+~~~~
 apache:x:999:999:Apache Web Server 
 
 User:/opt/apache:/usr/sbin/nologin 
-
+~~~~
  
-
+~~~~
 /etc/skel 
 
  
@@ -1996,7 +1997,7 @@ home directory.
 ● /etc/skel typically contains shell configuration 
 
 files. (.profile, .bashrc,etc) 
-
+~~~~
  
 
 More user adoptions II 
@@ -2014,13 +2015,13 @@ useradd –c "MySQL Server" –d
 ~~~~
 
  
-
+~~~~
 /opt/mysql -u 97 –s /usr/sbin/nologin 
 
 mysql 
-
+~~~~
  
-
+~~~~
 tail -1 /etc/passwd 
 
  
@@ -2028,7 +2029,7 @@ tail -1 /etc/passwd
 mysql:x:97:1003:MySQL Server: 
 
 /opt/mysql:/usr/sbin/nologin  
-
+~~~~
 
 # Delete user account:  
 
@@ -2962,7 +2963,8 @@ telnet> quit
 closed. 
 ~~~~
 
-~~~~
+~~~~ 
+
 [root@server1 ~]# nmcli con show  
 
  
@@ -3057,7 +3059,7 @@ To display Manual page for nmcli-examples - man nmcli-examples
 #Configure Static Route: 
 
 Configure static route on system.example.com for destination 10.1.1.0/24 via 192.168.99.30.  
-~~~~
+
  
 ~~~~
 • Route configuration must be persistent after reboot. 
@@ -3106,7 +3108,7 @@ vim /etc/sysconfig/network-scripts/route-system
 
  
 
- 
+~~~~ 
 
 #Command Action/Description   
 
@@ -3148,9 +3150,11 @@ not on 192.168.99.0/24 network and then test ssh connection from ipaserver.examp
 
  
 ~~~~
+
 Command Action/Description  
 
  
+~~~~ 
 
 Displaying firewall configurations - firewall-cmd --list-all   
 
@@ -3173,6 +3177,7 @@ To verify firewall configs after making changes - firewall-cmd --list-all
 	
 Packet Capture: 
 
+~~~~
 tcpdump 
 
  
@@ -3184,7 +3189,7 @@ tcpdump
 -v Verbose mode. Produce more output. 
 
 -vvv Even more verbose output. 
-
+~~~~
  
 
 $ sudo tcpdump  
@@ -3233,13 +3238,11 @@ tcpdump -w /temp/traffic.pcap -i eno1 -v host 9.9.9.9
 ~~~~
  
 
- 
-
- 
 ~~~~
 tcpdump -w /<dir>/traffic.pcap -i <interface> -v host <ip_addr_interface_is_sending_traffic_to> 
 ~~~~
-
+	
+	
 # Package Management
  
 
@@ -3595,3 +3598,95 @@ Check CPU, RAM, & Swap usage using top command
 Based on the results the best option is to identify and kill PIDS that is causing the issue and if that is not resolution reboot the node and free up swap space as it doesn't get released after RAM usage goes down 
 ~~~~
 
+# Git Commands 
+
+ 
+	
+To clone repository 
+
+~~~~	 
+
+git clone <url>  
+ 
+~~~~  
+
+Git add and commit together  
+
+
+~~~~
+
+git commit -am "comment"   
+
+~~~~
+
+Push changes to repo 
+
+~~~~	 
+
+git push 
+ 
+~~~~ 
+
+Checkout branch 
+
+~~~~	 
+
+git checkout –b <new branch name> 
+ 
+~~~~ 
+
+Discard changes in working directory
+
+~~~~ 
+
+git checkout -- <filename> 
+
+~~~~ 
+
+Check branches  
+
+~~~~ 
+
+git branch   
+
+~~~~ 
+
+Shows the status of the repository
+
+~~~~ 
+
+git status  
+
+~~~~ 
+
+Using Linux in git: 
+
+~~~~ 
+
+git rm  etc 
+
+~~~~ 
+
+Pull in changes from repo: 
+
+~~~~ 
+
+git pull  
+
+~~~~ 
+
+Revert commit:  
+
+~~~~
+
+git revert <git_id> 
+
+~~~~	 
+
+Delete branch: 
+
+~~~~	
+
+git branch -D <branch_name>  
+
+~~~~	

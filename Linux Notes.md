@@ -3476,9 +3476,10 @@ eze@ubuntu:~/.ssh$ ssh-copy-id -i ~/.ssh/key1.pub 192.168.142.136
 eze@ubuntu:~/.ssh$ ssh 192.168.142.136 
 ~~~~ 
 ~~~~	
-**** chmod 600 or 700 for ssh key to work **** 
+ chmod 600 or 700 for ssh key to work 
 ~~~~
-*** Copy SSH credentials cat id_rsa.pub | pbcopy ***
+
+Copy SSH credentials cat id_rsa.pub | pbcopy 
 
 
 # SSH File Config
@@ -3512,8 +3513,10 @@ Example:
 ssh ezeaka01@10.61.240.244
 ~~~~ 
  
- ~~~~
-***********************  How to create ssh config   *****************************************************************************   
+How to create ssh config 
+	
+~~~~
+      
   ssh 10.61.240.244 -v 
 	
   ssh ezeaka01@10.61.240.244 
@@ -3538,26 +3541,27 @@ Host *
   history
  
  
-***********************  How to create ssh config  *****************************************************************************  
+ 
 ~~~~
 
 #File Transfer
 
-
+~~~~
 
 /usr/bin/scp <app node name>:<filepath> <db node>:<filepath> 
 
-
+~~~~ 
+	
 # Troubleshooting 
  
 
-#Debugging: 
+Debugging: 
 
 ~~~~
 bash -v hello1.sh  
 ~~~~ 
 	
-#Can't ssh to an app Server:   
+Can't ssh to an app Server:   
 
 ~~~~	
 - Ping IP from localhost  
@@ -3590,99 +3594,4 @@ Check CPU, RAM, & Swap usage using top command
 ~~~~
 Based on the results the best option is to identify and kill PIDS that is causing the issue and if that is not resolution reboot the node and free up swap space as it doesn't get released after RAM usage goes down 
 ~~~~
-
-	
-# Git Commands 
-
- 
-	
-To clone repository 
-
-~~~~	 
-
-git clone <url>  
- 
-~~~~ 
-
-~~~~  
-	
-Git add and commit together  
-
-~~~~
-
-git commit -am "comment"   
-
-~~~~
-
-Push changes to repo 
-
-~~~~	 
-
-git push 
- 
-~~~~ 
-
-Checkout branch 
-
-~~~~	 
-
- git checkout –b <new branch name> 
- 
-~~~~ 
-
-Discard changes in working directory
-
-~~~~ 
-
-git checkout -- <filename> 
-
-~~~~ 
-
-Check branches  
-
-~~~~ 
-
-git branch   
-
-~~~~ 
-
-Shows the status of the repository
-
-~~~~ 
-
-git status  
-
-~~~~ 
-
-Using Linux in git: 
-
-~~~~ 
-
-git rm  etc 
-
-~~~~ 
-
-Pull in changes from repo: 
-
-~~~~ 
-
-git pull  
-
-~~~~ 
-
-Revert commit:  
-
-~~~~
-
-git revert <git_id> 
-
-~~~~	 
-
-Delete branch: 
-
-~~~~	
-
-git branch -D <branch_name>  
-
-~~~~	
 

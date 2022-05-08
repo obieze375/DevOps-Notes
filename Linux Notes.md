@@ -762,7 +762,15 @@ fi
 clear – Clear the terminal window 
 ~~~~
 • clear
-~~~~
+~~~~ 
+
+ echo $? - Check if previous bash command run was successful  
+ 
+ ~~~~  
+ 
+ • echo $? 
+ 
+ ~~~~
 
 reset – Resets the terminal 
 ~~~~
@@ -2384,7 +2392,7 @@ Bring Interface up / down
 
 #Bring Interface up  
 
-~~~~ 
+~~~~
 
 ifup eth0  
 
@@ -3700,4 +3708,38 @@ Delete branch:
 
 git branch -D <branch_name>  
 
-~~~~	
+~~~~	 
+	
+To checkout local changes not yet pushed to git: 
+
+~~~~
+	
+git checkout filename  
+	
+~~~~ 
+
+To checkout local changes not yet pushed to git on a different branch:  
+	
+~~~~
+
+	
+git checkout  --filename 
+	
+~~~~ 
+	
+	
+Dealing with conflicts when merging  
+	
+~~~~ 
+
+• Checkout source branch 
+• git merge to destination branch 
+• Any conflicts ctrl + f <<<<<< and remove old changes 
+• git status 
+• git add any changed file 
+• git commit + push 
+• In vscode select stage change option and save file
+	
+~~~~ 
+
+

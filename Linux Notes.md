@@ -2889,6 +2889,12 @@ $ tracepath -n google.com
 curl -k https://<url>:<port.no>
 ~~~~
 
+# Download files with wget 
+	
+~~~~ 
+wget --no-check-certificatw	
+~~~~
+	
 # Netstat  
 
  

@@ -1094,7 +1094,7 @@ Historic Information:
  sar -f /var/log/sa/sa15 -n DEV 
 ~~~~ 
 
- #Uptime: 
+# Uptime: 
 
 ~~~~
  w 
@@ -1245,7 +1245,103 @@ nano
 cat
 The Ctrl d key combination will send an EOF (End of File) to the running
 process ending the cat command 
+~~~~ 
+
+# File Compression 
+
+~~~~ 
+
+ gzip - 
+
+# -f option : 
+
+Sometimes a file cannot be compressed. Perhaps you are
+trying to compress a file called “myfile1” but there is already a file called
+“myfile1.gz”. In this instance, the “gzip” command won’t ordinarily work.
+
+To force the “gzip” command to do its stuff simply use -f option: 
+
+~~~~ 
+
+~~~~ 
+
+2.$ gzip -f myfile1.txt 
+
+The above command would end up with a file called “mydoc.txt.gz” and
+“mydoc.txt”. 
+
+~~~~ 
+
 ~~~~
+
+3.-L option : This option displays the gzip license. 
+
+$ gzip -L filename.gz 
+
+
+~~~~ 
+
+
+~~~~
+
+Unzip files
+
+1) Extract a tar.gz archive 
+
+The following command shell helps to extract tar files out a tar.gz archive.
+
+tar -xvzf bigfile.tar.gz
+
+x – Extract files
+v – Verbose, print the file names as they are extracted one by one
+z – The file is a “gzipped” file
+f – Use the following tar archive for the operation!
+
+~~~~ 
+
+
+~~~~
+
+2) Extract files to a specific directory or path 
+
+We can extract the files into a specified directory by using the parameter “-C”.
+
+tar -xvzf bigfile.tar.gz -C /folder/subfolder/
+The tar command doesn’t create any files or folders.
+
+
+~~~~ 
+
+
+~~~~
+
+Extract a single file 
+
+To extract a single file out of an archive just add the file name after the command like this
+tar -xz -f Music.tar.gz “./new/one.mp3”
+
+To extract more than one file out of an archive
+tar -xv -f Music.tar.gz “./new/two.mp3” “./new/three.mp3”
+
+~~~~
+
+
+~~~~
+
+Use unzip command to unzip a zip file
+The syntax is: 
+
+
+unzip {file.zip} 
+
+Use the following syntax if you want to extract/unzip to a particular destination directory: 
+
+
+unzip -d /dest/directory/ {file.zip}
+
+
+~~~~
+
 
 # Check contents of File 
 ~~~~
@@ -1346,18 +1442,21 @@ paul@debian7:~$
 ~~~~
 
 
-Running bash script 
-
+# Running bash script 
+~~~~
 paul@debian7~$
 ./ - to run bash script
+~~~~
 
-figlet
+# figlet 
 
-• Sudo apt-get install figlet
+~~~~
+• sudo apt-get install figlet
+~~~~ 
 
-mkdir – Makes new directory
+# mkdir – Makes new directory
 
-Creates Directory 
+# Creates Directory 
 
 ~~~~
 paul@debian8:~/mydir$ mkdir otherstuff 
@@ -1369,7 +1468,7 @@ total 8 drwxr-xr-x 2 paul paul 4096 Sep 17 00:08 otherstuff
 drwxr-xr-x 2 paul paul 4096 Sep 17 00:08 stuff
 ~~~~ 
 
-mkdir –p – Creates Parent with new directory 
+# mkdir –p – Creates Parent with new directory 
 
 ~~~~
 paul@debian8:~$ mkdir -p mydir2/mysubdir2/threedirsdeep 

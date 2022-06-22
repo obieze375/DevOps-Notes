@@ -764,7 +764,7 @@ clear – Clear the terminal window
 • clear
 ~~~~ 
 
- echo $? - Check if previous bash command run was successful  
+ echo $? - Check if previous bash command run was successful 0 means yes and 1 means no 
  
  ~~~~  
  
@@ -3845,6 +3845,13 @@ Dealing with conflicts when merging
 • git commit + push 
 • In vscode select stage change option and save file
 	
-~~~~ 
+~~~~  
+	
+Update Branch locally after deleting in Bitbucket/Github 
+~~~~	
+ -> git branch -D branch_name 
+	
+ -> git pull
+~~~~	
 
 

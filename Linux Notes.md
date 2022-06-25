@@ -1749,7 +1749,7 @@ set nu
 ~~~~
 Check for tabs: 
 ~~~~
-:set list 
+:set list - for yamls there should be no tabs or whitespaces between $ signs
 ~~~~ 
 
 Remove tab checker: 
@@ -1765,7 +1765,7 @@ Go to line:
 ~~~~
 
 
-#Groups & Users
+# Groups & Users
 
 
 ~~~~
@@ -2270,7 +2270,7 @@ hostnamectl set-hostname 'node01'
 ~~~~
  
 
-#List User Specific Open Files  
+# List User Specific Open Files  
 
  
 ~~~~
@@ -2389,7 +2389,7 @@ lsof -i TCP:1-1024
 ~~~~
  
 
-#Exclude User with ‘^’ Character  
+# Exclude User with ‘^’ Character  
 
  
 ~~~~
@@ -2427,7 +2427,7 @@ lsof -i TCP:1-1024
 
 ~~~~ 
 
-#Find Out who’s Looking What Files and Commands?  
+# Find Out who’s Looking What Files and Commands?  
 
 ~~~~ 
 
@@ -2684,7 +2684,7 @@ ffctcp6 0 0 ::1:631 :::* LISTEN
 ~~~~
  
 
-#netstat -tulpn  
+# netstat -tulpn  
 
 ~~~~ 
 
@@ -2855,7 +2855,7 @@ tcp 0 0 10.61.223.188:22 10.14.40.60:54034 ESTABLISHED -
 
 ~~~~
 
-#Netstat with grep  
+# Netstat with grep  
 
  
 ~~~~
@@ -2949,7 +2949,7 @@ PING 10.0.2.2 (10.0.2.2) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.103/0.192/0.272/0.070 ms 
 ~~~~ 
 
-#Traceroute  
+# Traceroute  
 
  
 ~~~~
@@ -2998,7 +2998,7 @@ curl -k https://<url>:<port.no>
 # Download files with wget 
 	
 ~~~~ 
-wget --no-check-certificatw	
+wget --no-check-certificate	
 ~~~~
 	
 # Netstat  

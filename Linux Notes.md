@@ -3734,7 +3734,26 @@ git clone <url>
  
 ~~~~  
 
-Git add and commit together  
+~~~~	
+git add -i 
+	
+	
+then you see:
+
+*** Commands ***
+  1: status       2: update       3: revert       4: add untracked
+  5: patch        6: diff         7: quit         8: help
+What now>
+hit 4 (add untracked), then you see
+
+What now> 4
+  1: file1
+  2: file2
+Add untracked>>
+	
+~~~~	
+	
+Git add and commit together - For files already present in git 
 
 
 ~~~~
@@ -3831,6 +3850,38 @@ To checkout local changes not yet pushed to git on a different branch:
 git checkout  --filename 
 	
 ~~~~ 
+	
+Checkout file that is in source control 	
+
+~~~~	
+git checkout origin/<branch_name> -- filename	
+~~~~ 
+	
+	
+	
+	
+Remove Files From Git Commit
+	
+~~~~
+
+In order to remove some files from a Git commit, use the “git reset” command with the “–soft” option and specify the commit before HEAD.
+
+$ git reset --soft HEAD~1 
+	
+When running this command, you will be presented with the files from the most recent commit (HEAD) and you will be able to commit them.
+
+Now that your files are in the staging area, you can remove them (or unstage them) using the “git reset” command again.
+
+$ git reset HEAD <file>
+	
+~~~~ 
+
+
+
+	
+	
+	
+~~~~
 	
 	
 Dealing with conflicts when merging  

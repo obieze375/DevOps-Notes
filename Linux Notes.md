@@ -747,9 +747,9 @@ echo All done
 From <https://ryanstutorials.net/bash-scripting-tutorial/bash-loops.php#while>   
 
 ~~~~
-if [[ `whoami` != root && `whoami` != mqm ]]
+if [[ `whoami` != root && `whoami` != obi ]]
 then
-   print "Script must be run as root or mqm user."
+   print "Script must be run as root or obi user."
    exit 1
 fi
 ~~~~
@@ -3895,7 +3895,7 @@ $ git reset HEAD <file>
 
 	
 	
-Dealing with conflicts when merging  
+# Dealing with conflicts when merging  
 	
 ~~~~ 
 
@@ -3916,4 +3916,11 @@ Update Branch locally after deleting in Bitbucket/Github
  -> git pull
 ~~~~	
 
+** LVM ** 
 
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/master/lvm.jpg?sanitize=true&raw=true" / 
+     
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/master/lvm2.png?sanitize=true&raw=true" / 
+	
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/master/lvm3.png?sanitize=true&raw=true" /
+	

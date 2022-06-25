@@ -3734,6 +3734,9 @@ git clone <url>
  
 ~~~~  
 
+	
+1) To add untracked Files - Remember to save the file 1st
+
 ~~~~	
 git add -i 
 	
@@ -3752,6 +3755,14 @@ What now> 4
 Add untracked>>
 	
 ~~~~	
+
+2) Commit the file 
+
+~~~~
+
+ git commit -m "comment"
+
+~~~~
 	
 Git add and commit together - For files already present in git 
 
@@ -3762,7 +3773,7 @@ git commit -am "comment"
 
 ~~~~
 
-Push changes to repo 
+3) Push changes to repo 
 
 ~~~~	 
 
@@ -3881,7 +3892,7 @@ $ git reset HEAD <file>
 	
 	
 	
-~~~~
+
 	
 	
 Dealing with conflicts when merging  

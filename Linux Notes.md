@@ -1245,7 +1245,9 @@ nano
 cat
 The Ctrl d key combination will send an EOF (End of File) to the running
 process ending the cat command 
-~~~~ 
+~~~~  
+
+
 
 # File Compression 
 
@@ -1688,6 +1690,11 @@ Vi - Searching
 / Start a forward search.  
 		
 ? Start a reverse search.
+~~~~ 
+
+Vi - Recover swap file  
+~~~~		
+vim -r 
 ~~~~ 
 
 

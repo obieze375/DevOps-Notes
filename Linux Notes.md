@@ -3745,6 +3745,11 @@ git clone <url>
 1) To add untracked Files - Remember to save the file 1st
 
 ~~~~	
+
+git add <file_name> 
+	
+git add <dir>/* a etc 
+	
 git add -i 
 	
 	

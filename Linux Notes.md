@@ -3928,11 +3928,8 @@ Update Branch locally after deleting in Bitbucket/Github
  -> git pull
 ~~~~	
 
-** LVM ** 
+# LVM: Logic Volume Management 
 
-<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/lvm.jpg?sanitize=true&raw=true" / 
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/lvm.jpg?sanitize=true&raw=true"/>
      
-<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/lvm2.png?sanitize=true&raw=true" / 
-	
-<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/lvm3.png?sanitize=true&raw=true" /
-	
+

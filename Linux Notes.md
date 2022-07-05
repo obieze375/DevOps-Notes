@@ -71,10 +71,13 @@ Manages the entire resources of the system, presenting them to you and every oth
 as a coherent system. Provides service to user applications such as device management, 
 process scheduling, etc. 
 Example functions performed by the kernel are: 
+
 • Managing the machine's memory and allocating it to each process. 
+
 • Scheduling the work done by the CPU so that the work of each user is carried out as efficiently as is possible. 
-• Accomplishing the transfer of data from one part of the machine to another 
-• Interpreting and executing instructions from the shell 
+
+• Accomplishing the transfer of data from one part of the machine to another interpreting and executing instructions from the shell 
+
 • Enforcing file access permissions  
 
 You do not need to know anything about the kernel in order to use a UNIX system. These 
@@ -85,11 +88,14 @@ details are provided for your information only.
 Whenever you login to a Unix system you are placed in a shell program. The shell's 
 prompt is usually visible at the cursor's position on your screen. To get your work done, 
 you enter commands at this prompt. 
+
 The shell is a command interpreter; it takes each command and passes it to the operating 
 system kernel to be acted upon. It then displays the results of this operation on your 
 screen. 
+
 Several shells are usually available on any UNIX system, each with its own strengths and 
 weaknesses. 
+
 Different users may use different shells. Initially, your system adminstrator will supply a 
 default shell, which can be overridden or changed. The most commonly available shells 
 are:  
@@ -110,12 +116,18 @@ scripts" are used to accomplish a series of tasks.
 # Utilities
 
 UNIX provides several hundred utility programs, often referred to as commands. 
-Accomplish universal functions 
+Accomplish universal functions  
+
 • editing 
+
 • file maintenance 
+
 • printing 
+
 • sorting 
+
 • programming support 
+
 • online info etc.  
 
 Modular: single functions can be grouped to perform more complex tasks
@@ -135,15 +147,19 @@ graphical user interface (GUI).
 
 An operating system performs these services for applications: 
 
-• In a multitasking operating system where multiple programs can be running at the same time, 
-• the operating system determines which applications should run in what order and how much time should be allowed for each application before giving another application a turn.
+• In a multitasking operating system where multiple programs can be running at the same time,  the operating system determines which applications should run in what order and how much time should be allowed for each application before giving another application a turn.
+
 • It manages the sharing of internal memory among multiple applications.
-• It handles input and output to and from attached hardware devices, such as hard disks, printers, and dial-up ports. 
+
+• It handles input and output to and from attached hardware devices, such as hard disks, printers, and dial-up ports.
+
 • It sends messages to each application or interactive user (or to a system operator) about the status of operation and any errors that may have occurred.
+
 • It can offload the management of what are called batch jobs (for example, printing) so that the initiating application is freed from this work.
+
 • On computers that can provide parallel processing, an operating system can manage how to divide the program so that it runs on more than one processor at a time.
 
-Various Parts of an Operating System
+# Various Parts of an Operating System
 
 UNIX and 'UNIX-like' operating systems (such as Linux) consist of a kernel and some system programs. 
 There are also some application programs for doing work. The kernel is the heart of the operating system. 
@@ -170,7 +186,7 @@ An operating system can also contain compilers and their corresponding libraries
 in particular under Linux), although not all programming languages need be part of the operating 
 system. Documentation, and sometimes even games, can also be part of it. 
 
-Important parts of the kernel
+# Important parts of the kernel
 
 The Linux kernel consists of several important parts: 
 

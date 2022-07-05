@@ -1,4 +1,243 @@
 
+# Background Knowledge to OS's 
+
+# History of Unix/Linux
+
+1965 Bell Laboratories joins with MIT and General Electric in the development effort for the new
+operating system, Multics, which would provide multi-user, multi-processor, and multi-level
+(hierarchical) file system, among its many forward-looking features.
+
+1969 AT&T was unhappy with the progress and drops out of the Multics project. Some of the Bell Labs 
+programmers who had worked on this project, Ken Thompson, Dennis Ritchie, Rudd Canaday, and 
+Doug McIlroy designed and implemented the first version of the Unix File System on a PDP-7 along with 
+a few utilities. It was given the name UNIX by Brian Kernighan as a pun on Multics.
+
+1971 The system now runs on a PDP-11, with 16Kbytes of memory, including 8Kbytes for user programs 
+and a 512Kbyte disk.
+
+Its first real use is as a text processing tool for the patent department at Bell Labs. That utilization justified 
+further research and development by the programming group. UNIX caught on among programmers 
+because it was designed with these features:
+
+• programmers environment
+• simple user interface
+• simple utilities that can be combined to perform powerful functions
+• hierarchical file system
+• simple interface to devices consistent with file format
+• multi-user, multi-process system
+• architecture independent and transparent to the user.
+
+1973 Unix is re-written mostly in C, a new language developed by Dennis Ritchie. Being written in this 
+high-level language greatly decreased the effort needed to port it to new machines.
+
+1974 Thompson and Ritchie publish a paper in the Communications of the ACM describing the new Unix 
+OS. This generates enthusiasm in the Academic community which sees a potentially great teaching tool 
+for studying programming systems development. Since AT&T is prevented from marketing the product 
+due to the 1956 Consent Decree they license it to Universities for educational purposes and to commercial 
+entities.
+
+1977 There are now about 500 Unix sites world-wide.
+
+1980 BSD 4.1 (Berkeley Software Development)
+
+1983 SunOS, BSD 4.2, SysV
+
+1984 There are now about 100,000 Unix sites running on many different hardware platforms, of vastly 
+different capabilities.
+
+1988 AT&T and Sun Microsystems jointly develop System V Release 4 (SVR4). This would later be 
+developed into UnixWare and Solaris 2.
+
+1993 Novell buys UNIX from AT&T
+
+1994 Novell gives the name "UNIX" to X/OPEN
+
+1995 Santa Cruz Operations buys UnixWare from Novell. Santa Cruz Operations and Hewlett-Packard 
+announce that they will jointly develop a 64-bit version of Unix.
+
+1996 International Data Corporation forecasts that in 1997 there will be 3 million Unix systems shipped 
+world-wide.
+
+
+# Inside Linux
+
+# Kernel
+
+The core of the UNIX system. Loaded at system start up (boot). Memory-resident control 
+program. 
+Manages the entire resources of the system, presenting them to you and every other user 
+as a coherent system. Provides service to user applications such as device management, 
+process scheduling, etc. 
+Example functions performed by the kernel are: 
+• Managing the machine's memory and allocating it to each process. 
+• Scheduling the work done by the CPU so that the work of each user is carried out as efficiently as is possible. 
+• Accomplishing the transfer of data from one part of the machine to another 
+• Interpreting and executing instructions from the shell 
+• Enforcing file access permissions  
+
+You do not need to know anything about the kernel in order to use a UNIX system. These 
+details are provided for your information only. 
+
+# Shell 
+
+Whenever you login to a Unix system you are placed in a shell program. The shell's 
+prompt is usually visible at the cursor's position on your screen. To get your work done, 
+you enter commands at this prompt. 
+The shell is a command interpreter; it takes each command and passes it to the operating 
+system kernel to be acted upon. It then displays the results of this operation on your 
+screen. 
+Several shells are usually available on any UNIX system, each with its own strengths and 
+weaknesses. 
+Different users may use different shells. Initially, your system adminstrator will supply a 
+default shell, which can be overridden or changed. The most commonly available shells 
+are: 
+• Bourne shell (sh) 
+• C shell (csh) 
+• Korn shell (ksh) 
+• TC Shell (tcsh) 
+• Bourne Again Shell (bash) 
+
+Each shell also includes its own programming language. Command files, called "shell 
+scripts" are used to accomplish a series of tasks. 
+
+# Utilities
+
+UNIX provides several hundred utility programs, often referred to as commands. 
+Accomplish universal functions 
+• editing 
+• file maintenance 
+• printing 
+• sorting 
+• programming support 
+• online info etc.  
+
+Modular: single functions can be grouped to perform more complex tasks
+
+# Operating system
+
+An operating system or OS is a software program that enables the computer hardware to communicate 
+and operate with the computer software. Without a computer operating system, a computer and software 
+programs would be useless. 
+
+An operating system (sometimes abbreviated as "OS") is the program that, after being initially loaded into 
+the computer by a boot program, manages all the other programs in a computer. The other programs are 
+called applications or application programs. The application programs make use of the operating system 
+by making requests for services through a defined application program interface (API). In addition, users 
+can interact directly with the operating system through a user interface such as a command language or a 
+graphical user interface (GUI).
+
+An operating system performs these services for applications: 
+
+• In a multitasking operating system where multiple programs can be running at the same time, 
+• the operating system determines which applications should run in what order and how much time should be allowed for each application before giving another application a turn.
+• It manages the sharing of internal memory among multiple applications.
+• It handles input and output to and from attached hardware devices, such as hard disks, printers, and dial-up ports. 
+• It sends messages to each application or interactive user (or to a system operator) about the status of operation and any errors that may have occurred.
+• It can offload the management of what are called batch jobs (for example, printing) so that the initiating application is freed from this work.
+• On computers that can provide parallel processing, an operating system can manage how to divide the program so that it runs on more than one processor at a time.
+
+Various Parts of an Operating System
+
+UNIX and 'UNIX-like' operating systems (such as Linux) consist of a kernel and some system programs. 
+There are also some application programs for doing work. The kernel is the heart of the operating system. 
+In fact, it is often mistakenly considered to be the operating system itself, but it is not. An operating 
+system provides many more services than a plain kernel.
+
+It keeps track of files on the disk, starts programs and runs them concurrently, assigns memory and other 
+resources to various processes, receives packets from and sends packets to the network, and so on. The 
+kernel does very little by itself, but it provides tools with which all services can be built. It also prevents 
+anyone from accessing the hardware directly, forcing everyone to use the tools it provides. This way the 
+kernel provides some protection for users from each other. The tools provided by the kernel are used via 
+system calls. 
+
+
+The system programs use the tools provided by the kernel to implement the various services required 
+from an operating system. System programs, and all other programs, run `on top of the kernel', in what is 
+called the user mode. The difference between system and application programs is one of intent: 
+applications are intended for getting useful things done (or for playing, if it happens to be a game), 
+whereas system programs are needed to get the system working. A word processor is an application; 
+mount is a system program. The difference is often somewhat blurry, however, and is important only to 
+compulsive categorizers.
+
+An operating system can also contain compilers and their corresponding libraries (GCC and the C library 
+in particular under Linux), although not all programming languages need be part of the operating 
+system. Documentation, and sometimes even games, can also be part of it. 
+
+Important parts of the kernel
+
+The Linux kernel consists of several important parts: 
+
+- Process management
+
+- Memory management
+
+- Hardware device drivers
+
+- Filesystem drivers
+
+- Network management
+
+- Various other bits and pieces
+
+The following figure shows some of the more important parts of the Linux kernel
+
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/kernel.png?sanitize=true&raw=true"/>
+
+Probably the most important parts of the kernel (nothing else works without them) are memory 
+management and process management. Memory management takes care of assigning memory areas and 
+swap space areas to processes, parts of the kernel, and for the buffer cache. Process management creates 
+processes, and implements multitasking by switching the active process on the processor.
+
+At the lowest level, the kernel contains a hardware device driver for each kind of hardware it supports. 
+Since the world is full of different kinds of hardware, the number of hardware device drivers is large. 
+There are often many otherwise similar pieces of hardware that differ in how they are controlled by 
+software. The similarities make it possible to have general classes of drivers that support similar 
+operations; each member of the class has the same interface to the rest of the kernel but differs in what it 
+needs to do to implement them. For example, all disk drivers look alike to the rest of the kernel, i.e., they 
+all have operations like `initialize the drive', `read sector N', and `write sector N'.
+
+# Examples of computer operating systems
+
+• Redhat – Very popular Linux operating system from Redhat 
+
+• Microsoft Windows - PC and IBM compatible operating system. Microsoft Windows is the most commonly found and used operating system in PCs
+
+• Apple MacOS - Apple computer operating system. The only Apple computer operating system.
+
+• Ubuntu Linux - A popular variant of Linux used with PC and IBM compatible computers.
+
+• Google Android - operating system used with Android compatible phones.
+
+• iOS - Operating system used with the Apple iPhone
+
+# Hard Disk
+
+A hard disk is part of a unit, often called a "disk drive," "hard drive," or "hard disk drive," that stores and
+provides relatively quick access to large amounts of data on an electromagnetically charged surface or set
+of surfaces. Today's computers typically come with a hard disk that contains several billion bytes
+(gigabytes) of storage.
+
+A hard disk is really a set of stacked "disks," each of which, like phonograph records, has data recorded
+electromagnetically in concentric circles or "tracks" on the disk. A "head" (something like a phonograph
+arm but in a relatively fixed position) records (writes) or reads the information on the tracks. Two heads,
+one on each side of a disk, read or write the data as the disk spins. Each read or write operation requires
+that data be located, which is an operation called a "seek." (Data already in a disk cache, however, will be
+located more quickly.)
+
+A hard disk/drive unit comes with a set rotation speed varying from 4500 to 7200 rpm. Disk access time is
+measured in milliseconds. Although the physical location can be identified with cylinder, track, and
+sector locations, these are actually mapped to a logical block address (LBA) that works with the larger
+address range on today's hard disks. 
+
+# Disk Cache
+
+A disk cache is a mechanism for improving the time it takes to read from or write to a hard disk. Today,
+the disk cache is usually included as part of the hard disk. A disk cache can also be a specified portion of
+random access memory (RAM).
+The disk cache holds data that has recently been read and, in some cases, adjacent data areas that are
+likely to be accessed next. Write caching is also provided with some disk caches. 
+
+
 
 # Git Aliases
 ~~~~
@@ -498,15 +737,17 @@ From <https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php>
 	• statement1 || statement2  # or operator
 
 	• -a               # and operator inside a test conditional expression
--o                     # or operator inside a test conditional expression 
+        -o                 # or operator inside a test conditional expression 
 
 
 
 # Process Handling
 
 
-# To suspend a job, type CTRL+Z while it is running. You can also suspend a job with CTRL+Y.
+# To suspend a job, type CTRL+Z while it is running. You can also suspend a job with CTRL+Y. 
+
 # This is slightly different from CTRL+Z in that the process is only stopped when it attempts to read input from terminal.
+
 # Of course, to interrupt a job, type CTRL+C.
 
 	• myCommand &  # runs job in the background and prompts back the shell
@@ -3372,8 +3613,519 @@ tcpdump -w /temp/traffic.pcap -i eno1 -v host 9.9.9.9
 ~~~~
 tcpdump -w /<dir>/traffic.pcap -i <interface> -v host <ip_addr_interface_is_sending_traffic_to> 
 ~~~~
+
 	
 	
+# Firewall Management
+
+# IP Tables Method 
+	
+# Start/Stop/Restart Iptables Firewall
+
+~~~~
+------------ On Cent/RHEL 7 and Fedora 22+ ------------
+
+	• yum install iptables-services
+
+	• systemctl status iptables 
+
+	• systemctl start iptables
+
+	• systemctl stop iptables
+	
+	• systemctl restart iptables
+~~~~
+
+
+# On SysVinit based Linux Distributions
+
+~~~~
+------------ On Cent/RHEL 6/5 and Fedora ------------
+
+	• -/etc/init.d/iptables start
+
+	• /etc/init.d/iptables stop
+	• /etc/init.d/iptables restart
+~~~~
+	
+Check all IPtables Firewall Rules 
+	
+~~~~
+iptables -L -n -v 
+~~~~
+	
+# Block Specific IP Address in IPtables Firewall 
+~~~~
+iptables -A INPUT -s xxx.xxx.xxx.xxx -j DROP
+
+iptables -A INPUT -p tcp -s xxx.xxx.xxx.xxx -j DROP 
+~~~~
+	
+# Unblock IP Address in IPtables Firewall 
+	
+~~~~
+iptables -D INPUT -s xxx.xxx.xxx.xxx -j DROP 
+~~~~	
+	
+# Block Specific Port on IPtables Firewall 
+
+To block outgoing connections on a specific port use: 
+	
+~~~~
+iptables -A OUTPUT -p tcp --dport xxx -j DROP 
+~~~~
+	
+To allow incoming connections use: 
+	
+~~~~
+iptables -A INPUT -p tcp --dport xxx -j ACCEPT
+~~~~
+	
+In both examples change "xxx" with the actual port you wish to allow. If
+you want to block UDP traffic instead of TCP, simply change "tcp" with
+"udp" in the above iptables rule. 
+
+Allow Multiple Ports on IPtables using
+Multiport 
+
+You can allow multiple ports at once, by using multiport, below you can
+find such rule for both incoming and outgoing connections:
+	
+~~~~
+iptables -A INPUT -p tcp -m multiport --dports 22,80,443 -j ACCEPT
+
+iptables -A OUTPUT -p tcp -m multiport --sports 22,80,443 -j ACCEPT
+~~~~
+	
+Allow Specific Network Range on Particular Port on IPtables
+You may want to limit certain connections on specific port to a given
+network. Let’s say you want to allow outgoing connections on port 22
+to network 192.168.100.0/24.
+~~~~
+iptables -A OUTPUT -p tcp -d 192.168.100.0/24 --dport 22 -j ACCEPT
+~~~~
+
+# Block Facebook on IPtables Firewall 
+	
+~~~~
+host facebook.com
+facebook.com has address 66.220.156.68
+
+whois 66.220.156.68 | grep CIDR
+CIDR: 66.220.144.0/20
+~~~~
+	
+You can then block that Facebook network with:
+
+~~~~
+iptables -A OUTPUT -p tcp -d 66.220.144.0/20 -j DROP
+~~~~
+	
+# Setup Port Forwarding in Iptables 
+	
+~~~~
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 25 -j REDIRECT -- to-port 2525 
+~~~~
+	
+# Block Network Flood on Apache Port with Iptables
+	
+~~~~
+iptables -A INPUT -p tcp --dport 80 -m limit --limit 100/minute --limitburst 200 -j ACCEPT 
+~~~~
+	
+# Block Incoming Ping Requests on IPtables
+
+~~~~
+iptables -A INPUT -p icmp -i eth0 -j DROP 
+~~~~
+	
+# Block Incoming Ping Requests on IPtables
+~~~~
+iptables -A INPUT -p icmp -i eth0 -j DROP
+~~~~
+
+# Allow loopback Access
+
+Loopback access (access from 127.0.0.1) is important and you should
+always leave it active:
+	
+~~~~
+iptables -A INPUT -i lo -j ACCEPT
+
+iptables -A OUTPUT -o lo -j ACCEPT 
+~~~~
+	
+# Keep a Log of Dropped Network Packets on Iptables 
+
+If you want to log the dropped packets on network interface eth0, you
+can use the following command:
+~~~~
+iptables -A INPUT -i eth0 -j LOG --log-prefix "IPtables dropped packets:"
+~~~~	
+
+You can change the value after "--log-prefix" with something by your
+choice. The messages are logged in /var/log/messages and you can
+search for them with:
+~~~~
+grep "IPtables dropped packets:" /var/log/messages 
+~~~~
+	
+# Block Access to Specific MAC Address on IPtables
+
+You can block access to your system from specific MAC address by
+using:
+	
+~~~~
+iptables -A INPUT -m mac --mac-source 00:00:00:00:00:00 -j DROP 
+	
+	
+Of course, you will need to change "00:00:00:00:00:00" with the actual
+MAC address that you want to block.
+~~~~
+	
+# Limit the Number of Concurrent Connections per IP Address 
+
+• If you don’t want to have too many concurrent connection established
+from single IP address on given port you can use the command below:
+~~~~
+iptables -A INPUT -p tcp --syn --dport 22 -m connlimit --connlimit-above 3 -j REJECT 
+~~~~
+	
+The above command allows no more than 3 connections per client. Of
+course, you can change the port number to match different service. Also
+the --connlimit-above should be changed to match your requirement.
+
+# Search within IPtables Rule 
+
+Once you have defined your iptables rules, you will want to search from time
+to time and may need to alter them. An easy way to search within your rules
+is to use: 
+	
+~~~~
+iptables -L $table -v -n | grep $string 
+~~~~
+	
+In the above example, you will need to change $table with the actual table
+within which you wish to search and $string with the actual string for which
+you are looking for.
+Here is an example:
+~~~~
+iptables -L INPUT -v -n | grep 192.168.0.100 
+~~~~ 
+	
+# Define New IPTables Chain 
+
+With iptables, you can define your own chain and store custom rules in
+it. To define a chain, use:
+	
+~~~~
+iptables -N custom-filter 
+~~~~	
+	
+Now you can check if your new filter is there:
+~~~~
+iptables -L 
+~~~~
+	
+# Flush IPtables Firewall Chains or Rules
+	
+If you want to flush your firewall chains, you can use:
+~~~~
+iptables -F 
+~~~~	
+
+You can flush chains from specific table with:
+~~~~
+iptables -t nat -F
+~~~~
+	
+You can change "nat" with the actual table which chains you wish to flush.
+Save IPtables Rules to a File
+If you want to save your firewall rules, you can use the iptables-save
+command. You can use the following to save and store your rules in a
+file:
+~~~~
+	• iptables-save > ~/iptables.rules
+~~~~
+	
+It’s up to you where will you store the file and how you will name it.
+
+Restore IPtables Rules from a File
+
+If you want to restore a list of iptables rules, you can use iptablesrestore. The command looks like this:
+
+iptables-restore < ~/iptables.rules
+Of course the path to your rules file might be different.
+Setup IPtables Rules for PCI Compliance
+				   
+Some system administrators might be required to configure their servers to be PCI compiliant. There
+are many requirements by different PCI compliance vendors, but there are few common ones.
+In many of the cases, you will need to have more than one IP address. You will need to apply the
+rules below for the site’s IP address. 
+
+Be extra careful when using the rules below and use them onlyif you are sure what you are doing:
+~~~~
+iptables -I INPUT -d SITE -p tcp -m multiport --dports 21,25,110,143,465,587,993,995 -j DROP 
+~~~~
+				   
+If you use cPanel or similar control panel, you may need to block it’s’ ports as well. Here is an example:
+				   
+~~~~
+iptables -I in_sg -d DEDI_IP -p tcp -m multiport --dports 2082,2083,2095,2096,2525,2086,2087 -j DROP
+~~~~
+				   
+Allow Established and Related Connections 
+
+As the network traffic is separate on incoming and outgoing, you will
+want to allow established and related incoming traffic. For incoming
+connections do it with:
+				   
+~~~~
+iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+~~~~
+For outgoing use:
+				   
+~~~~
+iptables -A OUTPUT -m conntrack --ctstate ESTABLISHED -j ACCEPT 
+~~~~
+				   
+# Drop Invalid Packets in Iptables 
+
+It’s possible to have some network packets marked as invalid. Some
+people may prefer to log those packages, but others prefer to drop
+them. To drop invalid the packets, you can use:
+~~~~
+iptables -A INPUT -m conntrack --ctstate INVALID -j DROP 
+~~~~
+# Block Connection on Network Interface
+				   
+• Some systems may have more than one network interface. You can
+limit the access to that network interface or block connections from
+certain IP address.
+				   
+For example:
+~~~~
+iptables -A INPUT -i eth0 -s xxx.xxx.xxx.xxx -j DROP
+
+Change “xxx.xxx.xxx.xxx” with the actual IP address (or network) that
+you wish to block.
+~~~~
+				   
+# Disable Outgoing Mails through IPTables 
+
+If your system should not be sending any emails, you can block
+outgoing ports on SMTP ports. For example you can use this:
+				   
+~~~~
+iptables -A OUTPUT -p tcp --dports 25,465,587 -j REJECT
+~~~~	
+				  
+# UFW Method 
+				   
+# Enable UFW
+~~~~				   
+sudo ufw enable
+~~~~
+				   
+# Using IPv6 with UFW (Optional) 
+
+sudo nano /etc/default/ufw
+
+Then make sure the value of IPV6 is yes. It should look like this:
+~~~~
+/etc/default/ufw excerpt
+IPV6=yes
+~~~~
+				  
+Save and close the file. Now, when UFW is enabled, it will be configured to write
+both IPv4 and IPv6 firewall rules. However, before enabling UFW, we will want to
+ensure that your firewall is configured to allow you to connect via SSH. Let’s start
+with setting the default policies.
+
+Setting Up Default Policies
+				   
+• If you’re just getting started with your firewall, the first rules to define are your default policies.
+These rules control how to handle traffic that does not explicitly match any other rules. By
+default, UFW is set to deny all incoming connections and allow all outgoing connections. This
+means anyone trying to reach your server would not be able to connect, while any application
+within the server would be able to reach the outside world.
+				   
+• Let’s set your UFW rules back to the defaults so we can be sure that you’ll be able to follow along
+with this tutorial. To set the defaults used by UFW, use these commands:
+~~~~
+sudo ufw default deny incoming
+				   
+sudo ufw default allow outgoing
+~~~~
+				   
+These commands set the defaults to deny incoming and allow outgoing connections. These
+firewall defaults alone might suffice for a personal computer, but servers typically need to
+respond to incoming requests from outside users. We’ll look into that next.
+
+# Allowing SSH Connections 
+				   
+~~~~
+sudo ufw allow ssh
+
+sudo ufw allow 22
+~~~~
+				   
+				   
+If you configured your SSH daemon to use a different port, you will
+have to specify the appropriate port. For example, if your SSH server is
+listening on port 2222, you can use this command to allow connections
+on that port:
+~~~~
+				   
+sudo ufw allow 2222
+				   
+~~~~
+				   
+# Allowing Other Connections 
+
+• Specific Port Ranges
+• You can specify port ranges with UFW. Some applications use multiple
+ports, instead of a single port.
+
+• For example, to allow X11 connections, which use ports 6000-6007, use
+these commands:
+~~~~
+				   
+sudo ufw allow 6000:6007/tcp
+				   
+sudo ufw allow 6000:6007/udp
+~~~~
+				   
+Allowing specific addresses and ports 
+~~~~
+sudo ufw allow from 203.0.113.4
+~~~~
+Allow specific ip addresses at ports:  
+				   
+~~~~
+sudo ufw allow from 203.0.113.4 to any port 22
+~~~~
+				   
+Allowing Subnets using CIDR notation to specify a
+netmask.
+
+Example:
+203.0.113.1 to 203.0.113.254 
+				   
+~~~~
+sudo ufw allow from 203.0.113.0/24
+~~~~ 
+				   
+~~~~				   
+sudo ufw allow from 203.0.113.0/24 to any port 22
+~~~~
+Connections to a Specific Network Interface 
+
+Use ip addr or ifconfig to obtain network interface
+				   
+~~~~
+sudo ufw allow in on eth0 to any port 80
+
+sudo ufw allow in on eth1 to any port 3306
+~~~~
+				   
+# Denying Connections
+				   
+For example, to deny HTTP connections, you could use this command:
+				   
+~~~~
+sudo ufw deny http
+~~~~
+				   
+				   
+Or if you want to deny all connections from 203.0.113.4 you could use
+this command:
+~~~~
+sudo ufw deny from 203.0.113.4
+~~~~
+				   
+# Deleting Rules 
+
+By Rule Number:
+~~~~
+sudo ufw status numbered
+~~~~
+				   
+Numbered Output:
+Status: active
+Action
+From
+To
+[ 1] 22
+[ 2] 80
+ALLOW IN
+ALLOW IN
+15.15.15.0/24
+Anywhere
+
+If we decide that we want to delete rule 2, the one that allows port 80 (HTTP) connections,
+we can specify it in a UFW delete command like this:
+				   
+~~~~
+sudo ufw delete 2
+~~~~
+				   
+Deleting by Actual Rule 
+
+For example to remove the allow http rule, you could write it like this:
+sudo ufw delete allow http
+
+You could also specify the rule by allow 80, instead of by service name:
+				   
+~~~~
+sudo ufw delete allow 80
+~~~~
+				   
+This method will delete both IPv4 and IPv6 rules, if they exist.
+
+Checking UFW Status
+At any time, you can check the status of UFW with this command:
+				   
+~~~~
+sudo ufw status verbose
+~~~~
+				   
+If UFW is disabled, which it is by default, you’ll see something like this:
+
+Output
+~~~~				  
+Status: inactive
+Checking UFW Status Continued
+• Output
+• Status: active
+• Logging: on (low)
+• Default: deny (incoming), allow (outgoing), disabled (routed)
+• New profiles: skip
+Action
+From
+• To
+• --
+• 22/tcp ALLOW IN Anywhere
+• Use the status command if you want to check how UFW has configured the firewall.
+Disabling or Resetting UFW (optional)
+~~~~
+If you decide you don’t want to use UFW, you can disable it with this command: 
+				   
+~~~~
+sudo ufw disable
+~~~~
+• Any rules that you created with UFW will no longer be active. You can
+always run sudo ufw enable if you need to activate it later.
+• If you already have UFW rules configured but you decide that you want to
+start over, you can use the reset command:
+• sudo ufw reset
+
+Alternative way to allow and deny connections 
+~~~~
+ufw allow from 0.0.0.0 to any port 9090 proto tcp/udp 
+				   
+ufw deny from 0.0.0.0 to any port 9090 proto tcp/udp
+~~~~
 # Package Management
  
 
@@ -3411,6 +4163,7 @@ Update/Upgrade packages
 
 	• yum update -y 
 ~~~~
+
 Get Details  
 ~~~~
 	• rpm -qi <package_name> 
@@ -4180,3 +4933,5 @@ root
 ~~~~
 
 The last line of the output is the user name returned by the whoami command. If sudo is configured correctly this value will be root. You have successfully configured a user with sudo access. You can now log in to this user account and use sudo to run commands as if you were logged in to the account of the root user. 
+
+	

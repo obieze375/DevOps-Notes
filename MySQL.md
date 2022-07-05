@@ -2,7 +2,7 @@ Obtained from https://devhints.io/mysql
 
 # Mysql DB Structure 
 
-<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/Mysql-mongoDB-structure.png?sanitize=true&raw=true"/>
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/mysql_db_structure.png?sanitize=true&raw=true"/>
 
 # Access Monitor 
 

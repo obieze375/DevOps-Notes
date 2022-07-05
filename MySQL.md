@@ -1,5 +1,9 @@
 Obtained from https://devhints.io/mysql
 
+# Mysql DB Structure 
+
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/Mysql-mongoDB-structure.png?sanitize=true&raw=true"/>
+
 # Access Monitor 
 
 ~~~~
@@ -554,3 +558,5 @@ mysql -u [username] –p[password] [database_name] < [dump_file.sql]
 As long as you have the correct credentials and the remote server is running, you will be able to restore the database remotely.
 
 ~~~~
+
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/Mysql-mongoDB-structure.png?sanitize=true&raw=true"/>

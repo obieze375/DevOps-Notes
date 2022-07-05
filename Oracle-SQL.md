@@ -100,5 +100,22 @@ segment space management auto;
 
 drop tablespace;  
 
-~~~ 
+~~~
 
+# Insert data into table 
+
+~~~
+INSERT INTO table
+(column1, column2, ... column_n )
+VALUES
+(expression1, expression2, ... expression_n );
+
+Or the syntax for the Oracle INSERT statement when inserting multiple records using a SELECT statement is:
+
+INSERT INTO table
+(column1, column2, ... column_n )
+SELECT expression1, expression2, ... expression_n
+FROM source_table
+[WHERE conditions];
+
+~~~

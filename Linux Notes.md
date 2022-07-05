@@ -4470,7 +4470,20 @@ Debugging:
 ~~~~
 bash -v hello1.sh  
 ~~~~ 
+
+# Server is not unreachable 
+
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/Server_Unreachable_Troubleshooting.docx_1.png?sanitize=true&raw=true"/>	
+
+# Firewall Issue 
+
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/Firewall Issue.docx_1.png?sanitize=true&raw=true"/>
 	
+# Cannot connect to a website or service hosted on server
+
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/Can't connect to Website.png?sanitize=true&raw=true"/>
+	
+
 Can't ssh to an app Server:   
 
 ~~~~	
@@ -5030,3 +5043,9 @@ The contents of the file could not be found because the soft link points to the 
 and not to the contents.
 Similarly, If blah1 is deleted, blah1-hard still holds the contents; if blah2 is deleted, blah2-soft is just a link 
 to a non-existing file.
+
+# Error Logs
+	
+~~~~	
+ls -l /var/log
+~~~~

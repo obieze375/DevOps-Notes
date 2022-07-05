@@ -3,9 +3,7 @@
 
 # History of Unix/Linux
 
-1965 Bell Laboratories joins with MIT and General Electric in the development effort for the new
-operating system, Multics, which would provide multi-user, multi-processor, and multi-level
-(hierarchical) file system, among its many forward-looking features.
+1965 Bell Laboratories joins with MIT and General Electric in the development effort for the new operating system,Multics, which would provide multi-user, multi-processor, and multi-level (hierarchical) file system, among its many forward-looking features.
 
 1969 AT&T was unhappy with the progress and drops out of the Multics project. Some of the Bell Labs 
 programmers who had worked on this project, Ken Thompson, Dennis Ritchie, Rudd Canaday, and 
@@ -19,19 +17,23 @@ Its first real use is as a text processing tool for the patent department at Bel
 further research and development by the programming group. UNIX caught on among programmers 
 because it was designed with these features:
 
-• programmers environment
-• simple user interface
-• simple utilities that can be combined to perform powerful functions
-• hierarchical file system
-• simple interface to devices consistent with file format
-• multi-user, multi-process system
+• programmers environment 
+
+• simple user interface 
+
+• simple utilities that can be combined to perform powerful functions 
+
+• hierarchical file system 
+
+• simple interface to devices consistent with file format 
+
+• multi-user, multi-process system 
+
 • architecture independent and transparent to the user.
 
-1973 Unix is re-written mostly in C, a new language developed by Dennis Ritchie. Being written in this 
-high-level language greatly decreased the effort needed to port it to new machines.
+1973 Unix is re-written mostly in C, a new language developed by Dennis Ritchie. Being written in this high-level language greatly decreased the effort needed to port it to new machines.
 
-1974 Thompson and Ritchie publish a paper in the Communications of the ACM describing the new Unix 
-OS. This generates enthusiasm in the Academic community which sees a potentially great teaching tool 
+1974 Thompson and Ritchie publish a paper in the Communications of the ACM describing the new Unix OS.This generates enthusiasm in the Academic community which sees a potentially great teaching tool 
 for studying programming systems development. Since AT&T is prevented from marketing the product 
 due to the 1956 Consent Decree they license it to Universities for educational purposes and to commercial 
 entities.
@@ -90,11 +92,16 @@ Several shells are usually available on any UNIX system, each with its own stren
 weaknesses. 
 Different users may use different shells. Initially, your system adminstrator will supply a 
 default shell, which can be overridden or changed. The most commonly available shells 
-are: 
-• Bourne shell (sh) 
-• C shell (csh) 
+are:  
+
+• Bourne shell (sh)  
+
+• C shell (csh)  
+
 • Korn shell (ksh) 
-• TC Shell (tcsh) 
+
+• TC Shell (tcsh)  
+
 • Bourne Again Shell (bash) 
 
 Each shell also includes its own programming language. Command files, called "shell 

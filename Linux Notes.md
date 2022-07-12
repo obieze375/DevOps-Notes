@@ -5512,6 +5512,22 @@ dracut -f
 # File system Management 
 
 <img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/file system tree.png.png?sanitize=true&raw=true"/> 
+
+# The df command
+
+~~~~
+df -h or df -h. or df -h | grep /<file_system_name> 
+~~~~
+
+~~~~	   
+Filesystem Size Used Avail Use% Mounted on
+/dev/sda2 198G 1.7G 196G 1% /
+devtmpfs 489M 0 489M 0% /dev
+tmpfs 497M 0 497M 0% /dev/shm
+tmpfs 497M 6.5M 491M 2% /run
+tmpfs 497M 0 497M 0% /sys/fs/cgroup
+/dev/sdb3 484G 73M 459G 1% /opt   
+~~~~
 	   
 # Introduction 
 

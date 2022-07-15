@@ -1514,7 +1514,16 @@ drwx------ 15 obi  obi       4096 Jan 10 15:57 .cache/
 -rwxr-xr-x  1 obi  obi         42 Jan 10 17:40 command_sub.sh*
 -rwxr-xr-x  1 obi  obi         42 Jan 10 17:41 command_substitution.sh*
 drwxr-xr-x 17 obi  obi       4096 Jan 10 18:28 .config/
+~~~~ 
+
+ls -R - List Ditrectory and subdirectory structure
+
 ~~~~
+
+ls -R
+~~~~
+
+
 
 # Search for files in Directories 
 

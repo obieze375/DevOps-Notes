@@ -2281,71 +2281,7 @@ group: developers
   web_nodes
 ~~~~
 
-Mail  
-	
-#Sample Ansible mail-playbook.yml 
-	
-~~~~
----
 
--
-  name: sending mail 
-  hosts: localhost
-  tasks:
-    - name: sending mail to root
-      mail:
-         subject: 'System has been successfully configured'
-      delegate_to: localhost
-       
-    - name: Sending an e-mail using Gmail SMTP servers
-      mail:
-        host: smtp.gmail.com
-        port: 587
-        username: username@gmail.com
-        password: mysecret
-        to: John Smith <john.smith@example.com>
-        subject: Ansible-report
-        body: 'System has been successfully provisioned.'
-      delegate_to: localhost
-    
-    - name: sendMail to a mail server with attachments
-      mail:
-        host: smtp.example.com
-        port: 465
-        username: payam@example.com
-        password: P@sswd
-        from: payam@example.com
-        to: jadi@example.com
-        attach: /etc/fstab /etc/hosts
-        subject: Ansible-report
-        body: 'System  has been successfully provisioned.'
-       
- ~~~~
-
-
-~~~~
-# Sample Inventory File
-
-  # Web Servers
-  sql_db1 ansible_host=sql01.xyz.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Lin$Pass
-  sql_db2 ansible_host=sql02.xyz.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Lin$Pass
-  web_node1 ansible_host=web01.xyz.com ansible_connection=ssh ansible_user=administrator ansible_ssh_pass=Win$Pass
-  web_node2 ansible_host=web02.xyz.com ansible_connection=ssh ansible_user=administrator ansible_ssh_pass=Win$Pass
-  web_node3 ansible_host=web03.xyz.com ansible_connection=ssh ansible_user=administrator ansible_ssh_pass=Win$Pass
-
-  [db_nodes]
-  sql_db1
-  sql_db2
-
-  [web_nodes]
-  web_node1
-  web_node2
-  web_node3
-
-  [all_nodes:children]
-  db_nodes
-  web_nodes
-~~~~
 
 
 Yum:  
@@ -2752,4 +2688,45 @@ Example of command
 
 ~~~~	
 ansible-playbook myapp-main.yml -e myapp_release_version=5.0.0 --limit prod-1 OR ansible-playbook myapp-main.yml -e myapp_release_version=5.0.0 -e target_env=prod_1
+~~~~
+
+## Use of Variables and extra vars in Playbook
+
+
+~~~~
+---
+- name: extra variable demo
+  hosts: all
+  vars:
+    fruit: ""
+  task:
+    - name: print message
+      ansible.builtin.debug:
+        msg: "fruit is {{ fruit }}"
+~~~~
+
+~~~~
+$ ansible-playbook --extra-vars="fruit=apple" -i virtualmachines/demo/inventory extra-variable/example.yml
+PLAY [extra variable demo] ************************************************************************
+TASK [Gathering Facts] ****************************************************************************
+ok: [demo.example.com]
+TASK [message] ************************************************************************************
+ok: [demo.example.com] => {
+    "msg": "fruit is apple"
+}
+PLAY RECAP ****************************************************************************************
+demo.example.com           : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ansible-pilot $
+execution with a plain extra variable
+$ ansible-playbook -i virtualmachines/demo/inventory --extra-vars="fruit=apple"  extra-variable/example.yml
+PLAY [extra variable demo] ************************************************************************
+TASK [Gathering Facts] ****************************************************************************
+ok: [demo.example.com]
+TASK [message] ************************************************************************************
+ok: [demo.example.com] => {
+    "msg": "fruit is apple"
+}
+PLAY RECAP ****************************************************************************************
+demo.example.com           : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ansible-pilot $
 ~~~~

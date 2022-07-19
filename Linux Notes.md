@@ -4766,12 +4766,18 @@ $ git reset HEAD <file>
 	
 ~~~~  
 	
-Update Branch locally after deleting in Bitbucket/Github 
+# Update Branch locally after deleting in Bitbucket/Github 
+
 ~~~~	
  -> git branch -D branch_name 
 	
  -> git pull
 ~~~~	
+
+# Etiquette for Pull Requests: 
+
+-> Keep the Jira ID in the heading of the PR (This automatically links both together)
+
 
 # LVM: Logic Volume & Filesystem Management 
 
@@ -6063,9 +6069,9 @@ root
 
 The last line of the output is the user name returned by the whoami command. If sudo is configured correctly this value will be root. You have successfully configured a user with sudo access. You can now log in to this user account and use sudo to run commands as if you were logged in to the account of the root user. 
 
-Creating Hard and Soft Links 
+# Creating Hard and Soft Links 
 	
-Soft Link and Hard Links
+# Soft Link and Hard Links
 
 Example:
 

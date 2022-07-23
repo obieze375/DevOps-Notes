@@ -4440,7 +4440,8 @@ total 8
 eze@ubuntu:~/.ssh$ ssh-copy-id -i ~/.ssh/key1.pub 192.168.142.136 
 
 eze@ubuntu:~/.ssh$ ssh 192.168.142.136 
-~~~~ 
+~~~~
+
 ~~~~	
  chmod 600 or 700 for ssh key to work 
 ~~~~
@@ -4508,6 +4509,18 @@ Host *
  
  
  
+~~~~
+
+# Config for extending SSH timeout 
+
+~~~~
+
+~/.ssh/config
+
+Host *
+  ServerAliveInterval 120
+
+
 ~~~~
 
 #File Transfer

@@ -4540,7 +4540,7 @@ Debugging:
 bash -v hello1.sh  
 ~~~~ 
 
-# Server is not unreachable 
+# Server is not reachable 
 
 <img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/Server_Unreachable_Troubleshooting.docx_1.png?sanitize=true&raw=true"/>	
 

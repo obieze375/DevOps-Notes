@@ -6833,3 +6833,11 @@ The concept of a “jump” server has been around for decades, but is rarely in
 <img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/sddc.png?sanitize=true&raw=true"/>
 
 An SDDC (software-defined data center) is a data storage facility in which all infrastructure elements -- networking, storage, CPU and security -- are virtualized and delivered as a service. Deployment, operation, provisioning and configuration are abstracted from hardware. Those tasks are implemented through software intelligence.
+
+# Blades Server
+
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/Blade_Server_Chassis.png?sanitize=true&raw=true"/>
+
+A blade server, sometimes referred to as a high-density server, is a compact device containing a computer used to manage and distribute data in a collection of computers and systems, called a network. Its role is to act as a conduit between computers, programs, applications and systems.
+
+In general, a blade server consists of a chassis, or box-like structure, housing multiple thin, modular electronic circuit boards, known as server blades. They are called blades because of their ultra-thin shape. Each blade contains a single server, often dedicated to a single application. The information within blade servers is stored on a memory card or other memory device. In addition, the individual blades contain processors, memory, integrated network controllers, an optional Fibre Channel host bus adaptor (HBA) and other input/output (IO) ports. These are used to connect server blades to other server blade units within the system, or to connect individual blades to power sources.

@@ -5137,6 +5137,21 @@ Check CPU, RAM, & Swap usage using top command
 Based on the results the best option is to identify and kill PIDS that is causing the issue and if that is not resolution reboot the node and free up swap space as it doesn't get released after RAM usage goes down 
 ~~~~
 
+# Troubleshooting Jenkins Build failures in pipeline 
+
+~~~~
+ After locating the failed build do the following: 
+
+ Check the last build failure via the dashboard 
+
+ Check for any errors in the console output that might provide any further information
+
+ Check for recent bitbucket commits that were added prior to the build failure in outputs
+
+ Search for commit in bitbucket and click on blame to find you made the commit, ask them in the change they made is correct
+
+~~~~
+
 # Git Commands 
 
  
@@ -6841,3 +6856,4 @@ An SDDC (software-defined data center) is a data storage facility in which all i
 A blade server, sometimes referred to as a high-density server, is a compact device containing a computer used to manage and distribute data in a collection of computers and systems, called a network. Its role is to act as a conduit between computers, programs, applications and systems.
 
 In general, a blade server consists of a chassis, or box-like structure, housing multiple thin, modular electronic circuit boards, known as server blades. They are called blades because of their ultra-thin shape. Each blade contains a single server, often dedicated to a single application. The information within blade servers is stored on a memory card or other memory device. In addition, the individual blades contain processors, memory, integrated network controllers, an optional Fibre Channel host bus adaptor (HBA) and other input/output (IO) ports. These are used to connect server blades to other server blade units within the system, or to connect individual blades to power sources.
+

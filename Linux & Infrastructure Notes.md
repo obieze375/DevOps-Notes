@@ -6382,10 +6382,53 @@ Verifying mounted share: mount
 
 ~~~~
 	
-# NFS
+
+# NFS (Network File Share)
+
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/nfs.png?sanitize=true&raw=true"/>
+
+A basic system is used in NFS where a mount command will instruct the server to link with several clients. The clients will get access to the files on the server through the proper platform. The design can allow several security protocols to run in a place that will dictate who will have access to certain files, producing a safe and simplified approach to work.
+
+NFS client server protocol begins with a “mount” command, a special client and server attributes option. The Network File System also has a file locking system in place that allows many clients to share the same file. The NFS can manage multiple computer threads and applications for operation. It uses multiple hosts that can access the same files. NFS does not require any application for its operation and provides a simple design for handling the content one will read.
+
+# Benefits of NFS Server (Pros)
+
+The NFS server stands for central management.
+
+Can be accessed from anywhere and enables multiple computers to use the same files.
+
+Reduces storage costs by reducing the need for disk space.
+
+The user to log into any server and have access to their files openly.
+
+File system is transparent to all users that leads to data consistency and reliability.
+
+Reduces administration costs.
+
+For more security firewalls and Kerberos can be used.
+
+# Disadvantages of NFS Network File System (Cons)
+
+File sharing can be highly complex.
+
+Parallel file access is not commonly available yet, other than NFSv4.
+
+Block size limitations which is a con of NFS and can be easily made larger, but then the timeouts would need to be adjusted too. 
+
+Security: NFS is based on RPCs which are generally insecure. 
+
+NFS  in generally can be vulnerable to internet threats.
+
+It may be difficult for multiple parties to access a file simultaneously, especially if the file is more massive in size.
+
+A firewall is necessary for running Network File System to keep unwanted parties from entering. 
+
+
 
 Discover the NFS share exported by NFS server ipaserver.example.com.
+
 • Mount the share /nfsshare on directory /nfs/share and mount should be persistent.
+
 • NFS version 3 should be used.
 
 Command Action Description
@@ -6855,5 +6898,8 @@ An SDDC (software-defined data center) is a data storage facility in which all i
 
 A blade server, sometimes referred to as a high-density server, is a compact device containing a computer used to manage and distribute data in a collection of computers and systems, called a network. Its role is to act as a conduit between computers, programs, applications and systems.
 
-In general, a blade server consists of a chassis, or box-like structure, housing multiple thin, modular electronic circuit boards, known as server blades. They are called blades because of their ultra-thin shape. Each blade contains a single server, often dedicated to a single application. The information within blade servers is stored on a memory card or other memory device. In addition, the individual blades contain processors, memory, integrated network controllers, an optional Fibre Channel host bus adaptor (HBA) and other input/output (IO) ports. These are used to connect server blades to other server blade units within the system, or to connect individual blades to power sources.
+In general, a blade server consists of a chassis, or box-like structure, housing multiple thin, modular electronic circuit boards, known as server blades. They are called blades because of their ultra-thin shape. Each blade contains a single server, often dedicated to a single application. The information within blade servers is stored on a memory card or other memory device. In addition, the individual blades contain processors, memory, integrated network controllers, an optional Fibre Channel host bus adaptor (HBA) and other input/output (IO) ports. These are used to connect server blades to other server blade units within the system, or to connect individual blades to power sources. 
+
+
+
 

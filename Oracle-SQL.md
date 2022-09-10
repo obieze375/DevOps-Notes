@@ -119,3 +119,21 @@ FROM source_table
 [WHERE conditions];
 
 ~~~
+
+# How to replace specific values in a oracle database column
+
+~~~ 
+UPDATE TABLE-NAME SET COLUMN-NAME = REPLACE(TABLE-NAME.COLUMN-NAME, 'STRING-TO-REPLACE', 'REPLACEMENT-STRING'); 
+
+  TABLE-NAME         - The name of the table being updated
+  COLUMN-NAME        - The name of the column being updated
+  STRING-TO-REPLACE  - The value to replace
+  REPLACEMENT-STRING - The replacement
+~~~
+
+# Copy and Paste from SQL Developer
+
+~~~
+ctrl + A and ctrl + C then paste into Notepad ++ using ctrl + v
+
+~~~

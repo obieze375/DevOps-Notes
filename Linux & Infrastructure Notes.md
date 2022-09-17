@@ -5120,7 +5120,7 @@ If the previous 2 fail attempt to log into the server directly e.g. via ILO if i
 ~~~~
  
 
-#Tip for diagnosing the issue:  
+# Tip for diagnosing the issue:  
 
  
 ~~~~
@@ -5144,12 +5144,170 @@ Based on the results the best option is to identify and kill PIDS that is causin
 
  Check the last build failure via the dashboard 
 
- Check for any errors in the console output that might provide any further information
+ Check for any errors in the console output that might provide any further information via ctrl + f and search failed
 
  Check for recent bitbucket commits that were added prior to the build failure in outputs
 
- Search for commit in bitbucket and click on blame to find you made the commit, ask them in the change they made is correct
+ Search for commit in bitbucket and click on blame to find who made the commit, ask them in the change they made is correct
 
+~~~~
+
+
+# To learn what a new or running process is doing
+
+# Troubleshooting with strace
+
+One of options of the strace utility is to help as a troubleshooting utility. If you want to know what a process is doing, or why it hangs, strace will definitely help. By running strace without any parameters, it will already show why a process is doing. You can trace a running process, or instruct strace to start it for you.
+
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/strace1.png?sanitize=true&raw=true"/>
+
+# Monitoring file activity
+
+Strace can monitor file related activity. There are two useful parts. The first is file, which shows file interactions. The other one allows tracing file descriptors. Both can be used to monitor for actions like opening files, reading/writing and closing. Usually using “trace=file” provides enough insights. If you really need more insights in the way a program deals with file descriptors, then use the second one.
+
+# Monitor opening of files: strace -e open
+
+
+# See all file activity: 
+
+~~~~
+strace -e trace=file -p 1234  or 
+~~~~
+
+~~~~
+strace -e trace=desc -p 1234
+~~~~
+
+If you want to track specific paths, use 1 or more times the -P parameter, following by the path.
+
+~~~~
+sudo strace -P /etc/cups -p 2261
+~~~~
+
+
+~~~~
+Process 2261 attached
+— SIGHUP {si_signo=SIGHUP, si_code=SI_USER, si_pid=6149, si_uid=0} —
+lstat(“/etc/cups”, {st_mode=S_IFDIR|0755, st_size=4096, …}) = 0
+openat(AT_FDCWD, “/etc/cups”, O_RDONLY|O_NONBLOCK|O_DIRECTORY|O_CLOEXEC) = 7
+getdents(7, /* 11 entries */, 32768) = 336
+getdents(7, /* 0 entries */, 32768) = 0
+close(7) = 0
+openat(AT_FDCWD, “/etc/cups”, O_RDONLY|O_NONBLOCK|O_DIRECTORY|O_CLOEXEC) = 7
+getdents(7, /* 11 entries */, 32768) = 336
+getdents(7, /* 0 entries */, 32768) = 0
+close(7) = 0
+~~~~
+
+# Common calls:
+
+~~~~
+access
+
+close (close file handle)
+
+fchmod (change file permissions)
+
+fchown (change file ownership)
+
+fstat (retrieve details)
+
+lseek (move through file)
+
+open (open file for reading/writing)
+
+read (read a piece of data)
+
+statfs (retrieve file system related details)
+~~~~
+
+# A related example screen output:
+
+
+<img src="https://raw.githubusercontent.com/obieze375/DevOps-Notes/main/strace2.png?sanitize=true&raw=true"/>
+
+screenshot of strace monitoring file access and activity
+
+
+# Monitoring file access and activity with strace
+
+# Monitoring the network
+
+Strace definitely can be useful for revealing more details about network traffic. Very useful to determine what network related connections are used, like when building your Docker image.
+
+~~~~
+strace -e trace=network
+~~~~
+
+
+# Common syscalls:
+~~~~
+bind – link the process to a network port
+
+listen – allow to receive incoming connections
+
+socket – open a local or network socket
+
+setsockopt – define options for an active socket
+
+# Monitoring memory calls
+
+~~~~
+
+To get better insights on the memory usage and system calls, strace can monitor for these as well. They are nicely grouped in the memory group.
+
+~~~~
+strace -e trace=memory
+~~~~
+
+
+# Common syscalls:
+
+mmap
+munmap
+
+# Strace Cheat Sheet – Overview
+
+
+# Useful options and examples
+
+~~~~
+-c – See what time is spend and where (combine with -S for sorting)
+
+-f – Track process including forked child processes
+
+-o my-process-trace.txt – Log strace output to a file
+
+-p 1234 – Track a process by PID
+
+-P /tmp – Track a process when interacting with a path
+
+-T – Display syscall duration in the output
+~~~~
+
+# Track by specific system call group
+
+~~~~
+
+-e trace=ipc – Track communication between processes (IPC)
+
+-e trace=memory – Track memory syscalls
+
+-e trace=network – Track memory syscalls
+
+-e trace=process – Track process calls (like fork, exec)
+
+-e trace=signal – Track process signal handling (like HUP, exit)
+
+-e trace=file – Track file related syscalls
+~~~~
+
+
+# Trace multiple syscalls
+
+
+~~~~
+strace -e open,close
 ~~~~
 
 # Git Commands 

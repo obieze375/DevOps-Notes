@@ -1561,10 +1561,14 @@ total 0
 # File Creation Commands
 ~~~~
 vim
+
 nano
+
 cat
+
 The Ctrl d key combination will send an EOF (End of File) to the running
 process ending the cat command 
+
 ~~~~  
 
 
@@ -2086,6 +2090,26 @@ Go to line:
 :644 
 ~~~~
 
+Create new Blank line
+
+~~~~
+'o'
+~~~~
+
+Undo changes 
+
+~~~~
+u 
+~~~~
+
+
+Paste from particular line number to another line number
+
+~~~~
+:6,12 co .
+
+6 is the 1st line, 12 is the endding line and place the cursor at the location you want to paste
+~~~~
 
 # Groups & Users
 
@@ -4535,6 +4559,19 @@ Host *
 ~~~~ 
 	
 # Troubleshooting 
+
+
+# How to troubleshoot connectivity issues with mysql database
+
+~~~ 
+	· Check if IP has been given access the specific table and database  
+	· Check if the internal firewall on the server is blocking a connection 
+	· Check if they have valid IP address  
+	· Check if they can connect using localhost or DNS - To check if they have lost access to their DNS 
+	· stop, start, or restart the SQL Server service as needed using 
+	· access log files  
+  . crash dumps
+~~~
  
 # Can't SSH to server as root user
 
@@ -5241,6 +5278,7 @@ strace -e trace=network
 
 
 # Common syscalls:
+
 ~~~~
 bind – link the process to a network port
 
@@ -5249,6 +5287,7 @@ listen – allow to receive incoming connections
 socket – open a local or network socket
 
 setsockopt – define options for an active socket
+~~~~
 
 # Monitoring memory calls
 
@@ -5308,6 +5347,21 @@ munmap
 
 ~~~~
 strace -e open,close
+~~~~
+
+# Vscode Tips & Tricks
+
+~~~~ 
+To search and replace all instances of a value in vscode: 
+
+
+ctrl + f : Enter the value in the box
+
+. Then hit arrow on left side of box
+
+. enter the value you want to find in the 1st box 
+
+. enter the value you want to replace in 2nd box
 ~~~~
 
 # Git Commands 

@@ -3208,11 +3208,24 @@ tcp 0 0 10.61.223.188:22 10.14.40.60:54034 ESTABLISHED -
 netstat -nap |grep :3506  
 ~~~~
 
-#Testing Connectivity with Ping  
+# Testing Connectivity with Ping  
 
  
 
 # Network Troubleshooting:
+
+# Schedule 
+
+~~~~
+
+. Define problem
+. Analyse problem
+. Eliminate potential causes 
+. Propose Hypothesis
+. Test Hypothesis
+. Solve problem and document solution
+~~~~
+
 
 Format: 
 

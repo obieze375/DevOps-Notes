@@ -2772,6 +2772,43 @@ ansible-pilot $
       chdir: "/opt/tomcat8/apache-tomcat-8.5.49/bin"
 ~~~~
 
+## Debug Module 
+~~~~
+---
+- name: Ansible debug module in action
+  hosts: all
+  tasks:
+          - name: Print system uptime
+            shell: uptime -p
+            register: system_uptime
+          - name: Print uptime of managed node
+            debug:
+              msg: "{{ system_uptime }}"
+
+---
+- name: Ansible debug module in action
+  hosts: all
+  vars:
+          greetings: Hello World!
+          site: Linuxtechi
+  tasks:
+          - name: Print the value of a variable
+            debug:
+              msg: "{{ greetings }}, Welcome to {{ site }}."
+
+
+---
+- name: Ansible debug module in action
+  hosts: all
+  tasks:
+          - name: Print a simple statement
+            debug:
+              msg: "Hello World! Welcome to Linuxtechi"
+
+
+
+
+~~~~
 
 
 ## Custom Module Creation with Ansible Galaxy

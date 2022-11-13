@@ -7125,6 +7125,21 @@ A blade server, sometimes referred to as a high-density server, is a compact dev
 
 In general, a blade server consists of a chassis, or box-like structure, housing multiple thin, modular electronic circuit boards, known as server blades. They are called blades because of their ultra-thin shape. Each blade contains a single server, often dedicated to a single application. The information within blade servers is stored on a memory card or other memory device. In addition, the individual blades contain processors, memory, integrated network controllers, an optional Fibre Channel host bus adaptor (HBA) and other input/output (IO) ports. These are used to connect server blades to other server blade units within the system, or to connect individual blades to power sources. 
 
+# How to rebuild a system after a ransomware attack
+
+~~~~
+1. Get burner laptop and plug into LAN of infected system to use as terminal
+2. Situate actual laptop camera towards laptop screen, and hotspot off mobile phone to get connection to it
+3. Rebuild system from there on
+~~~~
+
+# Software and application firewalls
+
+~~~~
+The main difference between a hardware firewall and a software firewall is that the hardware firewall runs on its own physical device, while a software firewall is installed on another machine. A common example of a software firewall is the firewall built into most operating systems like Windows and macOS.
+
+E.g. You can have the firewall config as physical controls the entire CORP env, while software protects specific applications
+~~~~
 
 ## HashiCorp Vault Commands
 

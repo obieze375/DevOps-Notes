@@ -945,7 +945,7 @@ CMD ["redis-server","--protected-mode no"]
 #In the last line, we are using the CMD instruction to set the default command that will be executed when the container runs.
 
 
-5) Build the Dockerfile:  docker build –t <dockerid>/<repo_name> . -> docker build -t obiezeakachi/redis-server . 
+5) Build the Dockerfile:  docker build –t <dockerid>/<repo_name> . -> docker build -t obiezeakachi/redis-server . - The option -t specifies the image name and optionally a username and tag in the ‘username/imagename:tag’ format.
 
 6) Run docker image: docker run -d -p 6379:6379 --name redis <dockerid>/<repo server>  -> docker run -d -p 6379:6379 --name redis obiezeakachi/redis-server
 
